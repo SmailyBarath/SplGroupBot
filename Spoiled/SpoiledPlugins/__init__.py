@@ -10,3 +10,9 @@ async def get_id(_, m):
                 id = int(txt[1])
     except:
         pass
+
+async def log(_, id, message):
+    try:
+        await _.send_message(id, f"#LOGS\n\n{message}")
+    except:
+        pass
