@@ -1,5 +1,5 @@
 from config import DEV
-from pyrogram import Client, filters
+from pyrogram import Client as Yashu, filters
 
 from . import get_id
 
@@ -31,7 +31,7 @@ async def unban_user(_, m):
     except Exception as e:
         return False, e
 
-@Client.on_message(filters.command(["ban", "unban"]))
+@Yashu.on_message(filters.command(["ban", "unban"]))
 async def ban_unban(_, m):
     try:
         user_id = m.from_user.id
