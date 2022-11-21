@@ -35,7 +35,7 @@ async def unban_user(_, m):
     except Exception as e:
         return False, e
 
-@Yashu.on_message(filters.command(["ban", "unban"]))
+@Yashu.on_message(filters.command(["sban", "unban", "ban", "unban"]))
 async def ban_unban(_, m):
     try:
         user_id = m.from_user.id
@@ -55,8 +55,9 @@ async def ban_unban(_, m):
             banned, optional = await ban_user(_, m)
             if not banned:
                 return await m.reply(optional)
-            men = (await _.get_users(await get_id(_, m))).mention
-            return await m.reply(f"{men} banned !")
+            if m.text.split()[0][1] != "s":
+                men = (await _.get_users(await get_id(_, m))).mention
+                return await m.reply(f"{men} banned !")
         else:
             if m.text.split(0)[1].lower() == "u":
                 unbanned, optional = await unban_user(_, m)
@@ -66,5 +67,9 @@ async def ban_unban(_, m):
             banned, optional = await ban_user(_, m)
             if not banned:
                 return await m.reply(optional)
-            men = (await _.get_users(await get_id(_, m))).mention
-            return await m.reply(f"{men} banned !")
+            if m.text.split()[0][1] != "s":
+                men = (await _.get_users(await get_id(_, m))).mention
+                return await m.reply(f"{men} banned !")
+    except Exception as e:
+        await m.reply("An unknown error occurred, consider support !", reply_markup=markup)
+        await log(_, LOG_GROUP_ID, e)
