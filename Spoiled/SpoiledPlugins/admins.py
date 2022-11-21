@@ -6,6 +6,8 @@ from . import get_id
 async def ban_user(_, m):
     try:
         x = await get_id(_, m)
+        if not x:
+            return False, "User not found !"
         if x in DEV.SUDO_USERS:
             return False, "Sudo user can't get banned !"
         y = await _.get_chat_member(m.chat.id, x)
@@ -23,6 +25,8 @@ async def ban_user(_, m):
 async def unban_user(_, m):
     try:
         x = await get_id(_, m)
+        if not x:
+            return False, "User not found !"
         y = await _.get_chat_member(m.chat.id, x)
         if y.status != "banned":
             return False, "User is not banned !"
