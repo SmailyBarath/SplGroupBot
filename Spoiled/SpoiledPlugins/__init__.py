@@ -1,3 +1,14 @@
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
+from config import SUPPORT_CHAT
+
+SUPPORT_CHAT_MARKUP = IKM(
+                      [
+                      [
+                      IKB("Support ✨💭", url=f"t.me/{SUPPORT_CHAT}")
+                      ]
+                      ]
+                      )
+
 async def get_id(_, m):
     try:
         if m.reply_to_message:
