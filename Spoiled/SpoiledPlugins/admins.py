@@ -1,7 +1,7 @@
 from config import DEV
 from pyrogram import Client as Yashu, filters
 
-from . import get_id
+from . import get_id, log, SUPPORT_CHAT_MARKUP as markup
 
 async def ban_user(_, m):
     try:
@@ -71,5 +71,8 @@ async def ban_unban(_, m):
                 men = (await _.get_users(await get_id(_, m))).mention
                 return await m.reply(f"{men} banned !")
     except Exception as e:
-        await m.reply("An unknown error occurred, consider support !", reply_markup=markup)
-        await log(_, LOG_GROUP_ID, e)
+        try:
+            await m.reply("An unknown error occurred, consider support !", reply_markup=markup)
+            await log(_, LOG_GROUP_ID, e)
+        except:
+            pass
