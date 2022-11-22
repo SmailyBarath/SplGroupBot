@@ -29,7 +29,7 @@ async def kang(u: Update, c: CallbackContext):
     try:
         m = u.effective_message
         user = u.effective_user
-        mark_name = "YashuAlpha_{}_{}1_by_@" + c.bot.username
+        mark_name = "YashuAlpha_{}_{}1_by_" + c.bot.username
         kang_markup = triple_button_maker(["Static pack", mark_name.format(user.id, "normal")], ["Animated pack", mark_name.format(user.id, "animated")], ["Video pack", mark_name.format(user.id, "video")])
         emoji = m.text.split()[1] if len(m.command) > 1 else "💭"
         title = f"{m.from_user.first_name}'s pack by @{c.bot.username}"
