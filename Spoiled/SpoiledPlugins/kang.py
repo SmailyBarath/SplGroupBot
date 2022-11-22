@@ -27,7 +27,7 @@ async def kang(u: Update, c: CallbackContext):
             else:
                 format = "normal"
             sticid = m.reply_to_message.sticker.file_id
-            if format == "video" or format == "animated"
+            if format == "video" or format == "animated":
                 get_file = await c.bot.get_file(sticid)
                 x = await get_file.download()
                 
