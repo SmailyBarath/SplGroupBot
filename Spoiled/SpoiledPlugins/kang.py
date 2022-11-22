@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from . import SUPPORT_CHAT_MARKUP as support_markup, single_button_maker
+from PIL import Image
 
 def resize(kangsticker):
      im = Image.open(kangsticker)
