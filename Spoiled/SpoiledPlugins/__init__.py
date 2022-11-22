@@ -29,3 +29,5 @@ async def log(_, id, message):
         await _.send_message(id, f"#LOGS\n\n{message}")
     except:
         pass
+
+Yashu = ApplicationBuilder().token(BOT_TOKEN).build()
