@@ -31,3 +31,13 @@ async def log(_, id, message):
         pass
 
 Yashu = ApplicationBuilder().token(BOT_TOKEN).build()
+
+def single_button_maker(text, url):
+    markup = IKM(
+             [
+             [
+             IKB(text, url=url)
+             ]
+             ]
+             )
+    return markup
