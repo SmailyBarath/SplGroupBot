@@ -41,17 +41,23 @@ async def kang(u: Update, c: CallbackContext):
                     if format == "video" or format == "animated":
                         if stics == 50:
                             pack += 1
+                            if format == "video":
+                                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, webm_sticker=open(x, "rb"))
+                            elif format == "animated":
+                                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
+                            else:
+                                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
                             break
                     else:
                         if stics == 120:
                             pack += 1
+                            if format == "video":
+                                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, webm_sticker=open(x, "rb"))
+                            elif format == "animated":
+                                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
+                            else:
+                                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
                             break
-                if format == "video":
-                    await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, webm_sticker=open(x, "rb"))
-                elif format == "animated":
-                    await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
-                else:
-                    await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
             except:
                 pack = 1
                 if format == "video":
