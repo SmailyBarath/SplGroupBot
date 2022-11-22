@@ -1,4 +1,5 @@
 from config import DEV
+from config.CHATS import LOG_GROUP_ID
 from pyrogram import Client as Yashu, filters
 
 from . import get_id, log, SUPPORT_CHAT_MARKUP as markup
