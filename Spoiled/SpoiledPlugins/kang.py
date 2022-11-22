@@ -58,7 +58,7 @@ async def kang(u: Update, c: CallbackContext):
                             else:
                                 await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
                             break
-                        break
+                    break
             except:
                 pack = 1
                 if format == "video":
