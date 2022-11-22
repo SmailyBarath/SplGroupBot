@@ -32,7 +32,7 @@ async def kang(u: Update, c: CallbackContext):
         emoji = m.text.split()[1] if len(m.command) > 1 else "💭"
         title = f"{m.from_user.first_name}'s pack by @{c.bot.username}"
         if not m.reply_to_message:
-            return await m.reply_text("Reply to an image or sticker !")
+            return await m.reply_text("Reply to an image or sticker !", reply_markup=kang_markup)
         if not m.reply_to_message.photo and not m.reply_to_message.sticker:
             return await m.reply_text("Reply to an image or a sticker !")
         if m.reply_to_message.photo:
@@ -89,4 +89,18 @@ async def kang(u: Update, c: CallbackContext):
     except Exception as e:
         await m.reply_text("An unknown error occurred, consider support !", reply_markup=support_markup)
                 
-            
+      
+async def del_sticker(u: Update, c: CallbackContext):
+    m = u.effective_message
+    user = u.effective_user
+    if not user.id in SUDO_USERS:
+        return
+    if not m.reply_to_message:
+        return await m.reply_text("reply to a stixker vruh! ")
+    if not m.reply_to_message.sticker:
+        return await m.reply_text("reply to a stixker vruh! ")
+    try:
+        await c.bot.delete_sticker_from_set(m.reply_to_message.sticker.file_id)
+        await m.reply_text("deleted !")
+    except Exception as e:
+        await m.reply_text(f"can't delete.. \n\n{e}")
