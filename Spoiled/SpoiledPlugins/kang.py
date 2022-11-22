@@ -6,6 +6,7 @@ async def kang(u: Update, c: CallbackContext):
         m = u.effective_message
         user = u.effective_user
         emoji = m.text.split()[1] if len(m.command) > 1 else "💭"
+        title = f"{m.from_user.first_name}'s pack by @{c.bot.username}"
         if not m.reply_to_message:
             return await m.reply_text("Reply to an image or sticker !")
         if not m.reply_to_message.photo and not m.reply_to_message.sticker:
