@@ -1,5 +1,5 @@
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
-from config import SUPPORT_CHAT
+from config.CHATS import SUPPORT_CHAT
 from telegram.ext import ApplicationBuilder
 from config.TOKENS import BOT_TOKEN
 
