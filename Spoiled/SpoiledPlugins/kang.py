@@ -63,6 +63,6 @@ async def kang(u: Update, c: CallbackContext):
             await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
 
     except Exception as e:
-        await m.reply_text("An unknown error occurred, 
+        await m.reply_text("An unknown error occurred, consider support !", reply_markup=support_markup)
                 
             
