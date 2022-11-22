@@ -12,3 +12,7 @@ class DATABASE:
 
 class STUFF:
     START_IMG = e("START_PIC", None)
+
+class CHATS:
+    SUPPORT_CHAT = e("SUPPORT_CHAT", "Spoiled_Community")
+    LOG_GROUP_ID = int(e("LOG_GROUP_ID", None))
