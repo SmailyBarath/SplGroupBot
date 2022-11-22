@@ -41,3 +41,18 @@ def single_button_maker(text, url):
              ]
              )
     return markup
+
+def triple_button_maker(x, y, z):
+    markup = IKM(
+             [
+             [
+             IKB(x[0], url=x[1]),
+             IKB(y[0], url=y[1])
+             ],
+             [
+             IKB(z[0], url=z[1])
+             ]
+             ]
+             )
+    return markup
+
