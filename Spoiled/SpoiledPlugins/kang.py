@@ -1,6 +1,6 @@
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
-from . import SUPPORT_CHAT_MARKUP as support_markup
+from . import SUPPORT_CHAT_MARKUP as support_markup, single_button_maker
 
 async def kang(u: Update, c: CallbackContext):
     try:
@@ -60,7 +60,7 @@ async def kang(u: Update, c: CallbackContext):
                     await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
                 else:
                     await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
-
+            markup = single_button_maker("Pack ✨💭", name)
             await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
 
     except Exception as e:
