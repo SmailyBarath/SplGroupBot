@@ -1,4 +1,4 @@
-from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
+from telegram import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 from config import CHATS
 from telegram.ext import ApplicationBuilder
 
