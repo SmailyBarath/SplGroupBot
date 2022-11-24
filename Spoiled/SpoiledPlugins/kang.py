@@ -3,6 +3,8 @@ from telegram.ext import CallbackContext, CommandHandler
 from . import SUPPORT_CHAT_MARKUP as support_markup, single_button_maker, triple_button_maker
 from PIL import Image
 from Spoiled import Yashu
+from . import log
+from config import CHATS
 
 def resize(kangsticker):
      im = Image.open(kangsticker)
@@ -91,6 +93,7 @@ async def kang(u: Update, c: CallbackContext):
 
     except Exception as e:
         await m.reply_text("An unknown error occurred, consider support !", reply_markup=support_markup)
+        await log(_, CHATS.LOG_GROUP_ID, e)
                 
       
 async def del_sticker(u: Update, c: CallbackContext):
