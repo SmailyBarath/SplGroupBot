@@ -1,5 +1,5 @@
 from config import DEV
-from config.CHATS import LOG_GROUP_ID
+from config import CHATS
 from pyrogram import Client as Yashu, filters
 
 from . import get_id, log, SUPPORT_CHAT_MARKUP as markup
@@ -74,6 +74,6 @@ async def ban_unban(_, m):
     except Exception as e:
         try:
             await m.reply("An unknown error occurred, consider support !", reply_markup=markup)
-            await log(_, LOG_GROUP_ID, e)
+            await log(_, CHATS.LOG_GROUP_ID, e)
         except:
             pass
