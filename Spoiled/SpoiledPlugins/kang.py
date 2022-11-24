@@ -104,8 +104,6 @@ async def kang(u: Update, c: CallbackContext):
 async def del_sticker(u: Update, c: CallbackContext):
     m = u.effective_message
     user = u.effective_user
-    if not user.id in SUDO_USERS:
-        return
     if not m.reply_to_message:
         return await m.reply_text("reply to a stixker vruh! ")
     if not m.reply_to_message.sticker:
