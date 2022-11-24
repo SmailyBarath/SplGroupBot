@@ -1,8 +1,9 @@
 from emoji import UNICODE_EMOJI
 from googletrans import LANGUAGES, Translator
-from telegram import ParseMode, Update
+from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler, run_async
 from Spoiled import Yashu
+from telegram.constants import ParseMode
 
 def totranslate(update: Update, context: CallbackContext):
     msg = update.effective_message
