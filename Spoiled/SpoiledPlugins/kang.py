@@ -93,6 +93,8 @@ async def kang(u: Update, c: CallbackContext):
             await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
 
     except Exception as e:
+        if "blocked" in str(e):
+            return await m.reply_text("Start me in pm !" reply_markup=single_button_maker("Start !", f"https://t.me/{c.bot.username}"))
         await m.reply_text("An unknown error occurred, consider support !", reply_markup=support_markup)
         print(e)
                 
