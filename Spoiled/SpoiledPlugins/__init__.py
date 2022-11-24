@@ -1,12 +1,11 @@
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
-from config.CHATS import SUPPORT_CHAT
+from config import CHATS
 from telegram.ext import ApplicationBuilder
-from config.TOKENS import BOT_TOKEN
 
 SUPPORT_CHAT_MARKUP = IKM(
                       [
                       [
-                      IKB("Support ✨💭", url=f"t.me/{SUPPORT_CHAT}")
+                      IKB("Support ✨💭", url=f"t.me/{CHATS.SUPPORT_CHAT}")
                       ]
                       ]
                       )
@@ -29,8 +28,6 @@ async def log(_, id, message):
         await _.send_message(id, f"#LOGS\n\n{message}")
     except:
         pass
-
-Yashu = ApplicationBuilder().token(BOT_TOKEN).build()
 
 def single_button_maker(text, url):
     markup = IKM(
