@@ -34,7 +34,7 @@ async def kang(u: Update, c: CallbackContext):
         user = u.effective_user
         mark_name = "YashuAlpha_{}_{}1_by_" + c.bot.username
         kang_markup = triple_button_maker(["Static pack", mark_name.format(user.id, "normal")], ["Animated pack", mark_name.format(user.id, "animated")], ["Video pack", mark_name.format(user.id, "video")])
-        emoji = m.text.split()[1] if len(m.command) > 1 else "💭"
+        emoji = m.text.split()[1] if c.args else "💭"
         title = f"{user.first_name}'s pack by @{c.bot.username}"
         if not m.reply_to_message:
             return await m.reply_text("Reply to an image or sticker !", reply_markup=kang_markup)
