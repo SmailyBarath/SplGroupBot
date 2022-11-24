@@ -11,8 +11,7 @@ from telegram import InputMediaPhoto, TelegramError
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 
-from MakimaDevil import dispatcher
-from MakimaDevil.modules.disable import DisableAbleCommandHandler
+from Spoiled import Yashu
 
 opener = urllib.request.build_opener()
 useragent = 'Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36'
