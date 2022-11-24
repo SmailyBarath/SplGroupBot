@@ -33,7 +33,8 @@ async def kang(u: Update, c: CallbackContext):
         m = u.effective_message
         user = u.effective_user
         mark_name = "YashuAlpha_{}_{}1_by_" + c.bot.username
-        kang_markup = triple_button_maker(["Static pack", mark_name.format(user.id, "normal")], ["Animated pack", mark_name.format(user.id, "animated")], ["Video pack", mark_name.format(user.id, "video")])
+        pack_link = "https://t.me/addstickers/{mark_name}"
+        kang_markup = triple_button_maker(["Static pack", pack_link.format(user.id, "normal")], ["Animated pack", pack_link.format(user.id, "animated")], ["Video pack", pack_link.format(user.id, "video")])
         emoji = m.text.split()[1] if c.args else "💭"
         title = f"{user.first_name}'s pack by @{c.bot.username}"
         if not m.reply_to_message:
@@ -88,7 +89,7 @@ async def kang(u: Update, c: CallbackContext):
                     await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
                 else:
                     await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
-            markup = single_button_maker("Pack ✨💭", name)
+            markup = single_button_maker("Pack ✨💭", f"https://t.me/addstickers/{name}")
             await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
 
     except Exception as e:
