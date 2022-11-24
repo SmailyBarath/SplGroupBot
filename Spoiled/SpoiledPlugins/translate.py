@@ -129,4 +129,4 @@ def totranslate(update: Update, context: CallbackContext):
     else:
         return
 
-Yashu.add_handler(["tr", "tl"], totranslate, run_async=True)
+Yashu.add_handler(["tr", "tl"], totranslate)
