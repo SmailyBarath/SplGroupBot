@@ -1,4 +1,4 @@
 from telegram.ext import ApplicationBuilder
-from config.TOKENS import BOT_TOKEN
+from config import TOKENS
 
-Yashu = ApplicationBuilder().token(BOT_TOKEN).build()
+Yashu = ApplicationBuilder().token(TOKENS.BOT_TOKEN).build()
