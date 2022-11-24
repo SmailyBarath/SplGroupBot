@@ -93,7 +93,7 @@ async def kang(u: Update, c: CallbackContext):
 
     except Exception as e:
         await m.reply_text("An unknown error occurred, consider support !", reply_markup=support_markup)
-        await log(_, CHATS.LOG_GROUP_ID, e)
+        print(e)
                 
       
 async def del_sticker(u: Update, c: CallbackContext):
