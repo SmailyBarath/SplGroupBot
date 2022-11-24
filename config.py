@@ -7,6 +7,9 @@ class API:
 class TOKENS:
     BOT_TOKEN = e("BOT_TOKEN", None)
 
+class DEV:
+    SUDO_USERS = e("SUDO_USERS", None)
+
 class DATABASE:
     MONGO_DB_URL = e("MONGO_DB_URL", None)
 
