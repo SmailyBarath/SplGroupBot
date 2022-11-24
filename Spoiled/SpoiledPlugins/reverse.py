@@ -7,7 +7,8 @@ import urllib.parse
 from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup
 
-from telegram import InputMediaPhoto, TelegramError
+from telegram import InputMediaPhoto
+from telegram.error import TelegramError
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 
