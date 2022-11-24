@@ -5,7 +5,7 @@ from telegram.ext import CallbackContext, CommandHandler
 from Spoiled import Yashu
 from telegram.constants import ParseMode
 
-def totranslate(update: Update, context: CallbackContext):
+async def totranslate(update: Update, context: CallbackContext):
     msg = update.effective_message
     problem_lang_code = []
     for key in LANGUAGES:
