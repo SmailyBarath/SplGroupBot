@@ -6,3 +6,4 @@ pymongo[srv]
 pillow
 googletrans
 emoji==1.7
+bs4
