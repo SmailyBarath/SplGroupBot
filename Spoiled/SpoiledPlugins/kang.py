@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from . import SUPPORT_CHAT_MARKUP as support_markup, single_button_maker, triple_button_maker
