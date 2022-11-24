@@ -58,13 +58,13 @@ def totranslate(update: Update, context: CallbackContext):
             if source_lang is None:
                 detection = trl.detect(text)
                 tekstr = trl.translate(text, dest=dest_lang)
-                return message.reply_text(
+                return await message.reply_text(
                     f"Translated from `{detection.lang}` to `{dest_lang}`:\n`{tekstr.text}`",
                     parse_mode=ParseMode.MARKDOWN,
                 )
             else:
                 tekstr = trl.translate(text, dest=dest_lang, src=source_lang)
-                message.reply_text(
+                await message.reply_text(
                     f"Translated from `{source_lang}` to `{dest_lang}`:\n`{tekstr.text}`",
                     parse_mode=ParseMode.MARKDOWN,
                 )
@@ -100,7 +100,7 @@ def totranslate(update: Update, context: CallbackContext):
             if dest_lang is None:
                 detection = trl.detect(text)
                 tekstr = trl.translate(text, dest=source_lang)
-                return message.reply_text(
+                return await message.reply_text(
                     "Translated from `{}` to `{}`:\n`{}`".format(
                         detection.lang, source_lang, tekstr.text
                     ),
@@ -108,7 +108,7 @@ def totranslate(update: Update, context: CallbackContext):
                 )
             else:
                 tekstr = trl.translate(text, dest=dest_lang, src=source_lang)
-                message.reply_text(
+                await message.reply_text(
                     "Translated from `{}` to `{}`:\n`{}`".format(
                         source_lang, dest_lang, tekstr.text
                     ),
@@ -116,7 +116,7 @@ def totranslate(update: Update, context: CallbackContext):
                 )
 
     except IndexError:
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             "Reply to messages or write messages from other languages   for translating into the intended language\n\n"
             "Example: `/tr en-ml` to translate from English to Malayalam\n"
             "Or use: `/tr ml` for automatic detection and translating it into Malayalam.\n"
@@ -124,7 +124,7 @@ def totranslate(update: Update, context: CallbackContext):
             parse_mode="markdown",
             disable_web_page_preview=True)
     except ValueError:
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             "The intended language is not found!")
     else:
         return
