@@ -2,6 +2,7 @@ from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from . import SUPPORT_CHAT_MARKUP as support_markup, single_button_maker, triple_button_maker
 from PIL import Image
+from Spoiled import Yashu
 
 def resize(kangsticker):
      im = Image.open(kangsticker)
@@ -106,3 +107,6 @@ async def del_sticker(u: Update, c: CallbackContext):
         await m.reply_text("deleted !")
     except Exception as e:
         await m.reply_text(f"can't delete.. \n\n{e}")
+
+Yashu.add_handler(CommandHandler("kang", kang))
+Yashu.add_handler(CommandHandler("delsticker", del_sticker))
