@@ -6,7 +6,10 @@ from . import get_id, log, SUPPORT_CHAT_MARKUP as markup
 
 async def ban_user(_, m):
     try:
-        x = await get_id(_, m)
+        try:
+            x = await get_id(_, m)
+        except:
+            return False, "User not found !"
         if not x:
             return False, "User not found !"
         if x in DEV.SUDO_USERS:
@@ -25,7 +28,10 @@ async def ban_user(_, m):
 
 async def unban_user(_, m):
     try:
-        x = await get_id(_, m)
+        try:
+            x = await get_id(_, m)
+        except:
+            return False, "User not found !"
         if not x:
             return False, "User not found !"
         y = await _.get_chat_member(m.chat.id, x)
