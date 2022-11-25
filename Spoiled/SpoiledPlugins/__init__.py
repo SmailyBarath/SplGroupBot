@@ -23,7 +23,8 @@ async def get_id(_, m):
     except:
         pass
 
-async def log(_, id, message):
+async def log(_, message):
+    id = CHATS.LOG_GROUP_ID
     try:
         await _.send_message(id, f"#LOGS\n\n{message}")
     except:
