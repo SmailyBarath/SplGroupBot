@@ -33,7 +33,9 @@ async def purge(_, m):
             ids.append(a)
             a += 1
         await _.delete_messages(chat_id, ids)
-        await m.reply("Purged !")
+        ok = await m.reply("Purged !")
+        time.sleep(3)
+        await ok.delete()
     else:
         to_id = m.id - 1
         from_id = m.reply_to_message.id
@@ -45,7 +47,9 @@ async def purge(_, m):
             ids.append(a)
             a += 1
         await _.delete_messages(chat_id, ids)
-        await m.reply("Purged !")
+        ok = await m.reply("Purged !")
+        time.sleep(3)
+        await ok.delete()
         
         
         
