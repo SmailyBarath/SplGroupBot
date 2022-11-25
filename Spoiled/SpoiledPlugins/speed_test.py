@@ -30,8 +30,6 @@ async def speedtestxyz(update: Update, context: CallbackContext):
 async def speedtestxyz_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     user = update.effective_user
-    if not user.id in DEV_USERS:
-        return
     if query.from_user.id in DEV_USERS:
         msg = await update.effective_message.edit_text("Running a speedtest....")
         speed = speedtest.Speedtest()
