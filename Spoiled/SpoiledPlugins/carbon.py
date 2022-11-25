@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from io import BytesIO
+from aiohttp import ClientSession
 
 @Client.on_message(filters.command("carbon"))
 async def carbon_func(_, message):
@@ -13,6 +14,8 @@ async def carbon_func(_, message):
     await pbot.send_photo(message.chat.id, carbon)
     await m.delete()
     carbon.close()
+
+aiosession = ClientSession()
 
 async def make_carbon(code):
     url = "https://carbonara.vercel.app/api/cook"
