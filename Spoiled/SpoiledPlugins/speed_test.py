@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 import speedtest
 from config import DEV
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -44,7 +46,7 @@ async def speedtestxyz_callback(update: Update, context: CallbackContext):
             await update.effective_message.reply_photo(
                 photo=speedtest_image, caption=replymsg
             )
-            msg.delete()
+            await msg.delete()
 
         elif query.data == "speedtest_text":
             await query.answer()
