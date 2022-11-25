@@ -4,6 +4,6 @@ python-telegram-bot==20.0a0
 motor
 pymongo[srv]
 pillow
-googletrans
+gpytranslate
 emoji==1.7
 bs4
