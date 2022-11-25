@@ -1,7 +1,8 @@
 from io import BytesIO
 from time import sleep
 from Spoiled import Yashu
-from telegram import TelegramError, Update
+from telegram.error import TelegramError
+from telegram import Update
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import (
     CallbackContext,
