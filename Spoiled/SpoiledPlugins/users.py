@@ -1,6 +1,6 @@
 from io import BytesIO
 from time import sleep
-
+from Spoiled import Yashu
 from telegram import TelegramError, Update
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import (
@@ -10,14 +10,15 @@ from telegram.ext import (
     MessageHandler,
 )
 
-import EmikoRobot.modules.sql.users_sql as sql
-from EmikoRobot import DEV_USERS, LOGGER, OWNER_ID, dispatcher
-from EmikoRobot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
-from EmikoRobot.modules.sql.users_sql import get_all_users
+import Spoiled.SqLDatabase.users_sql as sql
+from config import DEV
+from .helpers import dev_plus, sudo_plus
+from Spoiled.SqLDatabase.users_sql import get_all_users
 
+DEV_USERS = DEV.SUDO_USERS
 USERS_GROUP = 4
 CHAT_GROUP = 5
-DEV_AND_MORE = DEV_USERS.append(int(OWNER_ID))
+DEV_AND_MORE = DEV_USERS.append(int(DEV.OWNER_ID))
 
 
 def get_user_id(username):
@@ -45,13 +46,13 @@ def get_user_id(username):
             if excp.message == "Chat not found":
                 pass
             else:
-                LOGGER.exception("Error extracting user ID")
+                print("Error extracting user ID")
 
     return None
 
 
 @dev_plus
-def broadcast(update: Update, context: CallbackContext):
+async def broadcast(update: Update, context: CallbackContext):
     to_send = update.effective_message.text.split(None, 1)
 
     if len(to_send) >= 2:
@@ -70,7 +71,7 @@ def broadcast(update: Update, context: CallbackContext):
         if to_group:
             for chat in chats:
                 try:
-                    context.bot.sendMessage(
+                    await context.bot.sendMessage(
                         int(chat.chat_id),
                         to_send[1],
                         parse_mode="MARKDOWN",
@@ -82,7 +83,7 @@ def broadcast(update: Update, context: CallbackContext):
         if to_user:
             for user in users:
                 try:
-                    context.bot.sendMessage(
+                    await context.bot.sendMessage(
                         int(user.user_id),
                         to_send[1],
                         parse_mode="MARKDOWN",
@@ -91,7 +92,7 @@ def broadcast(update: Update, context: CallbackContext):
                     sleep(0.1)
                 except TelegramError:
                     failed_user += 1
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             f"Broadcast complete.\nGroups failed: {failed}.\nUsers failed: {failed_user}.",
         )
 
@@ -115,7 +116,7 @@ def log_user(update: Update, context: CallbackContext):
 
 
 @sudo_plus
-def chats(update: Update, context: CallbackContext):
+async def chats(update: Update, context: CallbackContext):
     all_chats = sql.get_all_chats() or []
     chatfile = "List of chats.\n0. Chat name | Chat ID | Members count\n"
     P = 1
@@ -136,18 +137,18 @@ def chats(update: Update, context: CallbackContext):
 
     with BytesIO(str.encode(chatfile)) as output:
         output.name = "groups_list.txt"
-        update.effective_message.reply_document(
+        await update.effective_message.reply_document(
             document=output,
             filename="groups_list.txt",
             caption="Here be the list of groups in my database.",
         )
 
 
-def chat_checker(update: Update, context: CallbackContext):
+async def chat_checker(update: Update, context: CallbackContext):
     bot = context.bot
     try:
         if update.effective_message.chat.get_member(bot.id).can_send_messages is False:
-            bot.leaveChat(update.effective_message.chat.id)
+            await bot.leaveChat(update.effective_message.chat.id)
     except Unauthorized:
         pass
 
