@@ -1224,3 +1224,5 @@ Yashu.add_handler(CommandHandler("cleanservice", cleanservice, filters=Filters.c
 Yashu.add_handler(CommandHandler("cleanwelcome", clean_welcome, filters=Filters.chat_type.groups))
 Yashu.add_handler(CommandHandler("welcomehelp", welcome_help))
 Yashu.add_handler(CommandHandler("welcomemutehelp", welcome_mute_help))
+Yashu.add_handler(CallbackQueryHandler(user_button, pattern=r"user_join_"))
+Yashu.add_handler(CallbackQueryHandler(user_captcha_button, pattern=r"user_captchajoin_\([\d\-]+,\d+\)_\(\d{4}\)"))
