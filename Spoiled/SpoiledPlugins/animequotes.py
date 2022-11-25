@@ -4,7 +4,7 @@ import html
 import random
 import time
 from Spoiled import Yashu
-from telegram.ext import CallbackContext, CommandHandler, Filters, CallbackQueryHandler
+from telegram.ext import CallbackContext, CommandHandler, filters, CallbackQueryHandler
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, replymarkup, ChatPermissions
 from telegram.error import BadRequest
 from telegram.constants import ParseMode
