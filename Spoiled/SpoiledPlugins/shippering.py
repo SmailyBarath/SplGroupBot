@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from Spoiled.Database.couples import get_couple, save_couple, del_couple
 from pyrogram import filters, Client as app
 import random
