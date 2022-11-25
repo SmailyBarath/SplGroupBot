@@ -16,7 +16,7 @@ async def paste(update: Update, context: CallbackContext):
         data = message.text.split(None, 1)[1]
 
     else:
-        message.reply_text("What am I supposed to do with this?")
+        await message.reply_text("What am I supposed to do with this?")
         return
 
     key = (
