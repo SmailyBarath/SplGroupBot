@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from telegram.ext import CommandHandler, CallbackContext
 from telegram import (
     Message,
