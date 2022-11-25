@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 import time
 from typing import List
 from Spoiled import Yashu
