@@ -198,7 +198,7 @@ async def blockanimation(update: Update, context: CallbackContext):
 
 async def clockanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = await update.effective_message.reply_text("🕙")
+    msg = await update.effective_message.reply_text("🕥")
     for x in range(EDIT_TIMES):
         await msg.edit_text(clock_ani[x % 11])
         time.sleep(EDIT_SLEEP)
