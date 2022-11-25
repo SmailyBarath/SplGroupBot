@@ -5,5 +5,4 @@ motor
 pymongo[srv]
 pillow
 gpytranslate
-emoji==1.7
 bs4
