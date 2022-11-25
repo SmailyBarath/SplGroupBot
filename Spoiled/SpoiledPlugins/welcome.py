@@ -851,7 +851,7 @@ async def set_goodbye(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin
-def reset_goodbye(update: Update, context: CallbackContext) -> str:
+async def reset_goodbye(update: Update, context: CallbackContext) -> str:
     chat = update.effective_chat
     user = update.effective_user
 
@@ -869,7 +869,7 @@ def reset_goodbye(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin
-def welcomemute(update: Update, context: CallbackContext) -> str:
+async def welcomemute(update: Update, context: CallbackContext) -> str:
     args = context.args
     chat = update.effective_chat
     user = update.effective_user
@@ -933,7 +933,7 @@ def welcomemute(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin
-def clean_welcome(update: Update, context: CallbackContext) -> str:
+async def clean_welcome(update: Update, context: CallbackContext) -> str:
     args = context.args
     chat = update.effective_chat
     user = update.effective_user
@@ -1213,4 +1213,14 @@ def __chat_settings__(chat_id, _):
         "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
     )
 
-
+Yashu.add_handler(CommandHandler("welcome", welcome, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("goodbye", goodbye, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("setwelcome", set_welcome, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("setgoodbye", set_goodbye, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("resetwelcome", reset_welcome, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("resetgoodbye", reset_goodbye, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("welcomemute", welcomemute, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("cleanservice", cleanservice, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("cleanwelcome", clean_welcome, filters=Filters.chat_type.groups))
+Yashu.add_handler(CommandHandler("welcomehelp", welcome_help))
+Yashu.add_handler(CommandHandler("welcomemutehelp", welcome_mute_help))
