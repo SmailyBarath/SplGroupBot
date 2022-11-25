@@ -11,6 +11,7 @@ async def purge(_, m):
     me = await _.get_me()
     myid = me.id
     Me = await _.get_chat_member(chat_id, myid)
+    Me = Me.privileges
     if not Me.can_delete_messages:
         return await m.reply("I got no rights to purge !")
     await m.delete()
