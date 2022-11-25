@@ -2,6 +2,9 @@ from functools import wraps
 from telegram import Update, Chat, ChatMember
 from telegram.ext import CallbackContext
 from config import DEV
+import threading 
+
+THREAD_LOCK = threading.RLock()
 
 DEV_USERS = [OWNER_ID] + SUDO_USERS
 
