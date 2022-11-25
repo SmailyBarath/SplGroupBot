@@ -9,3 +9,4 @@ bs4
 requests
 aiohttp
 speedtest-cli
+secureme
