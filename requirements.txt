@@ -6,3 +6,4 @@ pymongo[srv]
 pillow
 gpytranslate
 bs4
+requests
