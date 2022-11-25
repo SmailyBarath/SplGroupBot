@@ -84,11 +84,11 @@ async def kang(u: Update, c: CallbackContext):
                         break
             if stics > 0:
                 if format == "video":
-                    await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, webm_sticker=open(x, "rb"))
+                    await c.bot.add_sticker_to_set(user_id=user.id, name=name, emojis=emoji, webm_sticker=open(x, "rb"))
                 elif format == "animated":
-                    await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, tgs_sticker=open(x, "rb"))
+                    await c.bot.add_sticker_to_set(user_id=user.id, name=name, emojis=emoji, tgs_sticker=open(x, "rb"))
                 else:
-                    await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)                                  
+                    await c.bot.add_sticker_to_set(user_id=user.id, name=name, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)                                  
         except Exception as e:
             print(e)
             if format == "video":
