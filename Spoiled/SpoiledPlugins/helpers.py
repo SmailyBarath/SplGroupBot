@@ -15,7 +15,7 @@ async def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = N
         return True
 
     if not member:
-        member = chat.get_member(user_id)
+        member = await chat.get_member(user_id)
 
     return member.status in ("administrator", "creator")
 
