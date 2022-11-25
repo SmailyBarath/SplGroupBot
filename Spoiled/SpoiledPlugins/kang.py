@@ -7,6 +7,7 @@ from PIL import Image
 from Spoiled import Yashu
 from . import log
 from config import CHATS
+import math
 
 def resize(kangsticker):
      im = Image.open(kangsticker)
