@@ -14,6 +14,7 @@ class DEV:
 
 class DATABASE:
     MONGO_DB_URL = e("MONGO_DB_URL", None)
+    SQL_DB_URL = e("SQL_DB_URL", None)
 
 class STUFF:
     START_IMG = e("START_PIC", None)
