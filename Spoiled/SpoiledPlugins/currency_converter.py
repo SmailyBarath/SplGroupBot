@@ -4,6 +4,8 @@ from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from Spoiled import Yashu
 
+CASH_API_KEY = "-xyz"
+
 async def convert(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(" ")
 
