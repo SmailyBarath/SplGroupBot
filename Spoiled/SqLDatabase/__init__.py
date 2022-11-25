@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 from config import DATABASE
 
-DB_URL = DATABASE.SQL_DATABASE_URL
+DB_URL = DATABASE.SQL_DB_URL
 
 
 if DB_URL and DB_URL.startswith("postgres://"):
