@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 
+
 @Client.on_message(filters.command("carbon"))
 async def carbon_func(_, message):
     if not message.reply_to_message:
@@ -12,3 +13,10 @@ async def carbon_func(_, message):
     await pbot.send_photo(message.chat.id, carbon)
     await m.delete()
     carbon.close()
+
+async def make_carbon(code):
+    url = "https://carbonara.vercel.app/api/cook"
+    async with aiosession.post(url, json={"code": code}) as resp:
+        image = BytesIO(await resp.read())
+    image.name = "carbon.png"
+    return image
