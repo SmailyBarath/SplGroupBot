@@ -40,7 +40,7 @@ THREAD_LOCK = threading.RLock()
 
 DEV_USERS = [DEV.OWNER_ID] + DEV.SUDO_USERS
 
-async def get_welcome_type(msg: Message):
+def get_welcome_type(msg: Message):
     data_type = None
     content = None
     text = ""
