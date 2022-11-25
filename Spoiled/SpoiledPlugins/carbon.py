@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from pyrogram import Client, filters
 from io import BytesIO
 from aiohttp import ClientSession
