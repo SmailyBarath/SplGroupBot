@@ -406,3 +406,50 @@ def button_markdown_parser(
     note_data += markdown_note[prev:]
 
     return note_data, buttons
+
+def dev_plus(func):
+    @wraps(func)
+    async def is_dev_plus_func(update: Update, context: CallbackContext, *args, **kwargs):
+        bot = context.bot
+        user = update.effective_user
+
+        if user.id in DEV_USERS:
+            return func(update, context, *args, **kwargs)
+        if not user:
+            pass
+        elif DEL_CMDS and " " not in update.effective_message.text:
+            try:
+                await update.effective_message.delete()
+            except:
+                pass
+        else:
+            await update.effective_message.reply_text(
+                "This is a developer restricted command."
+                " You do not have permissions to run this.",
+            )
+
+    return is_dev_plus_func
+
+
+def sudo_plus(func):
+    @wraps(func)
+    async def is_sudo_plus_func(update: Update, context: CallbackContext, *args, **kwargs):
+        bot = context.bot
+        user = update.effective_user
+        chat = update.effective_chat
+
+        if user and is_sudo_plus(chat, user.id):
+            return func(update, context, *args, **kwargs)
+        if not user:
+            pass
+        elif DEL_CMDS and " " not in update.effective_message.text:
+            try:
+                await update.effective_message.delete()
+            except:
+                pass
+        else:
+            await update.effective_message.reply_text(
+                "Who dis non-admin telling me what to do? You want a punch?",
+            )
+
+    return is_sudo_plus_func
