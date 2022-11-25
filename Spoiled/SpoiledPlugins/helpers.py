@@ -30,25 +30,25 @@ async def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> 
     else:
         return member.status in ("administrator", "creator")
 
-def user_admin(func):
+async def user_admin(func):
     @wraps(func)
-    def is_admin(update: Update, context: CallbackContext, *args, **kwargs):
+    async def is_admin(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user
         chat = update.effective_chat
 
-        if user and is_user_admin(chat, user.id):
+        if user and await is_user_admin(chat, user.id):
             return func(update, context, *args, **kwargs)
         if not user:
             pass
         elif DEL_CMDS and " " not in update.effective_message.text:
             try:
-                update.effective_message.delete()
+                await update.effective_message.delete()
             except:
                 pass
         else:
-            update.effective_message.reply_text(
-                "Who dis non-admin telling me what to do? You want a punch?",
+            await update.effective_message.reply_text(
+                "Only admins are allowed to perform !",
             )
 
     return is_admin
