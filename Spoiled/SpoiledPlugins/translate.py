@@ -4,11 +4,11 @@ from telegram import (
     Message,
     Chat,
     User,
-    ParseMode,
     Update,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
+from telegram.constants import ParseMode
 from Spoiled import Yashu
 from pyrogram import filters, Client as pbot
 
