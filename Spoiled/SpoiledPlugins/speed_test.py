@@ -1,7 +1,7 @@
 import speedtest
 from config import DEV
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import CallbackContext, CallbackQueryHandler
+from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from telegram.constants import ParseMode
 from Spoiled import Yashu
 
