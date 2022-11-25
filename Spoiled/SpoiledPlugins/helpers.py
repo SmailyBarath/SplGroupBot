@@ -1,5 +1,5 @@
 from functools import wraps
-from telegram import Update, Chat, ChatMember
+from telegram import Update, Chat, ChatMember, InlineKeyboardButton
 from telegram.ext import CallbackContext
 from config import DEV
 import threading 
@@ -69,3 +69,24 @@ async def user_admin(func):
             )
 
     return is_admin
+
+def build_keyboard(buttons):
+    keyb = []
+    for btn in buttons:
+        if btn.same_line and keyb:
+            keyb[-1].append(InlineKeyboardButton(btn.name, url=btn.url))
+        else:
+            keyb.append([InlineKeyboardButton(btn.name, url=btn.url)])
+
+    return keyb
+
+
+def revert_buttons(buttons):
+    res = ""
+    for btn in buttons:
+        if btn.same_line:
+            res += "\n[{}](buttonurl://{}:same)".format(btn.name, btn.url)
+        else:
+            res += "\n[{}](buttonurl://{})".format(btn.name, btn.url)
+
+    return res
