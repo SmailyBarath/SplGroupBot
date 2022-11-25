@@ -7,3 +7,4 @@ pillow
 gpytranslate
 bs4
 requests
+aiohttp
