@@ -65,35 +65,35 @@ async def kang(u: Update, c: CallbackContext):
                 get_file = await c.bot.get_file(sticid)
                 x = await get_file.download()
             
-            alpha = True   
-            pack = 1
-            name = f"YashuAlpha_{user.id}_{format}{pack}_by_{c.bot.username}"
-            try:
-                while alpha:
-                    v = await c.bot.get_sticker_set(name)
-                    stics = len(v.stickers)
-                    if format == "video" or format == "animated":
-                        if stics == 50:
-                            pack += 1
-                    else:
-                        if stics == 120:
-                            pack += 1
-                    if stics > 0:
-                        if format == "video":
-                            await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, webm_sticker=open(x, "rb"))
-                        elif format == "animated":
-                            await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, tgs_sticker=open(x, "rb"))
-                        else:
-                            await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)                                  
-            except:
-                if format == "video":
-                    await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, webm_sticker=open(x, "rb"))
-                elif format == "animated":
-                    await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
+        alpha = True   
+        pack = 1
+        name = f"YashuAlpha_{user.id}_{format}{pack}_by_{c.bot.username}"
+        try:
+            while alpha:
+                v = await c.bot.get_sticker_set(name)
+                stics = len(v.stickers)
+                if format == "video" or format == "animated":
+                    if stics == 50:
+                        pack += 1
                 else:
-                    await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
-            markup = single_button_maker("Pack ✨💭", f"https://t.me/addstickers/{name}")
-            await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
+                    if stics == 120:
+                        pack += 1
+                if stics > 0:
+                    if format == "video":
+                        await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, webm_sticker=open(x, "rb"))
+                    elif format == "animated":
+                        await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, tgs_sticker=open(x, "rb"))
+                    else:
+                        await c.bot.add_sticker_to_set(user_id=user.id, name=pack_name, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)                                  
+        except:
+            if format == "video":
+                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, webm_sticker=open(x, "rb"))
+            elif format == "animated":
+                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, tgs_sticker=open(x, "rb"))
+            else:
+                await c.bot.create_new_sticker_set(user_id=user.id, name=name, title=title, emojis=emoji, png_sticker=open(x, "rb") if png else sticid)
+        markup = single_button_maker("Pack ✨💭", f"https://t.me/addstickers/{name}")
+        await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
 
     except Exception as e:
         if "blocked" in str(e):
