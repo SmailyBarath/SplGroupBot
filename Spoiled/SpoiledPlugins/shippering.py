@@ -76,9 +76,10 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
 
 @app.on_message(filters.command("couples"))
 async def couple(_, message):
-        if message.chat.type == "private":
-            await message.reply_text("This command only works in groups.")
-            return
+    if message.chat.type == "private":
+        await message.reply_text("This command only works in groups.")
+        return
+    try:
         chat_id = message.chat.id
         is_selected = await get_couple(chat_id, today)
         if not is_selected:
@@ -114,4 +115,6 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
 {c1_name} + {c2_name} = ❤️
 __New couple of the day may be chosen at 12AM {tomorrow}__"""
             await _.send_message(message.chat.id, text=couple_selection_message)
-    
+    except Exception as e:
+        await log(_, CHATS.LOG_GROUP_ID, e)
+        
