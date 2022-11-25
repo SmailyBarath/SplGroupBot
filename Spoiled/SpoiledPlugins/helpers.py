@@ -1,7 +1,7 @@
 from functools import wraps
 from telegram import Update, Chat, ChatMember, InlineKeyboardButton, Message, MessageEntity
 import re
-from typing import Dict
+from typing import Dict, List
 from telegram.ext import CallbackContext
 from config import DEV
 import threading 
@@ -340,3 +340,36 @@ def _calc_emoji_offset(to_calc) -> int:
     # special, eg with two emoji characters (eg face, and skin col) will have length 2, so by subbing one we
     # know we'll get one extra offset,
     return sum(len(e.group(0).encode("utf-16-le")) // 2 - 1 for e in emoticons)
+
+def escape_invalid_curly_brackets(text: str, valids: List[str]) -> str:
+    new_text = ""
+    idx = 0
+    while idx < len(text):
+        if text[idx] == "{":
+            if idx + 1 < len(text) and text[idx + 1] == "{":
+                idx += 2
+                new_text += "{{{{"
+                continue
+            success = False
+            for v in valids:
+                if text[idx:].startswith("{" + v + "}"):
+                    success = True
+                    break
+            if success:
+                new_text += text[idx : idx + len(v) + 2]
+                idx += len(v) + 2
+                continue
+            new_text += "{{"
+
+        elif text[idx] == "}":
+            if idx + 1 < len(text) and text[idx + 1] == "}":
+                idx += 2
+                new_text += "}}}}"
+                continue
+            new_text += "}}"
+
+        else:
+            new_text += text[idx]
+        idx += 1
+
+    return new_text
