@@ -1,5 +1,7 @@
 from functools import wraps
-from telegram import Update, Chat, ChatMember, InlineKeyboardButton, Message
+from telegram import Update, Chat, ChatMember, InlineKeyboardButton, Message, MessageEntity
+import re
+from typing import Dict
 from telegram.ext import CallbackContext
 from config import DEV
 import threading 
@@ -11,6 +13,8 @@ from pyrate_limiter import (
     Limiter,
     MemoryListBucket,
 )
+
+LINK_REGEX = re.compile(r"(?<!\\)\[.+?\]\((.*?)\)")
 
 @unique
 class Types(IntEnum):
@@ -149,7 +153,7 @@ async def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> 
     else:
         return member.status in ("administrator", "creator")
 
-async def user_admin(func):
+def user_admin(func):
     @wraps(func)
     async def is_admin(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
@@ -226,3 +230,76 @@ class AntiSpam:
 
 MessageHandlerChecker = AntiSpam()
 
+def markdown_parser(
+    txt: str,
+    entities: Dict[MessageEntity, str] = None,
+    offset: int = 0,
+) -> str:
+    """
+    Parse a string, escaping all invalid markdown entities.
+
+    Escapes URL's so as to avoid URL mangling.
+    Re-adds any telegram code entities obtained from the entities object.
+
+    :param txt: text to parse
+    :param entities: dict of message entities in text
+    :param offset: message offset - command and notename length
+    :return: valid markdown string
+    """
+    if not entities:
+        entities = {}
+    if not txt:
+        return ""
+
+    prev = 0
+    res = ""
+    # Loop over all message entities, and:
+    # reinsert code
+    # escape free-standing urls
+    for ent, ent_text in entities.items():
+        if ent.offset < -offset:
+            continue
+
+        start = ent.offset + offset  # start of entity
+        end = ent.offset + offset + ent.length - 1  # end of entity
+
+        # we only care about code, url, text links
+        if ent.type in ("code", "url", "text_link"):
+            # count emoji to switch counter
+            count = _calc_emoji_offset(txt[:start])
+            start -= count
+            end -= count
+
+            # URL handling -> do not escape if in [](), escape otherwise.
+            if ent.type == "url":
+                if any(
+                    match.start(1) <= start and end <= match.end(1)
+                    for match in LINK_REGEX.finditer(txt)
+                ):
+                    continue
+                # TODO: investigate possible offset bug when lots of emoji are present
+                res += _selective_escape(txt[prev:start] or "") + escape_markdown(
+                    ent_text,
+                )
+
+            # code handling
+            elif ent.type == "code":
+                res += _selective_escape(txt[prev:start]) + "`" + ent_text + "`"
+
+            # handle markdown/html links
+            elif ent.type == "text_link":
+                res += _selective_escape(txt[prev:start]) + "[{}]({})".format(
+                    ent_text,
+                    ent.url,
+                )
+
+            end += 1
+
+        # anything else
+        else:
+            continue
+
+        prev = end
+
+    res += _selective_escape(txt[prev:])  # add the rest of the text
+    return res
