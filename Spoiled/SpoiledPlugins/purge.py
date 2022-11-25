@@ -20,6 +20,7 @@ async def purge(_, m):
     is_sudo = True if user_id in PURGABLE else False
     if not is_sudo:
         x = await _.get_chat_member(chat_id, user_id)
+        x = x.privileges
         if not x.can_delete_messages:
             return await m.reply("You got no rights to purge !")
         to_id = m.message_id - 1
