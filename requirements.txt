@@ -10,3 +10,6 @@ requests
 aiohttp
 speedtest-cli
 secureme
+multicolorcaptcha
+emoji==1.7
+pyrate
