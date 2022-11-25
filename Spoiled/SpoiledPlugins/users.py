@@ -7,7 +7,7 @@ from telegram.error import BadRequest, Unauthorized
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
-    Filters,
+    filters as Filters,
     MessageHandler,
 )
 
