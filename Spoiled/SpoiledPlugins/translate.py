@@ -9,7 +9,7 @@ from telegram import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
-
+from Spoiled import Yashu
 from pyrogram import filters, Client as pbot
 
 trans = Translator()
@@ -45,8 +45,8 @@ async def translate(_, message: Message) -> None:
     await message.reply_text(reply, parse_mode="html")
 
 
-def languages(update: Update, context: CallbackContext) -> None:
-    update.effective_message.reply_text(
+async def languages(update: Update, context: CallbackContext) -> None:
+    await update.effective_message.reply_text(
         "Click on the button below to see the list of supported language codes.",
         reply_markup=InlineKeyboardMarkup(
             [
