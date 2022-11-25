@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 import aiohttp
 from pyrogram import filters, Client
 
