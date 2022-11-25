@@ -1,7 +1,7 @@
 import requests
 from Spoiled import Yashu
 from telegram import Update
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, CommandHandler
 from telegram.constants import ParseMode
 
 
