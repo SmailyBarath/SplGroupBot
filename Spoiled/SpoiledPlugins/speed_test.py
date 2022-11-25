@@ -39,6 +39,7 @@ async def speedtestxyz_callback(update: Update, context: CallbackContext):
         replymsg = "SpeedTest Results:"
 
         if query.data == "speedtest_image":
+            await query.answer()
             speedtest_image = speed.results.share()
             await update.effective_message.reply_photo(
                 photo=speedtest_image, caption=replymsg
@@ -46,11 +47,12 @@ async def speedtestxyz_callback(update: Update, context: CallbackContext):
             msg.delete()
 
         elif query.data == "speedtest_text":
+            await query.answer()
             result = speed.results.dict()
             replymsg += f"\nDownload: `{convert(result['download'])}Mb/s`\nUpload: `{convert(result['upload'])}Mb/s`\nPing: `{result['ping']}`"
             await update.effective_message.edit_text(replymsg, parse_mode=ParseMode.MARKDOWN)
     else:
-        await query.answer("You are not a part of EYuii Chan Club.")
+        await query.answer("You're not allowed to use this !", show_alert=True)
 
 Yashu.add_handler(CommandHandler("speedtest", speedtestxyz))
 Yashu.add_handler(CallbackQueryHandler(speedtestxyz_callback, pattern="speedtest_.*"))
