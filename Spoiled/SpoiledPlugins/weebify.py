@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from Spoiled import Yashu
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
