@@ -7,6 +7,7 @@ from telegram import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
+from typing import Union
 from telegram.constants import ParseMode
 from Spoiled import Yashu
 import requests
@@ -356,11 +357,23 @@ async def manga(update: Update, context: CallbackContext):
             )
 
 
-from tg_bot.modules.language import gs
+def get_string(self, lang: str, string: str) -> str:
+        try:
+            return self.languages[lang][string]
+        except KeyError:
+            # a keyerror happened, the english file must have it
+            en_string = self.languages["en"].get(string)
+            if en_string is None:
+                raise StringNotFound(f"String: ({string}) not found.")
+            return en_string
 
 
 def get_help(chat):
     return gs(chat, "anilist_help")
+
+def gs(chat_id: Union[int, str], string: str) -> str:
+    lang = "en"
+    return get_string(lang, string)
 
 Yashu.add_handler(CommandHandler("airing", airing))
 Yashu.add_handler(CommandHandler("anime", anime))
