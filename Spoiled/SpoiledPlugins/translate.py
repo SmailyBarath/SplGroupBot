@@ -1,4 +1,4 @@
-# MODULE VERIFIED BY @NORTH_YANKTON
+# 1MODULE VERIFIED BY @NORTH_YANKTON
 
 from gpytranslate import Translator
 from telegram.ext import CommandHandler, CallbackContext
