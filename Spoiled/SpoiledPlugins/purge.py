@@ -23,8 +23,8 @@ async def purge(_, m):
         x = x.privileges
         if not x.can_delete_messages:
             return await m.reply("You got no rights to purge !")
-        to_id = m.message_id - 1
-        from_id = m.reply_to_message.message_id
+        to_id = m.id - 1
+        from_id = m.reply_to_message.id
         ids = []
         a = from_id
         for i in range(0, (to_id - from_id)):
@@ -35,8 +35,8 @@ async def purge(_, m):
         await _.delete_messages(chat_id, ids)
         await m.reply("Purged !")
     else:
-        to_id = m.message_id - 1
-        from_id = m.reply_to_message.message_id
+        to_id = m.id - 1
+        from_id = m.reply_to_message.id
         ids = []
         a = from_id
         for i in range(0, (to_id - from_id)):
