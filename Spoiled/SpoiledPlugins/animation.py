@@ -187,7 +187,7 @@ earth_ani = [
 ]
 
 
-def blockanimation(update: Update, context: CallbackContext):
+async def blockanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message.reply_text("⬜")
     for x in range(EDIT_TIMES):
@@ -196,7 +196,7 @@ def blockanimation(update: Update, context: CallbackContext):
     await msg.edit_text("🟥")
 
 
-def clockanimation(update: Update, context: CallbackContext):
+async def clockanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message
     reply_text = (
@@ -208,7 +208,7 @@ def clockanimation(update: Update, context: CallbackContext):
     await msg.edit_text("🕚")
 
 
-def earthanimation(update: Update, context: CallbackContext):
+async def earthanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message
     reply_text = (
@@ -220,7 +220,7 @@ def earthanimation(update: Update, context: CallbackContext):
     await msg.edit_text("🌍")
 
 
-def moonanimation(update: Update, context: CallbackContext):
+async def moonanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message.reply_text("🌚")
     for x in range(EDIT_TIMES):
@@ -229,7 +229,7 @@ def moonanimation(update: Update, context: CallbackContext):
     await msg.edit_text("🌙")
 
 
-def bombs(update: Update, context: CallbackContext):
+async def bombs(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message.reply_text("💣")
     for x in range(EDIT_TIMES):
@@ -238,7 +238,7 @@ def bombs(update: Update, context: CallbackContext):
     await msg.edit_text("RIP PLOX...")
 
 
-def hack(update: Update, context: CallbackContext):
+async def hack(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message.reply_text("Target selected")
     for x in range(EDIT_TIMES):
@@ -247,7 +247,7 @@ def hack(update: Update, context: CallbackContext):
     await msg.edit_text("successful hacked all data send on my Database")
 
 
-def love(update: Update, context: CallbackContext):
+async def love(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     msg = update.effective_message.reply_text("❣️")
     for x in range(EDIT_TIMES):
