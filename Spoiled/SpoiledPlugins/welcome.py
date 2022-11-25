@@ -1,4 +1,4 @@
-import html
+"""import html
 import random
 import re
 import time
@@ -1228,3 +1228,4 @@ Yashu.add_handler(CallbackQueryHandler(user_button, pattern=r"user_join_"))
 Yashu.add_handler(CallbackQueryHandler(user_captcha_button, pattern=r"user_captchajoin_\([\d\-]+,\d+\)_\(\d{4}\)"))
 Yashu.add_handler(MessageHandler(Filters.status_update.new_chat_members, new_member))
 Yashu.add_handler(MessageHandler(Filters.status_update.left_chat_member, left_member))
+"""
