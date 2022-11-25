@@ -4,7 +4,7 @@ from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from Spoiled import Yashu
 
-def convert(update: Update, context: CallbackContext):
+async def convert(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(" ")
 
     if len(args) == 4:
@@ -12,7 +12,7 @@ def convert(update: Update, context: CallbackContext):
             orig_cur_amount = float(args[1])
 
         except ValueError:
-            update.effective_message.reply_text("Invalid Amount Of Currency")
+            await update.effective_message.reply_text("Invalid Amount Of Currency")
             return
 
         orig_cur = args[2].upper()
@@ -32,20 +32,20 @@ def convert(update: Update, context: CallbackContext):
                 response["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
             )
         except KeyError:
-            update.effective_message.reply_text("Currency Not Supported.")
+            await update.effective_message.reply_text("Currency Not Supported.")
             return
         new_cur_amount = round(orig_cur_amount * current_rate, 5)
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             f"{orig_cur_amount} {orig_cur} = {new_cur_amount} {new_cur}"
         )
 
     elif len(args) == 1:
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             "example syntax: /cash 1 USD INR", parse_mode=ParseMode.MARKDOWN
         )
 
     else:
-        update.effective_message.reply_text(
+        await update.effective_message.reply_text(
             f"*Invalid Args!!:* Required 3 But Passed {len(args) -1}",
             parse_mode=ParseMode.MARKDOWN,
         )
