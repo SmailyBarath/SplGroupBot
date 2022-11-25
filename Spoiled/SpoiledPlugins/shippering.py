@@ -2,6 +2,7 @@ from Spoiled.Database.couples import get_couple, save_couple, del_couple
 from pyrogram import filters, Client as app
 import random
 from datetime import datetime
+from . import log, SUPPORT_CHAT_MARKUP
 
 YASHUALPHA = [5754821527, 5296178757]
 
@@ -116,5 +117,6 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
 __New couple of the day may be chosen at 12AM {tomorrow}__"""
             await _.send_message(message.chat.id, text=couple_selection_message)
     except Exception as e:
+        await m.reply("An exception occurred, consider support !", reply_markup=SUPPORT_CHAT_MARKUP)
         await log(_, CHATS.LOG_GROUP_ID, e)
         
