@@ -101,6 +101,8 @@ async def kang(u: Update, c: CallbackContext):
         await m.reply_text(f"Sticker is added to set\n\nEmoji : {emoji}", reply_markup=markup)
 
     except Exception as e:
+        if "Stickerset_invalid" in str(e):
+            return await m.reply_text("Start me in pm !", reply_markup=single_button_maker("Start !", f"https://t.me/{c.bot.username}"))
         if "blocked" in str(e):
             return await m.reply_text("Start me in pm !", reply_markup=single_button_maker("Start !", f"https://t.me/{c.bot.username}"))
         if "occupied" in str(e):
