@@ -13,6 +13,15 @@ from pyrate_limiter import (
     Limiter,
     MemoryListBucket,
 )
+import emoji
+
+MATCH_MD = re.compile(
+    r"\*(.*?)\*|"
+    r"_(.*?)_|"
+    r"`(.*?)`|"
+    r"(?<!\\)(\[.*?\])(\(.*?\))|"
+    r"(?P<esc>[*_`\[])",
+)
 
 LINK_REGEX = re.compile(r"(?<!\\)\[.+?\]\((.*?)\)")
 
@@ -303,3 +312,31 @@ def markdown_parser(
 
     res += _selective_escape(txt[prev:])  # add the rest of the text
     return res
+
+def _selective_escape(to_parse: str) -> str:
+    """
+    Escape all invalid markdown
+
+    :param to_parse: text to escape
+    :return: valid markdown string
+    """
+    offset = 0  # offset to be used as adding a \ character causes the string to shift
+    for match in MATCH_MD.finditer(to_parse):
+        if match.group("esc"):
+            ent_start = match.start()
+            to_parse = (
+                to_parse[: ent_start + offset] + "\\" + to_parse[ent_start + offset :]
+            )
+            offset += 1
+    return to_parse
+
+
+# This is a fun one.
+def _calc_emoji_offset(to_calc) -> int:
+    # Get all emoji in text.
+    emoticons = emoji.get_emoji_regexp().finditer(to_calc)
+    # Check the utf16 length of the emoji to determine the offset it caused.
+    # Normal, 1 character emoji don't affect; hence sub 1.
+    # special, eg with two emoji characters (eg face, and skin col) will have length 2, so by subbing one we
+    # know we'll get one extra offset,
+    return sum(len(e.group(0).encode("utf-16-le")) // 2 - 1 for e in emoticons)
