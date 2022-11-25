@@ -118,5 +118,5 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
             await _.send_message(message.chat.id, text=couple_selection_message)
     except Exception as e:
         await m.reply("An exception occurred, consider support !", reply_markup=SUPPORT_CHAT_MARKUP)
-        await log(_, CHATS.LOG_GROUP_ID, e)
+        await log(_, e)
         
