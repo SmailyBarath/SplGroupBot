@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-
+from io import BytesIO
 
 @Client.on_message(filters.command("carbon"))
 async def carbon_func(_, message):
