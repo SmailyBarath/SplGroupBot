@@ -4,6 +4,13 @@ from telegram.ext import CallbackContext
 from config import DEV
 import threading 
 from enum import IntEnum, unique
+from pyrate_limiter import (
+    BucketFullException,
+    Duration,
+    RequestRate,
+    Limiter,
+    MemoryListBucket,
+)
 
 @unique
 class Types(IntEnum):
@@ -185,3 +192,37 @@ def revert_buttons(buttons):
             res += "\n[{}](buttonurl://{})".format(btn.name, btn.url)
 
     return res
+
+class AntiSpam:
+    def __init__(self):
+        self.whitelist = (
+            (DEV_USERS or [])
+        )
+        # Values are HIGHLY experimental, its recommended you pay attention to our commits as we will be adjusting the values over time with what suits best.
+        Duration.CUSTOM = 15  # Custom duration, 15 seconds
+        self.sec_limit = RequestRate(6, Duration.CUSTOM)  # 6 / Per 15 Seconds
+        self.min_limit = RequestRate(20, Duration.MINUTE)  # 20 / Per minute
+        self.hour_limit = RequestRate(100, Duration.HOUR)  # 100 / Per hour
+        self.daily_limit = RequestRate(1000, Duration.DAY)  # 1000 / Per day
+        self.limiter = Limiter(
+            self.sec_limit,
+            self.min_limit,
+            self.hour_limit,
+            self.daily_limit,
+            bucket_class=MemoryListBucket,
+        )
+
+    def check_user(self, user):
+        """
+        Return True if user is to be ignored else False
+        """
+        if user in self.whitelist:
+            return False
+        try:
+            self.limiter.try_acquire(user)
+            return False
+        except BucketFullException:
+            return True
+
+MessageHandlerChecker = AntiSpam()
+
