@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 import random 
 from Spoiled import Yashu
 from telegram import Update
