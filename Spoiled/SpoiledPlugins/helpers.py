@@ -1,9 +1,23 @@
 from functools import wraps
-from telegram import Update
+from telegram import Update, Chat, ChatMember
 from telegram.ext import CallbackContext
 from config import DEV
 
 DEV_USERS = [OWNER_ID] + SUDO_USERS
+
+async def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    if (
+        chat.type == "private"
+        or user_id in DEV_USERS
+        or chat.all_members_are_administrators
+        or user_id in [777000, 1087968824]
+    ):  # Count telegram and Group Anonymous as admin
+        return True
+
+    if not member:
+        member = chat.get_member(user_id)
+
+    return member.status in ("administrator", "creator")
 
 async def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (
