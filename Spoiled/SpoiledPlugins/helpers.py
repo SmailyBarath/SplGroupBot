@@ -6,7 +6,7 @@ import threading
 
 THREAD_LOCK = threading.RLock()
 
-DEV_USERS = [OWNER_ID] + SUDO_USERS
+DEV_USERS = [DEV.OWNER_ID] + DEV.SUDO_USERS
 
 async def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (
