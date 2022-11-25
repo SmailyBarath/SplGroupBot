@@ -218,13 +218,13 @@ async def new_member(update: Update, context: CallbackContext):  # sourcery no-m
                     await bot.send_message(
                         CHATS.LOG_GROUP_ID,
                         f"""
-                        \\#NEWGROUP \
+         """            \\#NEWGROUP \
                         \nGroup Name:   **\\{chat.title}** \
                         \nID:   `\\{chat.id}` \
                         \nCreator ID:   `\\{creator.id}` \
                         \nCreator Username:   \@{creator.username} \
                         """,
-                        parse_mode=ParseMode.MARKDOWN_V2,
+          """           parse_mode=ParseMode.MARKDOWN_V2,
                     )
                 else:
                     await bot.send_message(
