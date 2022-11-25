@@ -189,7 +189,7 @@ earth_ani = [
 
 async def blockanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message.reply_text("⬜")
+    msg = await update.effective_message.reply_text("⬜")
     for x in range(EDIT_TIMES):
         await msg.edit_text(block_chain[x % 18])
         time.sleep(EDIT_SLEEP)
@@ -198,10 +198,7 @@ async def blockanimation(update: Update, context: CallbackContext):
 
 async def clockanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message
-    reply_text = (
-        msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
-    )
+    msg = await update.effective_message.reply_text("🕙")
     for x in range(EDIT_TIMES):
         await msg.edit_text(clock_ani[x % 11])
         time.sleep(EDIT_SLEEP)
@@ -210,10 +207,7 @@ async def clockanimation(update: Update, context: CallbackContext):
 
 async def earthanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message
-    reply_text = (
-        msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
-    )
+    msg = await update.effective_message.reply_text("🌍")
     for x in range(EDIT_TIMES):
         await msg.edit_text(earth_ani[x % 18])
         time.sleep(EDIT_SLEEP)
@@ -222,7 +216,7 @@ async def earthanimation(update: Update, context: CallbackContext):
 
 async def moonanimation(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message.reply_text("🌚")
+    msg = await update.effective_message.reply_text("🌚")
     for x in range(EDIT_TIMES):
         await msg.edit_text(moon_ani[x % 32])
         time.sleep(EDIT_SLEEP)
@@ -231,7 +225,7 @@ async def moonanimation(update: Update, context: CallbackContext):
 
 async def bombs(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message.reply_text("💣")
+    msg = await update.effective_message.reply_text("💣")
     for x in range(EDIT_TIMES):
         await msg.edit_text(bomb_ettu[x % 9])
         time.sleep(EDIT_SLEEP)
@@ -240,7 +234,7 @@ async def bombs(update: Update, context: CallbackContext):
 
 async def hack(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message.reply_text("Target selected")
+    msg = await update.effective_message.reply_text("Target selected")
     for x in range(EDIT_TIMES):
         await msg.edit_text(hack_you[x % 5])
         time.sleep(EDIT_SLEEP)
@@ -249,7 +243,7 @@ async def hack(update: Update, context: CallbackContext):
 
 async def love(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message.reply_text("❣️")
+    msg = await update.effective_message.reply_text("❣️")
     for x in range(EDIT_TIMES):
         await msg.edit_text(love_siren[x % 5])
         time.sleep(EDIT_SLEEP)
@@ -258,7 +252,7 @@ async def love(update: Update, context: CallbackContext):
 
 async def kill(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
-    msg = update.effective_message.reply_text("🔫")
+    msg = await update.effective_message.reply_text("🔫")
     for x in range(EDIT_TIMES):
         await msg.edit_text(kill_you[x % 12])
         time.sleep(EDIT_SLEEP)
