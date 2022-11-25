@@ -1,4 +1,4 @@
-"""import html
+import html
 import random
 import re
 import time
@@ -218,13 +218,13 @@ async def new_member(update: Update, context: CallbackContext):  # sourcery no-m
                     await bot.send_message(
                         CHATS.LOG_GROUP_ID,
                         f"""
-"""                     \\#NEWGROUP \
+                        \\#NEWGROUP \
                         \nGroup Name:   **\\{chat.title}** \
                         \nID:   `\\{chat.id}` \
                         \nCreator ID:   `\\{creator.id}` \
                         \nCreator Username:   \@{creator.username} \
                         """,
-"""                     parse_mode=ParseMode.MARKDOWN_V2,
+                        parse_mode=ParseMode.MARKDOWN_V2,
                     )
                 else:
                     await bot.send_message(
@@ -1139,9 +1139,9 @@ async def user_captcha_button(update: Update, context: CallbackContext):
             except:
                 pass
             kicked_msg = f"""
-"""            ❌ [{escape_markdown(join_usr_data.first_name)}](tg://user?id={join_user}) failed the captcha and was kicked.
+               ❌ [{escape_markdown(join_usr_data.first_name)}](tg://user?id={join_user}) failed the captcha and was kicked.
             """
-"""         await query.answer(text="Wrong answer")
+            await query.answer(text="Wrong answer")
             res = chat.unban_member(join_user)
             if res:
                 await bot.sendMessage(
@@ -1228,4 +1228,3 @@ Yashu.add_handler(CallbackQueryHandler(user_button, pattern=r"user_join_"))
 Yashu.add_handler(CallbackQueryHandler(user_captcha_button, pattern=r"user_captchajoin_\([\d\-]+,\d+\)_\(\d{4}\)"))
 Yashu.add_handler(MessageHandler(Filters.status_update.new_chat_members, new_member))
 Yashu.add_handler(MessageHandler(Filters.status_update.left_chat_member, left_member))
-"""
