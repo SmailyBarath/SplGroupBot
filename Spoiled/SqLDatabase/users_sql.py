@@ -1,5 +1,6 @@
 import threading
 from . import BASE, SESSION
+from telegram.ext import CallbackContext
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -77,7 +78,7 @@ INSERTION_LOCK = threading.RLock()
 
 def ensure_bot_in_db():
     with INSERTION_LOCK:
-        bot = Users(dispatcher.bot.id, dispatcher.bot.username)
+        bot = Users(CallbackContext.bot.id, CallbackContext.bot.username)
         SESSION.merge(bot)
         SESSION.commit()
 
