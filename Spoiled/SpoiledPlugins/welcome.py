@@ -48,6 +48,8 @@ VALID_WELCOME_FORMATTERS = [
     "mention",
 ]
 
+dispatcher = CallbackContext
+
 ENUM_FUNC_MAP = {
     sql.Types.TEXT.value: dispatcher.bot.send_message,
     sql.Types.BUTTON_TEXT.value: dispatcher.bot.send_message,
