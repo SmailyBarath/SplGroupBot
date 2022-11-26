@@ -55,7 +55,7 @@ async def gbl(_, m):
     txt += "\n\n"
     for h in li:
         txt += f"-`{h}`\n"
-    await m.reply(txt, reply_markup=markup)
+    await _.send_message(m.chat.id, txt, reply_markup=markup)
 
 @Client.on_callback_query(filters.regex("clear_all"))
 async def clear_cbq(_, q):
