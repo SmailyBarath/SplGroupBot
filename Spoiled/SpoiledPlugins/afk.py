@@ -17,7 +17,7 @@ async def afk(_, m):
 
 B_UN = None
 
-@Client.on_message(group=1):
+@Client.on_message(group=1)
 async def cwf(_, m):
     global B_UN
     if not B_UN:
