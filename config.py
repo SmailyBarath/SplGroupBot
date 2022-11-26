@@ -17,7 +17,8 @@ class DATABASE:
     SQL_DB_URL = e("SQL_DB_URL", None)
 
 class STUFF:
-    START_IMG = e("START_PIC", None)
+    START_IMG = e("START_IMG", "https://te.legra.ph/file/3ecafa3dcb3fbf5a44468.jpg")
+    PING_IMG = e("PING_IMG", "https://te.legra.ph/file/3ecafa3dcb3fbf5a44468.jpg")
 
 class CHATS:
     SUPPORT_CHAT = e("SUPPORT_CHAT", "Spoiled_Community")
