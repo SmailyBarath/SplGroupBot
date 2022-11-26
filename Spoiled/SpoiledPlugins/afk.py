@@ -81,9 +81,9 @@ async def reply_afk(_, m):
             dur = end - start
             dur = get_readable_time(int(dur))
             if reason:
-                await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`")
+                await m.reply(f"**{first_name}** is AFK since {dur}.\n\n**Reason** : `{reason}`")
             else:
-                await m.reply(f"**{first_name}** is back online and was away for {dur}.")
+                await m.reply(f"**{first_name}** is AFK since {dur}.")
     else:
         if m.text or m.caption:
             args = m.text.split() if m.text else m.caption.split()
@@ -104,9 +104,9 @@ async def reply_afk(_, m):
                     dur = end - start
                     dur = get_readable_time(int(dur))
                     if reason:
-                        await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`")
+                        await m.reply(f"**{first_name}** is AFK since {dur}.\n\n**Reason** : `{reason}`")
                     else:
-                        await m.reply(f"**{first_name}** is back online and was away for {dur}.")
+                        await m.reply(f"**{first_name}** is AFK since {dur}.")
 
 
 @Client.on_message(filters.command("afkusers") & filters.user(DEV_USERS))
