@@ -5,7 +5,7 @@ from . import IKM, IKB
 
 DEV_USERS = [DEV.OWNER_ID] + DEV.SUDO_USERS
 
-@Client.on_message(filters.command(["addblacklist", "addblocklist"]))
+@Client.on_message(filters.command(["addblacklist", "addblocklist"]) & filters.group)
 async def blacklist(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
@@ -18,9 +18,9 @@ async def blacklist(_, m):
     if check:
         return await m.reply(f"`{word}` is already blacklisted !")
     await add_blacklist(m.chat.id, word)
-    await m.reply(f"`{word}` blacklisted !")
+    await m.reply(f"`{word}` added to blacklist !")
 
-Client.on_message(filters.command(["rmblacklist", "rmblocklist"]))
+@Client.on_message(filters.command(["rmblacklist", "rmblocklist"]) & filters.group)
 async def rmblacklist(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
@@ -43,7 +43,7 @@ markup = IKM(
          ]
          )
     
-@Client.on_message(filters.command(["blacklist", "blocklist"]))
+@Client.on_message(filters.command(["blacklist", "blocklist"]) & filters.group)
 async def gbl(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
@@ -68,3 +68,22 @@ async def clear_cbq(_, q):
     await q.answer("clearing list !", show_alert=True)
     await clear_blacklist(q.message.chat.id)
     await q.edit_message_text("Blacklist cleared !")
+
+@Client.on_message(group=3 & filters.group)
+async def cwf(_, m):
+    if m.from_user:
+        if m.from_user.id in DEV_USERS:
+            return
+        z = await _.get_chat_member(m.chat.id, m.from_user.id)
+        if z.status in ["creator", "administrator"]:
+            return
+    if m.text or m.caption:
+        txt = m.text.split() if m.text else m.caption.split()
+        g = await get_blacklist(m.chat.id)
+        for j in txt:
+            if j in g:
+            try:
+                await m.delete()
+            except:
+                pass
+            
