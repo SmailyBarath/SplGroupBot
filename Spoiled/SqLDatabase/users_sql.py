@@ -1,7 +1,6 @@
 import threading
 from . import BASE, SESSION
 from telegram.ext import CallbackContext
-from pyrogram import Client
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -12,9 +11,6 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.sql.sqltypes import BigInteger
-
-Me = Client.get_me(self)
-botid = Me.id
 
 class Users(BASE):
     __tablename__ = "users"
