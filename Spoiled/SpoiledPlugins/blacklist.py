@@ -13,7 +13,7 @@ async def blacklist(_, m):
             return await m.reply("Only admin can perform this action !")
     if not len(m.command) > 1:
         return await m.reply("`/addblacklist < word > `")
-    word = m.text.split()[1] 
+    word = m.text.split()[1].lower()
     check = await is_blacklist(m.chat.id, word)
     if check:
         return await m.reply(f"`{word}` is already blacklisted !")
@@ -28,7 +28,7 @@ async def rmblacklist(_, m):
             return await m.reply("Only admin can perform this action !")
     if not len(m.command) > 1:
         return await m.reply("`/rmblacklist < word > `")
-    word = m.text.split()[1] 
+    word = m.text.split()[1].lower()
     check = await is_blacklist(m.chat.id, word)
     if not check:
         return await m.reply(f"`{word}` isn't blacklisted !")
@@ -54,7 +54,7 @@ async def gbl(_, m):
     txt = f"**Words blacklist :** {m.chat.title}"
     txt += "\n\n"
     for h in li:
-        txt += f"-`{h}`\n"
+        txt += f"- `{h}`\n"
     await m.reply(txt, reply_markup=markup)
 
 @Client.on_callback_query(filters.regex("clear_all"))
@@ -80,7 +80,7 @@ async def cwf(_, m):
         txt = m.text.split() if m.text else m.caption.split()
         g = await get_blacklist(m.chat.id)
         for j in txt:
-            if j in g:
+            if j.lower() in g:
                 try:
                     await m.delete()
                 except:
