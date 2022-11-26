@@ -63,3 +63,42 @@ def get_readable_time(seconds: int) -> str:
 
 @Client.on_message(group=2)
 async def reply_afk(_, m):
+    if m.reply_to_message:
+        if not m.reply_to_message.from_user:
+            return 
+        id = m.reply_to_message.from_user.id
+        afk, details = await is_afk(id)
+        if afk:
+            first_name = (await _.get_users(id)).first_name
+            start = details["time"]
+            reason = details["reason"]
+            end = time.time()
+            dur = end - start
+            dur = get_readable_time(int(dur))
+            if reason:
+                await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`)
+            else:
+                await m.reply(f"**{first_name}** is back online and was away for {dur}.")
+    else:
+        if m.text or m.caption;
+            args = m.text.split() if m.text else m.caption.split()
+            uns = []
+            for x in args:
+                if x[0] == "@":
+                    uns.append(x)
+            if not uns:
+                return
+            for z in uns:
+                id = (await _.get_users(z)).id
+                afk, details = await is_afk(id)
+                if afk:
+                    first_name = m.from_user.first_name
+                    start = details["time"]
+                    reason = details["reason"]
+                    end = time.time()
+                    dur = end - start
+                    dur = get_readable_time(int(dur))
+                    if reason:
+                        await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`)
+                    else:
+                        await m.reply(f"**{first_name}** is back online and was away for {dur}.")
