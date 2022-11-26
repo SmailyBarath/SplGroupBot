@@ -23,6 +23,7 @@ from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Update,
+    Bot
 )
 from config import CHATS
 from Spoiled import Yashu
@@ -48,7 +49,7 @@ VALID_WELCOME_FORMATTERS = [
     "mention",
 ]
 
-dispatcher = CallbackContext
+dispatcher = Bot
 
 ENUM_FUNC_MAP = {
     sql.Types.TEXT.value: dispatcher.bot.send_message,
