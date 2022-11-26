@@ -1,6 +1,7 @@
 import threading
 from . import BASE, SESSION
-from telegram.ext import CallbackContext
+from telegram.ext import Updater
+from config import TOKENS
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -11,6 +12,9 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.sql.sqltypes import BigInteger
+
+updater = Updater(BOT_TOKEN, workers=8, use_context=True)
+dispatcher = updater.dispatcher
 
 class Users(BASE):
     __tablename__ = "users"
@@ -76,7 +80,7 @@ INSERTION_LOCK = threading.RLock()
 
 def ensure_bot_in_db():
     with INSERTION_LOCK:
-        bot = Users(botid, CallbackContext.bot.username)
+        bot = Users(dispatcher.bot.id, dispatcher.bot.username)
         SESSION.merge(bot)
         SESSION.commit()
 
