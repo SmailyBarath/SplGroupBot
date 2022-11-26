@@ -50,8 +50,21 @@ async def gbl(_, m):
         if not x.status in ["creator", "administrator"]:
             return await m.reply("Only admin can perform this action !")
     li = await get_blacklist(m.chat.id)
+    if not li:
+        return await m.reply("No blacklist !")
     txt = f"**Words blacklist :** {m.chat.title}"
     txt += "\n\n"
     for h in li:
         txt += f"-`{h}`\n"
     await m.reply(txt, reply_markup=markup)
+
+@Client.on_callback_query(filters.regex("clear_all"))
+async def clear_cbq(_, q):
+    id = q.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(q.message.chat.id, id)
+        if x.status != "creator":
+            return await q.answer("Only owner can perform this action !", show_alert=True)
+    await q.answer("clearing list !", show_alert=True)
+    await clear_blacklist(q.message.chat.id)
+    await q.edit_message_text("Blacklist cleared !")
