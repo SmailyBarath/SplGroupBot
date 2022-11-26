@@ -13,7 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.sql.sqltypes import BigInteger
 
-updater = Updater(TOKENS.BOT_TOKEN, use_context=True)
+updater = Updater(TOKENS.BOT_TOKEN)
 dispatcher = updater.dispatcher
 
 class Users(BASE):
