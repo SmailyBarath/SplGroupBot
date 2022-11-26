@@ -28,8 +28,18 @@ async def is_blacklist(chat_id: int, word):
         return False
     return False
 
-def get_blacklist(chat_id: int):
+async def get_blacklist(chat_id: int):
     x = await bldb.find_one({"chat_id": chat_id})
     if not x:
         return []
     return x["words"]
+
+async def clear_blacklist(chat_id: int):
+    x = await get_blacklist(chat_id)
+    if not x:
+        return
+    for c in x:
+        await del_blacklist(chat_id, c)
+
+
+
