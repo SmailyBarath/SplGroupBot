@@ -20,5 +20,5 @@ async def get_afk_users():
         return 0
     l = []
     for z in await x.to_list(length=1000000000):
-        l.append(x["user_id"])
+        l.append(z["user_id"])
     return len(l)
