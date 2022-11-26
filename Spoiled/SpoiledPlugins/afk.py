@@ -5,8 +5,9 @@ from pyrogram import Client
 from pyrogram.types import Message
 from telegram import MessageEntity, Update
 from telegram.error import BadRequest
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
+    ParseMode,
     CallbackContext,
     CallbackQueryHandler,
     CommandHandler,
