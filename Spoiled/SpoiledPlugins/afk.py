@@ -92,7 +92,7 @@ async def reply_afk(_, m):
                 id = (await _.get_users(z)).id
                 afk, details = await is_afk(id)
                 if afk:
-                    first_name = m.from_user.first_name
+                    first_name = (await _.get_users(id)).first_name
                     start = details["time"]
                     reason = details["reason"]
                     end = time.time()
@@ -102,3 +102,9 @@ async def reply_afk(_, m):
                         await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`)
                     else:
                         await m.reply(f"**{first_name}** is back online and was away for {dur}.")
+
+
+@Client.on_message(filters.command("afkusers") & filters.user(DEV_USERS))
+async def afk_users(_, m):
+    x = await get_afk_users()
+    return await m.reply(f"**AFK Users** : {x}")
