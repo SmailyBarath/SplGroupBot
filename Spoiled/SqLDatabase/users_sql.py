@@ -1,6 +1,7 @@
 import threading
 from . import BASE, SESSION
 from telegram.ext import CallbackContext
+from pyrogram import Client
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -12,7 +13,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.sql.sqltypes import BigInteger
 
-
+Me = Client.get_me()
+botid = Me.id
 
 class Users(BASE):
     __tablename__ = "users"
@@ -78,7 +80,7 @@ INSERTION_LOCK = threading.RLock()
 
 def ensure_bot_in_db():
     with INSERTION_LOCK:
-        bot = Users(CallbackContext.bot.id, CallbackContext.bot.username)
+        bot = Users(botid, CallbackContext.bot.username)
         SESSION.merge(bot)
         SESSION.commit()
 
