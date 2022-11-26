@@ -9,7 +9,7 @@ DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 async def afk(_, m):
     user_id = m.from_user.id
     first_name = m.from_user.first_name
-    await m.reply(f"**{first_name}** is not AFK")
+    await m.reply(f"**{first_name}** is now AFK")
     reason = m.text.split(None, 1)[1] if len(m.command) > 1 else None
     start = time.time()
     details = {"reason": reason, "time": start}
