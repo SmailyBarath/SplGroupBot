@@ -11,7 +11,10 @@ async def alive(_, m):
     myfn = (await _.get_me()).first_name
     txt = f"**Hi {m.from_user.first_name} !, I'm {myfn}**\n"
     txt += f"**Bot owner : [Yashu-Alpha](t.me/{DEV.OWNER_USERNAME})**\n"
-    txt += f"**Sudo status : {" ✅ , " + str(len(DEV.SUDO_USERS)) if len(DEV.SUDO_USERS) > 0 else " ❌ "}**\n"
+    if DEV.SUDO_USERS:
+        txt += f"**Sudo status : ✅ , {len(DEV.SUDO_USERS)}**\n"
+    else:
+        txt += f"**Sudo status : ❌**\n"
     end = time.time()
     dur = (str(end-start))[0:5]
     await ok.delete()
