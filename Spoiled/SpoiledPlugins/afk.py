@@ -7,14 +7,13 @@ from telegram import MessageEntity, Update
 from telegram.error import BadRequest
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
-    ParseMode,
     CallbackContext,
     CallbackQueryHandler,
     CommandHandler,
     filters as Filters,
     MessageHandler
 )
-
+from telegram.constants import ParseMode
 AFK_GROUP = 7
 AFK_REPLY_GROUP = 8
 
