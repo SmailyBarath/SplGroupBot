@@ -1,6 +1,9 @@
 from pyrogram import Client, filters
 from Spoiled.Database.afk import *
 import time
+from config import DEV
+
+DEV_USERS = SUDO_USERS + [OWNER_ID]
 
 @Client.on_message(filters.command("afk") | filters.command("brb", ""))
 async def afk(_, m):
@@ -33,7 +36,7 @@ async def cwf(_, m):
     dur = end - start
     dur = get_readable_time(int(dur))
     if reason:
-        await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`)
+        await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`")
     else:
         await m.reply(f"**{first_name}** is back online and was away for {dur}.")
     await del_afk(user_id)
@@ -76,7 +79,7 @@ async def reply_afk(_, m):
             dur = end - start
             dur = get_readable_time(int(dur))
             if reason:
-                await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`)
+                await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`")
             else:
                 await m.reply(f"**{first_name}** is back online and was away for {dur}.")
     else:
@@ -99,7 +102,7 @@ async def reply_afk(_, m):
                     dur = end - start
                     dur = get_readable_time(int(dur))
                     if reason:
-                        await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`)
+                        await m.reply(f"**{first_name}** is back online and was away for {dur}.\n\n**Reason** : `{reason}`")
                     else:
                         await m.reply(f"**{first_name}** is back online and was away for {dur}.")
 
