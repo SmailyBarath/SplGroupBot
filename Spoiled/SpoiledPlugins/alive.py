@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from pyrogram import Client, filters
 from config import DEV, STUFF
 import time
@@ -18,4 +20,4 @@ async def alive(_, m):
     end = time.time()
     dur = (str(end-start))[0:5]
     await ok.delete()
-    await m.reply_photo(STUFF.PING_IMG, txt + "\n" + f"**Ping : {dur}s**")
+    await m.reply_photo(STUFF.PING_IMG, caption=txt + "\n" + f"**Ping : {dur}s**")
