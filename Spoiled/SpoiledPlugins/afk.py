@@ -1,7 +1,8 @@
 import random, html
 from Spoiled import Yashu
 from Spoiled.SqLDatabase import afk_sql as sql
-from .helpers import get_user_id
+from pyrogram import Client
+from pyrogram.types import Message
 from telegram import MessageEntity, Update
 from telegram.error import BadRequest
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
@@ -16,6 +17,9 @@ from telegram.ext import (
 AFK_GROUP = 7
 AFK_REPLY_GROUP = 8
 
+async def get_user_id(username):
+    x = (await Client.get_users(username)).id
+    return x
 
 async def afk(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(None, 1)
