@@ -3,7 +3,7 @@ from . import db
 afkdb = db.afk
 
 async def is_afk(user_id: int):
-    x = afkdb.find_one({"user_id": user_id})
+    x = await afkdb.find_one({"user_id": user_id})
     if not x:
         return False, {}
     return True, x["details"]
