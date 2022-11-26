@@ -1,0 +1,29 @@
+from . import db 
+
+bldb = db.blacklist
+
+async def add_blacklist(chat_id: int, word):
+    x = await bldb.find_one({"chat_id": chat_id})
+    if x:
+        list = x["words"]
+        list.append(word)
+        return await bldb.update_one({"chat_id: chat_id}, {"$set": {"words": list}}, upsert=True)
+    else:
+        list = [word]
+        return await bldb.update_one({"chat_id: chat_id}, {"$set": {"words": list}}, upsert=True)
+
+async def del_blacklist(chat_id: int, word):
+    x = await bldb.find_one({"chat_id": chat_id})
+    if x:
+        list = x["words"]
+        list.remove(word)
+        return await bldb.update_one({"chat_id: chat_id}, {"$set": {"words": list}}, upsert=True)
+
+async def is_blacklist(chat_id: int, word):
+    x = await bldb.find_one({"chat_id": chat_id})
+    if x:
+        list = x["words"]
+        if word in list:
+            return True
+        return False
+    return False
