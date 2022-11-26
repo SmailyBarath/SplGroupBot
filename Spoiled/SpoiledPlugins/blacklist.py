@@ -51,7 +51,7 @@ async def gbl(_, m):
             return await m.reply("Only admin can perform this action !")
     li = await get_blacklist(m.chat.id)
     if not li:
-        return await m.reply("No blacklist !")
+        return await m.reply("blacklist is empty!")
     txt = f"**Words blacklist :** {m.chat.title}"
     txt += "\n\n"
     for h in li:
