@@ -3,7 +3,7 @@ from Spoiled.Database.afk import *
 import time
 from config import DEV
 
-DEV_USERS = SUDO_USERS + [OWNER_ID]
+DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
 @Client.on_message(filters.command("afk") | filters.command("brb", ""))
 async def afk(_, m):
