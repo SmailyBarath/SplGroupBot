@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from Spoiled.Database.blacklist import *
 from config import DEV
-from . import IKM, IKB
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
 DEV_USERS = [DEV.OWNER_ID] + DEV.SUDO_USERS
 
@@ -55,7 +55,7 @@ async def gbl(_, m):
     txt += "\n\n"
     for h in li:
         txt += f"-`{h}`\n"
-    await _.send_message(m.chat.id, txt, reply_markup=markup)
+    await m.reply(txt, reply_markup=markup)
 
 @Client.on_callback_query(filters.regex("clear_all"))
 async def clear_cbq(_, q):
