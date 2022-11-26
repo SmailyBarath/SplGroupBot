@@ -34,17 +34,16 @@ async def rmblacklist(_, m):
         return await m.reply(f"`{word}` isn't blacklisted !")
     await del_blacklist(m.chat.id, word)
     await m.reply(f"`{word}` removed from blacklist !")
-
-markup = IKM(
+    
+@Client.on_message(filters.command(["blacklist", "blocklist"]) & filters.group)
+async def gbl(_, m):
+    markup = IKM(
          [
          [
          IKB("Clear all 🗑️", callback_data="clear_all")
          ]
          ]
          )
-    
-@Client.on_message(filters.command(["blacklist", "blocklist"]) & filters.group)
-async def gbl(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
         if not x.status in ["creator", "administrator"]:
