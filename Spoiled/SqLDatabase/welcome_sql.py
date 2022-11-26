@@ -1,7 +1,7 @@
 import random
 import threading
 from typing import Union
-from enum import unique
+from enum import unique, IntEnum
 from . import BASE, SESSION
 from sqlalchemy import Boolean, Column, String, UnicodeText, Integer
 from sqlalchemy.sql.sqltypes import BigInteger
