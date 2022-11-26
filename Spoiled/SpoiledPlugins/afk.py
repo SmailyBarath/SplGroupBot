@@ -141,6 +141,6 @@ async def check_afk(update, context, user_id, fst_name, userc_id):
             await update.effective_message.reply_text(res, parse_mode="html")
 
 Yashu.add_handler(CommandHandler("afk", afk))
-Yashu.add_handler(CommandHandler(Filters.regex(r"^(?i)brb(.*)$"), afk, friendly="afk"))
-Yashu.add_handler(MessageHandler(Filters.all & Filters.chat_type.groups, no_longer_afk))
-Yashu.add_handler(MessageHandler(Filters.all & Filters.chat_type.groups, reply_afk))
+Yashu.add_handler(CommandHandler(Filters.Regex(r"^(?i)brb(.*)$"), afk, friendly="afk"))
+Yashu.add_handler(MessageHandler(Filters.ALL & Filters.chat_type.groups, no_longer_afk))
+Yashu.add_handler(MessageHandler(Filters.ALL & Filters.chat_type.groups, reply_afk))
