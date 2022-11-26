@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 from pyrogram import Client, filters
 from Spoiled.Database.afk import *
 import time
