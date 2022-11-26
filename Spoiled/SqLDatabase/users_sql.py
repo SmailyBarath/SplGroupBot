@@ -13,7 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.sql.sqltypes import BigInteger
 
-Me = Client.get_me()
+Me = Client.get_me(self)
 botid = Me.id
 
 class Users(BASE):
