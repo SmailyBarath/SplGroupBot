@@ -82,8 +82,8 @@ async def cwf(_, m):
         g = await get_blacklist(m.chat.id)
         for j in txt:
             if j in g:
-            try:
-                await m.delete()
-            except:
-                pass
+                try:
+                    await m.delete()
+                except:
+                    pass
             
