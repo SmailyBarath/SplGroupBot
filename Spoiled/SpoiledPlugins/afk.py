@@ -83,7 +83,7 @@ async def reply_afk(_, m):
             else:
                 await m.reply(f"**{first_name}** is back online and was away for {dur}.")
     else:
-        if m.text or m.caption;
+        if m.text or m.caption:
             args = m.text.split() if m.text else m.caption.split()
             uns = []
             for x in args:
