@@ -20,4 +20,4 @@ async def alive(_, m):
     end = time.time()
     dur = (str(end-start))[0:5]
     await ok.delete()
-    await m.reply_photo(STUFF.PING_IMG, caption=txt + "\n" + f"**Ping : {dur}S**")
+    await m.reply_photo(STUFF.PING_IMG, caption=txt + "\n" + f"**Ping : {dur} Sec**")
