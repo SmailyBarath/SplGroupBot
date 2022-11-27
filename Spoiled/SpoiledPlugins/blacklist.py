@@ -10,7 +10,7 @@ DEV_USERS = [DEV.OWNER_ID] + DEV.SUDO_USERS
 async def blacklist(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return await m.reply("Only admin can perform this action !")
     if not len(m.command) > 1:
         return await m.reply("`/addblacklist < word > `")
@@ -25,7 +25,7 @@ async def blacklist(_, m):
 async def rmblacklist(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return await m.reply("Only admin can perform this action !")
     if not len(m.command) > 1:
         return await m.reply("`/rmblacklist < word > `")
@@ -47,7 +47,7 @@ async def gbl(_, m):
          )
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return await m.reply("Only admin can perform this action !")
     li = await get_blacklist(m.chat.id)
     if not li:
@@ -77,7 +77,7 @@ async def cwf(_, m):
         if m.from_user.id in DEV_USERS:
             return
         z = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if z.status in ["creator", "administrator"]:
+        if z.privileges:
             return
     if m.text or m.caption:
         txt = m.text.split() if m.text else m.caption.split()
