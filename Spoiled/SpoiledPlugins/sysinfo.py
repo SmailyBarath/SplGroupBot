@@ -1,7 +1,7 @@
 import psutil as p
 from pyrogram import Client, filters
 
-CPU = p.cpu_percent(3)
+CPU = p.cpu_percent()
 RAM_USED = str(p.virtual_memory()[3] / 10000000000)[0:4]
 TOTAL_RAM = str(p.virtual_memory().total / 10000000000)[0:4]
 RAM_USEDP = p.virtual_memory()[2]
