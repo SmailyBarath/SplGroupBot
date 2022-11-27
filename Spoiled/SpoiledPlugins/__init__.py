@@ -22,6 +22,7 @@ async def get_id(_, m):
                 id = (await _.get_users(txt[1])).id
             else:
                 id = int(txt[1])
+        return id
 
 async def log(_, message):
     id = CHATS.LOG_GROUP_ID
