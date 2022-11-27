@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as 
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
-AVAILABLE = ["photo", "video", "document", "voice", "audio", "gif", "url"]
+AVAILABLE = ["photo", "video", "document", "voice", "audio", "gif", "url", "sticker"]
 
 ASYNC = None
 
@@ -18,7 +18,7 @@ async def lock(_, m):
             return await m.reply("Only admins are allowed to perform !")
     if not len(m.command) > 1:
         return await m.reply("`/lock` < locktype >")
-    locktype = m.text.split()[1]
+    locktype = m.text.split()[1].lower()
     if not locktype in AVAILABLE:
         return await m.reply("Undefined locktype, use `/locktypes` to know !")
     g = await is_lock(m.chat.id, locktype)
@@ -37,7 +37,7 @@ async def unlock(_, m):
             return await m.reply("Only admins are allowed to perform !")
     if not len(m.command) > 1:
         return await m.reply("`/unlock` < locktype >")
-    locktype = m.text.split()[1]
+    locktype = m.text.split()[1].lower()
     if not locktype in AVAILABLE:
         return await m.reply("Undefined locktype, use `/locktypes` to know !")
     g = await is_lock(m.chat.id, locktype)
@@ -158,6 +158,14 @@ async def cwf(_, m):
 
     if m.animation:
         if "gif" in LOCKS:
+            try:
+                await m.delete()
+            except:
+                pass
+        return
+
+    if m.sticker:
+        if "sticker" in LOCKS:
             try:
                 await m.delete()
             except:
