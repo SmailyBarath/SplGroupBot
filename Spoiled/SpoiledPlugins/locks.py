@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as 
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
-AVAILABLE = ["photo", "video", "document", voice", "audio", "gif", "url"]
+AVAILABLE = ["photo", "video", "document", "voice", "audio", "gif", "url"]
 
 ASYNC = None
 
