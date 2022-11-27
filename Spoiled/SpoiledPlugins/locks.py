@@ -98,7 +98,7 @@ async def lock_cbq(_, q):
 
 LOCKS = []
 admins = []
-@Client.on_message(group=4, filters.group)
+@Client.on_message(filters.group, group=4)
 async def cwf(_, m):
     global admins
     if not admins:
