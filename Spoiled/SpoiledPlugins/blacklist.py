@@ -69,7 +69,7 @@ async def clear_cbq(_, q):
     await clear_blacklist(q.message.chat.id)
     await q.edit_message_text("Blacklist cleared !")
 
-@Client.on_message(group=3)
+@Client.on_message(group=3, filters.group)
 async def cwf(_, m):
     if m.from_user:
         if await is_approved(m.chat.id, m.from_user.id):
