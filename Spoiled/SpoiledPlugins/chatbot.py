@@ -67,9 +67,8 @@ async def type_and_send(message: Message):
     & filters.reply
     & ~filters.bot
     & ~filters.via_bot
-    & ~filters.forwarded
-    & ~filters.edited,
-    group=chatbot_group,
+    & ~filters.forwarded,
+    group=chatbot_group
 )
 async def chatbot_talk(_, message: Message):
     global BOT_ID
