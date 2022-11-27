@@ -6,7 +6,7 @@ from pyrogram.types import Message
 from pyrogram import Client as app
 
 from config import DEV
-from wbb.modules.admin import member_permissions
+from Spoiled.SpoiledPlugins.admin import member_permissions
 
 SUDOERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
