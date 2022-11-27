@@ -20,7 +20,7 @@ async def sysinfo(_, m):
     txt += "\n\n"
     txt += f"**• DISK : {DISK_USAGE}%**"
     txt += "\n\n"
-    txt += f"**• MEMORY USED : {RAM_USED}GB ({RAM_USEDP}%)**"
+    txt += f"**• MEMORY USAGE : {RAM_USED}GB ({RAM_USEDP}%)**"
     txt += "\n\n"
     txt += f"**• MEMORY TOTAL (RAM) : {TOTAL_RAM}GB**"
     await m.reply_photo(IMG, caption=txt)
