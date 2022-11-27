@@ -27,4 +27,13 @@ async def approve_user(_, m):
     await approve(m.chat.id, id)
     await m.reply(f"**{fn}** is now approved in **{m.chat.title}**, they got no limitations !")
 
-    
+@Client.on_message(filters.command("disapprove"))
+async def disapprove_user(_, m):
+    user_id = m.from_user.id
+    x, y = await verify(_, m)
+    if not x:
+        return await m.reply(y)
+    try:
+        id = await get_id(_, m)
+    except:
+        return await m.reply("Atleast reply to user or provide id !")
