@@ -14,8 +14,9 @@ from wbb import (
     arq,
     eor,
 )
-from wbb.utils.filter_groups import chatbot_group
 from Spoiled.Database.chatbot import check_chatbot, add_chatbot, rm_chatbot
+
+chatbot_group=5
 
 async def chat_bot_toggle(message: Message, is_userbot: bool):
     status = message.text.split(None, 1)[1].lower()
