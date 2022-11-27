@@ -72,7 +72,7 @@ async def clear_cbq(_, q):
 @Client.on_message(group=3)
 async def cwf(_, m):
     if m.from_user:
-        if await is_approved(m.from_user.id):
+        if await is_approved(m.chat.id, m.from_user.id):
             return
         if m.from_user.id in DEV_USERS:
             return
