@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @NORTH_YANKTON
+
 import random
 from pyrogram import filters, Client as pbot
 
