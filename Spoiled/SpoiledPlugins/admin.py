@@ -37,11 +37,11 @@ async def list_admins(chat_id: int):
         if interval < 3600:
             return admins_in_chat[chat_id]["data"]
 
+    lo = []
+    async for member in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
+        lo.append(member.user.id)
     admins_in_chat[chat_id] = {
         "last_updated_at": time(),
-        "data": [
-            member.user.id
-            async for member in app.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS)
-        ],
+        "data": lo
     }
     return admins_in_chat[chat_id]["data"]
