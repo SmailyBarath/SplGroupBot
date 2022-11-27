@@ -1,7 +1,7 @@
 from asyncio import get_running_loop, sleep
 from time import time
 
-from pyrogram import filters, Client as app
+from pyrogram import filters, Client as app, enums
 from pyrogram.types import (
     CallbackQuery,
     ChatPermissions,
@@ -34,7 +34,7 @@ async def list_admins(_, m):
         ADMINS = {"admins": [], "updated": None}
     admins = ADMINS["admins"]
     if not admins:
-        async for x in _.get_,chat_members(m.chat.id, filter="enums.ChatMembers.ADMINISTRATORS):
+        async for x in _.get_chat_members(m.chat.id, filter=enums.ChatMembers.ADMINISTRATORS):
             admins.append(x.user.id)
         ADMINS = {"admins": admins, "updated": time()}
         return ADMINS["admins"]
