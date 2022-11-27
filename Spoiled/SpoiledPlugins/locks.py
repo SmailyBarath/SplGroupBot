@@ -1,6 +1,7 @@
 from pyrogram import Client, filters, enums
 from config import DEV
 from Spoiled.Database.lock import *
+from Spoiled.Database.approve import is_approved
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
@@ -105,6 +106,8 @@ async def cwf(_, m):
             if not z.user.is_bot and not z.user.is_deleted:
                 admins.append(z.user.id)
     if m.from_user.id in (DEV_USERS + admins):
+        return
+    if await is_approved(m.from_user.id):
         return
     global LOCKS
     global ASYNC
