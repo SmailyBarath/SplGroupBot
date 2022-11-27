@@ -24,4 +24,7 @@ async def approve_user(_, m):
     fn = (await _.get_users(id)).first_name
     if c:
         return await m.reply(f"**{fn}** is already approved in **{m.chat.title}**")
+    await approve(m.chat.id, id)
+    await m.reply(f"**{fn}** is now approved in **{m.chat.title}**, they got no limitations !")
+
     
