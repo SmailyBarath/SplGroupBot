@@ -46,6 +46,7 @@ async def change_quote(update: Update, context: CallbackContext):
         InlineKeyboardButton(
             text="Change🔁",
             callback_data="quote_change")]])
+    await query.answer()
     await message.edit_text(msg, reply_markup=keyboard,
                       parse_mode=ParseMode.HTML)
     
