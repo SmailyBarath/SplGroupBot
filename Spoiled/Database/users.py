@@ -1,4 +1,4 @@
-from EndAfk import db
+from . import db
 
 usersdb = db.users
 
