@@ -11,7 +11,7 @@ from pyrogram.types import (
 )
 from config import DEV
 from ..Decorators.permissions import adminsOnly
-from .admin import list_admins, member_permissions
+from .admin import member_permissions
 from Spoiled.Database.flood import flood_off, flood_on, is_flood_on
 
 flood_group = 7
@@ -25,6 +25,24 @@ def reset_flood(chat_id, user_id=0):
     for user in DB[chat_id].keys():
         if user != user_id:
             DB[chat_id][user] = 0
+
+ADMINS = None
+
+async def list_admins(_, m):
+    global ADMINS
+    if not ADMINS:
+        ADMINS = {"admins": [], "updated": None}
+    admins = ADMINS["admins"]
+    if not admins:
+        async for x in _.get_,chat_members(m.chat.id, filter="enums.ChatMembers.ADMINISTRATORS):
+            admins.append(x.user.id)
+        ADMINS = {"admins": admins, "updated": time()}
+        return ADMINS["admins"]
+    if ADMINS["updated"]:
+        if not (time() - ADMINS["updated"]) > 300.0:
+            return ADMINS["admins"]
+        return ADMINS["admins"]
+
 
 
 @app.on_message(
