@@ -1,4 +1,4 @@
-from pyrogram import Client as app
+from pyrogram import Client as app, enums
 
 async def member_permissions(chat_id: int, user_id: int):
     perms = []
