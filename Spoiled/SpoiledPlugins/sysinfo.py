@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 CPU = p.cpu_percent()
 TOTAL_RAM = str(p.virtual_memory().total / 10000000000)[0:4]
 RAM_USEDP = p.virtual_memory().percent
-RAM_USED
+RAM_USED = (RAM_USEDP * TOTAL_RAM) / 100
 IMG = "https://te.legra.ph/file/70ef0b7a6c8fece1a13c0.jpg"
 
 txt = "\n"
