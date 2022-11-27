@@ -65,7 +65,6 @@ async def type_and_send(message: Message):
     await message._client.send_chat_action(chat_id, "typing")
     response, _ = await gather(lunaQuery(query, user_id), sleep(3))
     await message.reply_text(response)
-    await message._client.send_chat_action(chat_id, "cancel")
 
 
 @app.on_message(
