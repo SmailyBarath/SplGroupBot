@@ -17,14 +17,11 @@ chatbot_group=5
 
 BOT_ID = None
 
-async def eor(msg: Message, **kwargs):
-    func = (
-        (msg.edit_text if msg.from_user.is_self else msg.reply)
-        if msg.from_user
-        else msg.reply
-    )
-    spec = getfullargspec(func.__wrapped__).args
-    return await func(**{k: v for k, v in kwargs.items() if k in spec})
+async def eor(m: Message, text="?"):
+    if m.from_user.is_self:
+        await m.edit(text)
+    else:
+        await m.reply(text)
 
 async def chat_bot_toggle(message: Message, is_userbot: bool):
     status = message.text.split(None, 1)[1].lower()
