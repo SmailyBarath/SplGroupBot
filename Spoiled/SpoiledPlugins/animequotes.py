@@ -49,11 +49,11 @@ async def change_quote(update: Update, context: CallbackContext):
     await message.edit_text(msg, reply_markup=keyboard,
                       parse_mode=ParseMode.HTML)
     
-def animequotes(update: Update, context: CallbackContext):
+async def animequotes(update: Update, context: CallbackContext):
     message = update.effective_message
     name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
     reply_photo = message.reply_to_message.reply_photo if message.reply_to_message else message.reply_photo
-    reply_photo(
+    await reply_photo(
         random.choice(QUOTES_IMG))
 
 QUOTES_IMG = (
