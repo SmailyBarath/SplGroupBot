@@ -1,4 +1,5 @@
 from pyrogram import Client, filters
+from pyrogram.types import Message
 from config import DEV
 from Spoiled.Database.chats import add_served_chat
 
