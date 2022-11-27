@@ -17,3 +17,4 @@ sqlalchemy
 psycopg2
 psutil
 pynewtonmath
+pykeyboard
