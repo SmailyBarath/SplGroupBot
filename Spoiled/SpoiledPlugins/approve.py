@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY NORTH_YANKTON
+
 from pyrogram import Client, filters
 from Spoiled.Database.approve import *
 from . import get_id, verify
