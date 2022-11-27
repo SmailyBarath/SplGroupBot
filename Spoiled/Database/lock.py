@@ -3,7 +3,7 @@ from . import db
 lockdb = db.lock
 
 async def add_lock(chat_id: int, word):
-    x = await lock.find_one({"chat_id": chat_id})
+    x = await lockdb.find_one({"chat_id": chat_id})
     if x:
         list = x["words"]
         list.append(word)
