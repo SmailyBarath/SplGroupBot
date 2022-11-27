@@ -94,3 +94,20 @@ def log(update: Update, context: CallbackContext):
     args = context.args
     message = update.effective_message
     message.reply_text(math.log(int(args[0])))
+
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+Yashu.add_handler(CommandHandler("math", simplify))
+
