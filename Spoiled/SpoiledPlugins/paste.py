@@ -1,12 +1,11 @@
 import asyncio
 import os
 import re
-
 from aiohttp import ClientSession
 
 import aiofiles
 from pykeyboard import InlineKeyboard
-from pyrogram import filters, Client
+from pyrogram import filters, Client as app
 from pyrogram.types import InlineKeyboardButton
 
 import socket
