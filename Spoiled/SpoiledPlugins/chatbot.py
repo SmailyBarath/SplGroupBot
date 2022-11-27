@@ -1,20 +1,17 @@
 from asyncio import gather, sleep
-
-from pyrogram import filters
+from Python_ARQ import ARQ
+from pyrogram import filters, Client as app
 from pyrogram.types import Message
-
-from wbb import (
-    BOT_ID,
-    SUDOERS,
-    USERBOT_ID,
-    USERBOT_PREFIX,
-    USERBOT_USERNAME,
-    app,
-    app2,
-    arq,
-    eor,
-)
+from aiohttp import ClientSession
+    
 from Spoiled.Database.chatbot import check_chatbot, add_chatbot, rm_chatbot
+
+ARQ_API_KEY = TOKENS.ARQ_API_KEY
+ARQ_API_URL = "https://arq.hamker.in"
+
+aiohttpsession = ClientSession()
+
+arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
 chatbot_group=5
 
