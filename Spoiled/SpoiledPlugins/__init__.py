@@ -2,6 +2,9 @@ from telegram import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 from config import CHATS
 from telegram.ext import ApplicationBuilder
 from config import DEV
+import time
+
+startTime = time.time()
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
