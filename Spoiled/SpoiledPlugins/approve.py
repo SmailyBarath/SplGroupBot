@@ -21,7 +21,7 @@ async def approve_user(_, m):
     if id in DEV_USERS:
         return await m.reply("Sudo users are already free from locks, blacklists, floods etc..!")
     j = await _.get_chat_member(m.chat.id, id)
-    if j.status in ["creator", "administrator"]:
+    if j.privileges:
         return await m.reply("Admins are already free from locks, blacklists, flood etc..!")
     c = await is_approved(m.chat.id, id)
     fn = (await _.get_users(id)).first_name
