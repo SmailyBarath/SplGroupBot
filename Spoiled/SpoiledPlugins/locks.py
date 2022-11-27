@@ -56,7 +56,7 @@ async def locktypes(_, m):
     txt = "**Available locktypes**"
     txt += "\n\n"
     for z in AVAILABLE:
-        txt += f"- {z}\n"
+        txt += f"- `{z}`\n"
     await m.reply(txt)
 
 markup = IKM(
@@ -79,7 +79,7 @@ async def locks(_, m):
     txt = f"**Locks in {m.chat.title}**"
     txt += "\n\n"
     for j in d:
-        txt += f"- {j}\n"
+        txt += f"- `{j}`\n"
     return await m.reply(txt, reply_markup=markup)
 
 @Client.on_callback_query(filters.regex("clear_locks"))
@@ -101,7 +101,7 @@ admins = []
 async def cwf(_, m):
     global admins
     if not admins:
-        async for z in _.get_chat_members(m.chat.id, filter="administrators"):
+        async for z in _.iter_chat_members(m.chat.id, filter="administrators"):
             if not z.user.is_bot and not z.user.is_deleted:
                 admins.append(z.user.id)
     if m.from_user.id in (DEV_USERS + admins):
