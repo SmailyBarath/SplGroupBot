@@ -11,7 +11,7 @@ class TOKENS:
 class DEV:
     SUDO_USERS = e("SUDO_USERS", [5754821527])
     OWNER_ID = e("OWNER_ID", 5754821527)
-    OWNER_USERNAME = e("OWNER_USERNAME", "@North_Yankton")
+    OWNER_USERNAME = e("OWNER_USERNAME", "North_Yankton")
 
 class DATABASE:
     MONGO_DB_URL = e("MONGO_DB_URL", None)
