@@ -179,11 +179,12 @@ async def cwf(_, m):
                 for t in z:
                     if t == ".":
                         ind = z.index(".")
-                        if z[ind - 1] != " " and z[ind + 1] != " ":
-                            try:
-                                await m.delete()
-                            except:
-                                pass
+                        if z[ind - 1] != " ":
+                            if z[ind + 1] != " ":
+                                try:
+                                    await m.delete()
+                                except:
+                                    pass
         return
     
     
