@@ -7,7 +7,30 @@ from PIL import Image
 from pyrogram import filters, Client as app
 from pyrogram.types import Message
 
-from EmikoRobot.services.sections import section
+n = "\n"
+w = " "
+
+bold = lambda x: f"**{x}:** "
+bold_ul = lambda x: f"**--{x}:**-- "
+
+mono = lambda x: f"`{x}`{n}"
+
+def section(
+    title: str,
+    body: dict,
+    indent: int = 2,
+    underline: bool = False,
+) -> str:
+
+    text = (bold_ul(title) + n) if underline else bold(title) + n
+
+    for key, value in body.items():
+        text += (
+            indent * w
+            + bold(key)
+            + ((value[0] + n) if isinstance(value, list) else mono(value))
+        )
+    return text
 
 
 async def convert(
