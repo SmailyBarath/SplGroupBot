@@ -15,6 +15,8 @@ arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
 chatbot_group=5
 
+BOT_ID = None
+
 async def chat_bot_toggle(message: Message, is_userbot: bool):
     status = message.text.split(None, 1)[1].lower()
     chat_id = message.chat.id
@@ -70,6 +72,9 @@ async def type_and_send(message: Message):
     group=chatbot_group,
 )
 async def chatbot_talk(_, message: Message):
+    global BOT_ID
+    if not BOT_ID:
+        BOT_ID = (await _.get_me()).id
     db = await check_chatbot()
     if message.chat.id not in db["bot"]:
         return
