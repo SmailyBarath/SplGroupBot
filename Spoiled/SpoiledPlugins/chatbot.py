@@ -5,6 +5,7 @@ from pyrogram.types import Message
 from aiohttp import ClientSession
 from config import TOKENS 
 from Spoiled.Database.chatbot import check_chatbot, add_chatbot, rm_chatbot
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
 ARQ_API_KEY = TOKENS.ARQ_API_KEY
 ARQ_API_URL = "https://arq.hamker.in"
@@ -45,13 +46,62 @@ async def chat_bot_toggle(message: Message, is_userbot: bool):
 
 # Enabled | Disable Chatbot
 
+markup = IKM(
+         [
+         [
+         IKB("Enable ✅", callback_data="chatbot_enable"),
+         IKB("Disable ❌", callback_data="chatbot_disable")
+         ],
+         [
+         IKB("Close 🗑️", callback_data="chatbot_close")
+         ]
+         ]
+         )
+
+id = None
 
 @app.on_message(filters.command("chatbot"))
 async def chatbot_status(_, message: Message):
-    if len(message.command) != 2:
-        return await eor(message, text="**Usage:**\n/chatbot [ENABLE|DISABLE]")
-    await chat_bot_toggle(message, is_userbot=False)
+    global id
+    id = message.from_user.id
+    await m.reply("Choose from below !", reply_markup=markup)
 
+@app.on_callback_query(filters.regex("chatbot_enable"))
+async def en_cbq(_, q):
+    global id
+    if id != q.from_user.id:
+        return await q.answer()
+    chat_id = q.message.chat.id
+    db = await check_chatbot()
+    db = db["bot"]
+    if chat_id in db:
+        return await q.answer("Chatbot already enabled !", show_alert=True)
+    await q.answer("Enabling Chatbot !", show_alert=True)
+    await add_chatbot(chat_id, is_userbot=False)
+    await q.edit_message_text(f"Chatbot enabled in **{q.message.chat.title}** !")
+    
+@app.on_callback_query(filters.regex("chatbot_disable"))
+async def di_cbq(_, q):
+    global id
+    if id != q.from_user.id:
+        return await q.answer()
+    chat_id = q.message.chat.id
+    db = await check_chatbot()
+    db = db["bot"]
+    if not chat_id in db:
+        return await q.answer("Chatbot isn't enabled !", show_alert=True)
+    await q.answer("Disabling Chatbot !", show_alert=True)
+    await rm_chatbot(chat_id, is_userbot=False)
+    await q.edit_message_text(f"Chatbot disabled in **{q.message.chat.title}** !")
+
+@app.on_callback_query(filters.regex("chatbot_close"))
+async def close_cbq(_, q):
+    global id
+    if id != q.from_user.id:
+        return await q.answer()
+    await q.answer("closing...")
+    await q.delete()
+    
 
 async def lunaQuery(query: str, user_id: int):
     luna = await arq.luna(query, user_id)
