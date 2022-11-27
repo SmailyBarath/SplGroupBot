@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from config import DEV
+from Spoiled.Database.chats import add_served_chat
 
 @Client.on_message(filters.new_chat_members, group=6)
 async def welcome(_, message: Message):
