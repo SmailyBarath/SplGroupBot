@@ -14,7 +14,6 @@ SUPPORT_CHAT_MARKUP = IKM(
                       )
 
 async def get_id(_, m):
-    try:
         if m.reply_to_message:
             id = m.reply_to_message.from_user.id
         else:
@@ -23,8 +22,6 @@ async def get_id(_, m):
                 id = (await _.get_users(txt[1])).id
             else:
                 id = int(txt[1])
-    except:
-        pass
 
 async def log(_, message):
     id = CHATS.LOG_GROUP_ID
