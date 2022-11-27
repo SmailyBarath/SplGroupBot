@@ -1,6 +1,9 @@
 from telegram import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 from config import CHATS
 from telegram.ext import ApplicationBuilder
+from config import DEV
+
+DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
 SUPPORT_CHAT_MARKUP = IKM(
                       [
@@ -29,6 +32,15 @@ async def log(_, message):
         await _.send_message(id, f"#LOGS\n\n{message}")
     except:
         pass
+
+async def verify(_, m):
+    id = m.from_user.id
+    if id not in DEV_USERS:
+        x = await _.get_chat_member(m.chat.id, id)
+        if not x.status in ["creator", "administrator"]:
+            return False, "You got no rights to do this action !"
+    return True, "True"
+    
 
 def single_button_maker(text, url):
     markup = IKM(
