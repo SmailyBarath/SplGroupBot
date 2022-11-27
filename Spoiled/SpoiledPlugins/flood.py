@@ -109,17 +109,9 @@ async def flood_control_func(_, message: Message):
             f"Imagine flooding the chat in front of me, Muted {mention} for an hour!",
             reply_markup=keyboard,
         )
+    else:
+        DB[chat_id][user_id] += 1
 
-        async def delete():
-            await sleep(3600)
-            try:
-                await m.delete()
-            except Exception:
-                pass
-
-        loop = get_running_loop()
-        return loop.create_task(delete())
-    DB[chat_id][user_id] += 1
 
 
 @app.on_callback_query(filters.regex("unmute_"))
