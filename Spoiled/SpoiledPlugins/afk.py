@@ -72,6 +72,8 @@ async def reply_afk(_, m):
         if not m.reply_to_message.from_user:
             return 
         id = m.reply_to_message.from_user.id
+        if id == m.from_user.id:
+            return
         afk, details = await is_afk(id)
         if afk:
             first_name = (await _.get_users(id)).first_name
@@ -95,6 +97,8 @@ async def reply_afk(_, m):
                 return
             for z in uns:
                 id = (await _.get_users(z)).id
+                if id == m.from_user.id:
+                    continue
                 afk, details = await is_afk(id)
                 if afk:
                     first_name = (await _.get_users(id)).first_name
