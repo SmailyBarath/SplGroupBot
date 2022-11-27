@@ -9,7 +9,7 @@ async def get_served_chats() -> list:
         return []
     chats_list = []
     for chat in await chats.to_list(length=1000000000):
-        chats_list.append(chat)
+        chats_list.append(chat["chat_id"])
     return chats_list
 
 
