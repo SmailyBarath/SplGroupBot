@@ -1,4 +1,5 @@
 from pyrogram import Client as app, enums
+from time import time
 
 async def member_permissions(chat_id: int, user_id: int):
     perms = []
