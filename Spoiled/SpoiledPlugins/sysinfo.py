@@ -13,7 +13,7 @@ txt += "\n\n"
 txt += f"**• CPU : {CPU}%**"
 txt += "\n\n"
 txt += f"**• MEMORY USED : {RAM_USED}GB ( {RAM_USEDP} )**"
-txt *= "\n\n"
+txt += "\n\n"
 txt += f"**• RAM : {TOTAL_RAM}GB**"
 
 @Client.on_message(filters.command("sysinfo"))
