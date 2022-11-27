@@ -34,7 +34,7 @@ async def unlock(_, m):
     global ASYNC
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges
             return await m.reply("Only admins are allowed to perform !")
     if not len(m.command) > 1:
         return await m.reply("`/unlock` < locktype >")
@@ -52,7 +52,7 @@ async def unlock(_, m):
 async def locktypes(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return await m.reply("Only admins are allowed to perform !")
     txt = "**Available locktypes**"
     txt += "\n\n"
@@ -72,7 +72,7 @@ markup = IKM(
 async def locks(_, m):
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return await m.reply("Only admins are allowed to perform !")
     d = await get_locks(m.chat.id)
     if not d:
