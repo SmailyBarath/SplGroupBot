@@ -32,3 +32,10 @@ async def get_approved(chat_id):
     if not x:
         return []
     return x["approved"]
+
+async def disapprove_all(chat_id: int):
+    x = await get_approved(chat_id)
+    if not x:
+        return
+    for y in x:
+        await disapprove(chat_id, y)
