@@ -3,6 +3,8 @@
 from pyrogram import Client, filters
 from config import DEV, STUFF
 import time
+from .afk import get_readable_time
+from . import startTime
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
@@ -14,9 +16,10 @@ async def alive(_, m):
     txt = f"**Hi {m.from_user.first_name} !, I'm {myfn}**\n\n"
     txt += f"**Bot owner : [Yashu-Alpha](t.me/{DEV.OWNER_USERNAME})**\n\n"
     if DEV.SUDO_USERS:
-        txt += f"**Sudo status : ✅ , {len(DEV.SUDO_USERS)}**\n"
+        txt += f"**Sudo status : ✅ , {len(DEV.SUDO_USERS)}**\n\n"
     else:
-        txt += f"**Sudo status : ❌**\n"
+        txt += f"**Sudo status : ❌**\n\n"
+    txt += f"**Uptime : {get_readable_time(int(time.time()-startTime))}\n**"
     end = time.time()
     dur = (str(end-start))[0:5]
     await ok.delete()
