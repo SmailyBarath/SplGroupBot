@@ -38,7 +38,7 @@ async def disapprove_user(_, m):
         id = await get_id(_, m)
     except:
         return await m.reply("Atleast reply to user or provide id !")
-    lol = await is_approved(id)
+    lol = await is_approved(m.chat.id, id)
     fn = (await _.get_users(id)).first_name
     if not lol:
         return await m.reply(f"**{fn}** wasn't approved in **{m.chat.title}**")
