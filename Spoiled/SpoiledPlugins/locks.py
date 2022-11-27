@@ -15,7 +15,7 @@ async def lock(_, m):
     global ASYNC
     if not m.from_user.id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, m.from_user.id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return await m.reply("Only admins are allowed to perform !")
     if not len(m.command) > 1:
         return await m.reply("`/lock` < locktype >")
