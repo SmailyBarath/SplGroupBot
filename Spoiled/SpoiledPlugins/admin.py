@@ -26,8 +26,8 @@ async def member_permissions(chat_id: int, user_id: int):
         perms.append("can_manage_voice_chats")
     return perms
 
-admins_in_chat = {}
 
+admins_in_chat = {}
 
 async def list_admins(chat_id: int):
     global admins_in_chat
@@ -41,7 +41,7 @@ async def list_admins(chat_id: int):
         "data": [
             member.user.id
             async for member in app.get_chat_members(
-                chat_id, filter="administrators"
+                chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS
             )
         ],
     }
