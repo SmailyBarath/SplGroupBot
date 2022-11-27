@@ -35,7 +35,6 @@ def reset_flood(chat_id, user_id=0):
     & ~filters.bot,
     group=flood_group
 )
-@capture_err
 async def flood_control_func(_, message: Message):
     if not message.chat:
         return
