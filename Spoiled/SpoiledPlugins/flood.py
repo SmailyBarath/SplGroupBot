@@ -77,7 +77,7 @@ async def flood_control_func(_, message: Message):
         DB[chat_id][user_id] = 0
 
     # Reset floodb of current chat if some other user sends a message
-    reset_flood(chat_id, user_id)
+        reset_flood(chat_id, user_id)
 
     # Ignore devs and admins
     mods = await list_admins(_, message)
