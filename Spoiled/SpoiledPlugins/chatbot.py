@@ -100,7 +100,7 @@ async def close_cbq(_, q):
     if id != q.from_user.id:
         return await q.answer()
     await q.answer("closing...")
-    await q.delete()
+    await q.message.delete()
     
 
 async def lunaQuery(query: str, user_id: int):
