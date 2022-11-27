@@ -35,7 +35,7 @@ async def verify(_, m):
     id = m.from_user.id
     if id not in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, id)
-        if not x.status in ["creator", "administrator"]:
+        if not x.privileges:
             return False, "You got no rights to do this action !"
     return True, "True"
     
