@@ -1,6 +1,6 @@
 from asyncio import gather, sleep
 from Python_ARQ import ARQ
-from pyrogram import filters, Client as app
+from pyrogram import filters, Client as app, enums
 from pyrogram.types import Message
 from aiohttp import ClientSession
 from config import TOKENS 
@@ -112,8 +112,10 @@ async def type_and_send(message: Message):
     chat_id = message.chat.id
     user_id = message.from_user.id if message.from_user else 0
     query = message.text.strip()
+    await _.send_chat_action(chat_id, enums.ChatAction.TYPING)
     response, _ = await gather(lunaQuery(query, user_id), sleep(3))
     await message.reply_text(response)
+    await _.send_chat_action(chat_id, enums.ChatAction.CANCEL)
 
 
 @app.on_message(
