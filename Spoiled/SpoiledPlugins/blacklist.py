@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from Spoiled.Database.blacklist import *
+from Spoiled.Database.approve import is_approved
 from config import DEV
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
@@ -71,6 +72,8 @@ async def clear_cbq(_, q):
 @Client.on_message(group=3)
 async def cwf(_, m):
     if m.from_user:
+        if await is_approved(m.from_user.id):
+            return
         if m.from_user.id in DEV_USERS:
             return
         z = await _.get_chat_member(m.chat.id, m.from_user.id)
