@@ -34,7 +34,7 @@ async def list_admins(_, m):
         ADMINS = {"admins": [], "updated": None}
     admins = ADMINS["admins"]
     if not admins:
-        async for x in _.get_chat_members(m.chat.id, filter=enums.ChatMembers.ADMINISTRATORS):
+        async for x in _.get_chat_members(m.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
             admins.append(x.user.id)
         ADMINS = {"admins": admins, "updated": time()}
         return ADMINS["admins"]
