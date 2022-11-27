@@ -40,7 +40,7 @@ async def chat_bot_toggle(message: Message, is_userbot: bool):
 # Enabled | Disable Chatbot
 
 
-@app.on_message(filters.command("chatbot") & ~filters.edited)
+@app.on_message(filters.command("chatbot"))
 async def chatbot_status(_, message: Message):
     if len(message.command) != 2:
         return await eor(message, text="**Usage:**\n/chatbot [ENABLE|DISABLE]")
