@@ -2,9 +2,9 @@ import psutil as p
 from pyrogram import Client, filters
 
 CPU = p.cpu_percent()
-RAM_USED = str(p.virtual_memory()[3] / 10000000000)[0:4]
 TOTAL_RAM = str(p.virtual_memory().total / 10000000000)[0:4]
-RAM_USEDP = p.virtual_memory()[2]
+RAM_USEDP = p.virtual_memory().percent
+RAM_USED
 IMG = "https://te.legra.ph/file/70ef0b7a6c8fece1a13c0.jpg"
 
 txt = "\n"
