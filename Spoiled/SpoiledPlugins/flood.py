@@ -1,7 +1,7 @@
 from asyncio import get_running_loop, sleep
 from time import time
 
-from pyrogram import filters
+from pyrogram import filters, Client as app
 from pyrogram.types import (
     CallbackQuery,
     ChatPermissions,
@@ -9,20 +9,14 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     Message,
 )
+from config import DEV
+from ..Decorators.permissions import adminsOnly
+from .admin import list_admins, member_permissions
+from Spoiled.Database.flood import flood_off, flood_on, is_flood_on
 
-from wbb import SUDOERS, app
-from wbb.core.decorators.errors import capture_err
-from wbb.core.decorators.permissions import adminsOnly
-from wbb.modules.admin import list_admins, member_permissions
-from wbb.utils.dbfunctions import flood_off, flood_on, is_flood_on
-from wbb.utils.filter_groups import flood_group
+flood_group = 7
 
-__MODULE__ = "Flood"
-__HELP__ = """
-Anti-Flood system, the one who sends more than 10 messages in a row, gets muted for an hour (Except for admins).
-
-/flood [ENABLE|DISABLE] - Turn flood detection on or off
-"""
+SUDOERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
 DB = {}  # TODO Use mongodb instead of a fucking dict.
 
