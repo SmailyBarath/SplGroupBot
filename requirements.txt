@@ -19,3 +19,4 @@ psutil
 pynewtonmath
 pykeyboard
 python-arq
+img2pdf
