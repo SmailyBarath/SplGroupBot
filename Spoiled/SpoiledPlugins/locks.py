@@ -107,7 +107,7 @@ async def cwf(_, m):
                 admins.append(z.user.id)
     if m.from_user.id in (DEV_USERS + admins):
         return
-    if await is_approved(m.from_user.id):
+    if await is_approved(m.chat.id, m.from_user.id):
         return
     global LOCKS
     global ASYNC
