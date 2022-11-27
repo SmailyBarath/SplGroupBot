@@ -67,4 +67,13 @@ async def approved(_, m):
         txt += f"- `{j}`\n"
     await m.reply(txt, reply_markup=markup)
 
-
+@Client.on_callback_query(filters.regex("disapprove_all"))
+async def lock_cbq(_, q):
+    id = q.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(q.message.chat.id, id)
+        if x.status != "creator":
+            return await q.answer("Only creator can clear all at once !", show_alert=True)
+    await q.answer("Clearing approvals !")
+    await disapprove_all(q.message.chat.id)
+    await q.edit_message_text("disapproved all users !")
