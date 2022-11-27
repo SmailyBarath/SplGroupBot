@@ -6,6 +6,7 @@ class API:
 
 class TOKENS:
     BOT_TOKEN = e("BOT_TOKEN", None)
+    ARQ_API_KEY = e("ARQ_API_KEY", "PNZJLN-ZZFHVK-USQLIZ-MQEWJN-ARQ")
 
 class DEV:
     SUDO_USERS = e("SUDO_USERS", [5754821527])
