@@ -2,6 +2,8 @@ import asyncio
 import os
 import re
 
+from aiohttp import ClientSession
+
 import aiofiles
 from pykeyboard import InlineKeyboard
 from pyrogram import filters, Client
@@ -11,6 +13,7 @@ import socket
 from asyncio import get_running_loop
 from functools import partial
 
+session = ClientSession()
 
 def _netcat(host, port, content):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
