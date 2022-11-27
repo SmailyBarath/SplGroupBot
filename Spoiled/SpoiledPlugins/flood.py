@@ -41,6 +41,9 @@ async def list_admins(_, m):
     if ADMINS["updated"]:
         if not (time() - ADMINS["updated"]) > 300.0:
             return ADMINS["admins"]
+        async for x in _.get_chat_members(m.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
+            admins.append(x.user.id)
+        ADMINS = {"admins": admins, "updated": time()}
         return ADMINS["admins"]
 
 
@@ -77,7 +80,7 @@ async def flood_control_func(_, message: Message):
     reset_flood(chat_id, user_id)
 
     # Ignore devs and admins
-    mods = await list_admins(chat_id)
+    mods = await list_admins(_, message)
     if user_id in mods or user_id in SUDOERS:
         return
 
