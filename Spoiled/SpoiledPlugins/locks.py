@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from config import DEV
 from Spoiled.Database.lock import *
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
@@ -101,7 +101,7 @@ admins = []
 async def cwf(_, m):
     global admins
     if not admins:
-        async for z in _.iter_chat_members(m.chat.id, filter="administrators"):
+        async for z in _.get_chat_members(m.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
             if not z.user.is_bot and not z.user.is_deleted:
                 admins.append(z.user.id)
     if m.from_user.id in (DEV_USERS + admins):
