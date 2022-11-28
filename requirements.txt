@@ -21,4 +21,5 @@ psutil
 pynewtonmath
 pykeyboard
 python-arq
+pillow
 img2pdf
