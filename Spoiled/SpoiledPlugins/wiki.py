@@ -6,7 +6,7 @@ from telegram.constants import ParseMode
 from wikipedia.exceptions import DisambiguationError, PageError
 
 
-def wiki(update: Update, context: CallbackContext):
+async def wiki(update: Update, context: CallbackContext):
     msg = (
         update.effective_message.reply_to_message
         if update.effective_message.reply_to_message
@@ -20,14 +20,14 @@ def wiki(update: Update, context: CallbackContext):
     try:
         res = wikipedia.summary(search)
     except DisambiguationError as e:
-        update.message.reply_text(
+        await update.message.reply_text(
             "Disambiguated pages found! Adjust your query accordingly.\n<i>{}</i>".format(
                 e
             ),
             parse_mode=ParseMode.HTML,
         )
     except PageError as e:
-        update.message.reply_text(
+        await update.message.reply_text(
             "<code>{}</code>".format(e), parse_mode=ParseMode.HTML
         )
     if res:
@@ -38,7 +38,7 @@ def wiki(update: Update, context: CallbackContext):
             with open("result.txt", "w") as f:
                 f.write(f"{result}\n\nUwU OwO OmO UmU")
             with open("result.txt", "rb") as f:
-                context.bot.send_document(
+                await context.bot.send_document(
                     document=f,
                     filename=f.name,
                     reply_to_message_id=update.message.message_id,
@@ -46,7 +46,7 @@ def wiki(update: Update, context: CallbackContext):
                     parse_mode=ParseMode.HTML,
                 )
         else:
-            update.message.reply_text(
+            await update.message.reply_text(
                 result, parse_mode=ParseMode.HTML, disable_web_page_preview=True
             )
 
