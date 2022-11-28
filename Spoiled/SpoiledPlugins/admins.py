@@ -25,7 +25,7 @@ async def reload_admins(_, m):
 
 @Client.on_message(filters.command("reload"))
 async def reload(_, m):
-    ok = await m.reply(f"**Reloading bot...\n\n• loading\n• ⏳\n• ⏳**"
+    ok = await m.reply(f"**Reloading bot...\n\n• loading\n• ⏳\n• ⏳**")
     x = await reload_admins(_, m)
     await ok.edit(f"**Reloading bot...\n\n• loading\n• Admin list updated ✅\n• ⏳**")
     x = (await _.get_me()).id
