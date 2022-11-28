@@ -9,29 +9,29 @@ async def ban_user(_, m):
     try:
         id = await get_id(_, m)
     except:
-        return False, "Reply to a user or provide id !"
+        return False, f"**Reply to a user or provide id !**"
     if id in DEV_USERS:
-        return False, "Can't ban sudo users !"
+        return False, f"**Can't ban sudo users !**"
     x = await _.get_chat_member(m.chat.id, id)
     if x.privileges:
-        return False, "Can't ban as admin !"
+        return False, f"**Can't ban an admin !**"
     if x.status == "banned":
-        return False, "User already banned !"
+        return False, f"**User already banned !**"
     await _.ban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
-    return True, f"{men} banned !"
+    return True, f"**{men} banned !**"
 
 async def unban_user(_, m):
     try:
         id = await get_id(_, m)
     except:
-        return False, "Reply to a user or provide id !"
+        return False, f"**Reply to a user or provide id !**"
     x = await _.get_chat_member(m.chat.id, id)
     if x.status != "banned":
-        return False, "User isn't banned !"
+        return False, f"**User isn't banned !**"
     await _.unban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
-    return True, f"{men} unbanned !"
+    return True, f"**{men} unbanned !**"
 
 @Client.on_message(filters.command(["ban", "sban"]))
 async def ban(_, m):
