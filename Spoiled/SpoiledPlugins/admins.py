@@ -15,7 +15,6 @@ async def list_admins(_, m):
         l = reload_admins(_)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
-    
 
 async def reload_admins(_: Client):
     l = []
