@@ -96,7 +96,10 @@ async def reply_afk(_, m):
             if not uns:
                 return
             for z in uns:
-                id = (await _.get_users(z)).id
+                try:
+                    id = (await _.get_users(z)).id
+                except:
+                    return
                 if id == m.from_user.id:
                     continue
                 afk, details = await is_afk(id)
