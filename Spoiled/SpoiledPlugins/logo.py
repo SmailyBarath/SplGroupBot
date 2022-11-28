@@ -279,7 +279,7 @@ async def lego(_, m):
     draw.text((x, y), text, font=font, fill="white", stroke_width=1, stroke_fill="black")
     fname = "Spl.png"
     img.save(fname, "png")
-    await _.send_photo(m.chat_id, fname, caption = f"Made by @{B_UN} !")         
+    await _.send_photo(m.chat.id, fname, caption = f"Made by @{B_UN} !")         
     await pesan.delete()
     if os.path.exists(fname):
             os.remove(fname)
