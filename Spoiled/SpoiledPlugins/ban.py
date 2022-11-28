@@ -70,7 +70,7 @@ async def unban(_, m):
     x = x.privileges
     if not x.can_restrict_members:
         return await m.reply("I got no rights to restrict members !")
-    g, h = await ban_user(_, m)
+    g, h = await unban_user(_, m)
     if not g:
         return await m.reply(h)
     await m.reply(h)
