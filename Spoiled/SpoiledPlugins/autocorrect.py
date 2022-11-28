@@ -19,7 +19,7 @@ async def autocorrect_bot(_, message: Message):
     await message.reply_text(result.corrected if result.corrected else "Empty")
 
 
-IS_ENABLED = True
+IS_ENABLED = False
 
 
 @app.on_message(
