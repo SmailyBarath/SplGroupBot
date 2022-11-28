@@ -1,5 +1,5 @@
 from . import verify
-from pyrogram import Client, filters, enums
+from pyrogram import Client, filters
 from . import get_id
 from config import DEV
 from pyrogram.types import ChatPermissions
@@ -16,7 +16,7 @@ async def mute_user(_, m):
     x = await _.get_chat_member(m.chat.id, id)
     if x.privileges:
         return False, f"**Can't mute an admin !**"
-    if x.enums.ChatMemberStatus.RESTRICTED:
+    if x.ChatMemberStatus.RESTRICTED:
         return False, f"**User already muted !**"
     await _.restict_chat_member(m.chat.id, id, permissions=ChatPermissions())
     men = (await _.get_users(id)).mention
@@ -28,7 +28,7 @@ async def unmute_user(_, m):
     except:
         return False, f"**Reply to a user or provide id !**"
     x = await _.get_chat_member(m.chat.id, id)
-    if x.enums.ChatMemberStatus.RESTRICTED:
+    if x.ChatMemberStatus.RESTRICTED:
         return False, f"**User isn't muted !**"
     await _.unban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
