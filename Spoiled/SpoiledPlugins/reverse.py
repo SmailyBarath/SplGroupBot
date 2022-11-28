@@ -115,7 +115,7 @@ async def reverse_image_search(client, message: Message):
         text = div.find("a").text
         text = f"**Result**: [{text}]({location})"
     except Exception:
-        return await m.edit(
+        return await message.reply(
             f"**Result**: [Link]({location})",
             disable_web_page_preview=True,
         )
@@ -161,7 +161,7 @@ async def reverse_image_search(client, message: Message):
     except Exception:
         pass
 
-    await m.edit(
+    await message.reply(
         text,
         disable_web_page_preview=True,
     )
