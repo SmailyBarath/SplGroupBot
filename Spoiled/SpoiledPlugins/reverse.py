@@ -3,7 +3,7 @@ from asyncio import gather, get_running_loop
 from base64 import b64decode
 from io import BytesIO
 from random import randint
-import aiohttpsession as session
+from aiohttp import ClientSession as session
 import aiofiles
 import requests
 from bs4 import BeautifulSoup
