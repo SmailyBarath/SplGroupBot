@@ -3,7 +3,7 @@ from asyncio import gather, get_running_loop
 from base64 import b64decode
 from io import BytesIO
 from random import randint
-
+import aiohttpsession as session
 import aiofiles
 import requests
 from bs4 import BeautifulSoup
@@ -14,6 +14,14 @@ from .chatbot import eor
 from wbb.utils.http import get
 
 MESSAGE_DUMP_CHAT = -1001898918828
+
+async def get(url: str, *args, **kwargs):
+    async with session.get(url, *args, **kwargs) as resp:
+        try:
+            data = await resp.json()
+        except Exception:
+            data = await resp.text()
+    return data
 
 def get_file_id_from_message(
         message,
