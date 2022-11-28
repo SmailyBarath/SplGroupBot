@@ -25,9 +25,9 @@ async def reload_admins(_, m):
 
 @Client.on_message(filters.command("reload"))
 async def reload(_, m):
-    ok = await m.reply("Reloading bot...\n\n--loading\n l-- ⏳\n l-- ⏳")
+    ok = await m.reply(f"**Reloading bot...\n\n• loading\n• ⏳\n• ⏳"**)
     x = await reload_admins(_, m)
-    await ok.edit("Reloading bot...\n\n--loading\n l-- Admin list updated ✅\n l-- ⏳")
+    await ok.edit(f"**Reloading bot...\n\n• loading\n• Admin list updated ✅\n• ⏳**")
     x = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, x)
     x = x.privileges
@@ -35,5 +35,5 @@ async def reload(_, m):
         txt = "No ban rights ❌"
     else:
         txt = "Bot can ban ✅"
-    await ok.edit(f"Reloading bot...\n\n--loaded\n l-- Admin list updated ✅\n l-- {txt}")
+    await ok.edit(f"**Reloaded bot !\n\n• loaded\n• Admin list updated ✅\n• {txt}**")
     
