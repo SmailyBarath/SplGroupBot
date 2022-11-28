@@ -28,7 +28,7 @@ async def unmute_user(_, m):
     except:
         return False, f"**Reply to a user or provide id !**"
     x = await _.get_chat_member(m.chat.id, id)
-    if x.status.RESTRICTED:
+    if not x.status.RESTRICTED:
         return False, f"**User isn't muted !**"
     await _.unban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
