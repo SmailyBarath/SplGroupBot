@@ -1,6 +1,6 @@
 from pyrogram import filters, Client as pbot
 
-@pbot.on_message(filters.command("tagall") & ~filters.edited & ~filters.bot)
+@pbot.on_message(filters.command("tagall"))
 async def tagall(client, message):
     x = await client.get_chat_member(message.chat.id, message.from_user.id)
     if not x.privileges:
