@@ -11,8 +11,6 @@ from pyrogram import filters, Client as app
 from pyrogram.types import InputMediaPhoto, Message
 from .chatbot import eor
 
-from wbb.utils.http import get
-
 MESSAGE_DUMP_CHAT = -1001898918828
 
 async def get(url: str, *args, **kwargs):
