@@ -11,9 +11,10 @@ from pyrogram import filters, Client as app
 from pyrogram.types import InputMediaPhoto, Message
 from .chatbot import eor
 
-from wbb import MESSAGE_DUMP_CHAT
 from wbb.utils.functions import get_file_id_from_message
 from wbb.utils.http import get
+
+MESSAGE_DUMP_CHAT = -1001898918828
 
 
 async def get_soup(url: str, headers):
