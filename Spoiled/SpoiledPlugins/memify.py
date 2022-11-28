@@ -6,7 +6,9 @@ from pyrogram import Client, filters
 
 @Client.on_message(filters.command("mmf"))
 async def handler(_, m):
-    if not m.reply_to_message and not m.reply_to_message.sticker:
+    if not m.reply_to_message:
+        return await m.reply("Reply to an image or a sticker !")
+    if not m.reply_to_message.sticker:
         return await m.reply("Reply to an image or a sticker !")
     file = await m.reply_to_message.download()
     msg = await m.reply("```Memifying this image !```")
