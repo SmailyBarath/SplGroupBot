@@ -14,7 +14,7 @@ async def wiki(update: Update, context: CallbackContext):
     )
     res = ""
     if msg == update.effective_message:
-        if context.args == 1:
+        if len(context.args) == 1:
             return await msg.reply_text("Enter query !")
         search = msg.text.split(" ", maxsplit=1)[1]
     else:
