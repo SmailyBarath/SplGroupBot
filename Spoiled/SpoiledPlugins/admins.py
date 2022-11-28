@@ -8,15 +8,16 @@ async def list_admins(_, m):
     chat_id = m.chat.id
     admins = admin_list[chat_id]["admins"]
     if not admins:
-        l = reload_admins(_)
+        l = reload_admins(_, m)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
     if (int(time.time()-admin_list[chat_id]["updated"])) >= 600:
-        l = reload_admins(_)
+        l = reload_admins(_, m)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
 
-async def reload_admins(_: Client):
+async def reload_admins(_, m):
+    chat_id = m.chat.id
     l = []
     async for x in _.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         l.append(x.user.id)
@@ -25,7 +26,7 @@ async def reload_admins(_: Client):
 @Client.on_message(filters.command("reload"))
 async def reload(_, m):
     ok = await m.reply("Reloading bot...\n\n--loading\n l-- ⏳\n l-- ⏳")
-    x = await reload_admins(_)
+    x = await reload_admins(_, m)
     await ok.edit("Reloading bot...\n\n--loading\n l-- Admin list updated ✅\n l-- ⏳")
     x = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, x)
