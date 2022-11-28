@@ -18,7 +18,7 @@ async def mute_user(_, m):
         return False, f"**Can't mute an admin !**"
     if x.enums.ChatMemberStatus.RESTRICTED:
         return False, f"**User already muted !**"
-    await _.ban_chat_member(m.chat.id, id)
+    await _.restict_chat_member(m.chat.id, id, permissions=ChatPermissions())
     men = (await _.get_users(id)).mention
     return True, f"**{men} muted !**"
 
