@@ -34,5 +34,5 @@ async def reload(_, m):
         txt = "No ban rights ❌"
     else:
         txt = "Bot can ban ✅"
-    await ok.edit(f"Reloading bot...\n\n--loaded\n l-- Admin list updated ✅\n l-- {txt}"
+    await ok.edit(f"Reloading bot...\n\n--loaded\n l-- Admin list updated ✅\n l-- {txt}")
     
