@@ -4,9 +4,9 @@ from pyrogram import filters, Client as pbot
 async def tagall(client, message):
     x = await client.get_chat_member(message.chat.id, message.from_user.id)
     if not x.privileges:
-        return await m.reply("Only admins are allowed to use !")
+        return await message.reply("Only admins are allowed to use !")
     await message.reply("`Processing.....`")
-    sh = m.text.split(None, 1)[1] if len(m.command) > 1 else "Hii !"
+    sh = message.text.split(None, 1)[1] if len(message.command) > 1 else "Hii !"
     mentions = ""
     async for member in client.get_chat_members(message.chat.id):
         if member.user.is_bot or member.user.is_deleted:
