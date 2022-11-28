@@ -2,6 +2,13 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from config import DEV
 from Spoiled.Database.chats import add_served_chat
+from Spoiled.Database.users import add_served_user
+
+@Client.on_message(group=8)
+async def user_cwf(_, m):
+    if not m.from_user:
+        return
+    await add_served_user(m.from_user.id)
 
 @Client.on_message(filters.new_chat_members, group=6)
 async def welcome(_, message: Message):
