@@ -5,6 +5,8 @@ motor
 pymongo[srv]
 pillow
 gpytranslate
+googletrans
+gTTS
 bs4
 requests
 aiohttp
