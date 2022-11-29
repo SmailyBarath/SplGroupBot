@@ -77,6 +77,9 @@ async def welm(_, m):
     if not len(m.command) > 1:
         return await m.reply(f"**/welcomemode [on | off]**")
     txt = m.text.split()[1].lower()
-
+    if not txt in ["on", "off"]:
+        return await m.reply(f"**/welcomemode [on | off]**")
+    y = await is_welcome_off(m.chat.id)
+    if txt == "off":
 
     
