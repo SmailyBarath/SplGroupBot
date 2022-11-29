@@ -137,8 +137,10 @@ async def setflm(_, m):
 
 LIST = {}
 IDS = {}
+a = 0
 @Client.on_message(filters.group, group=9)
 async def cwf(_, m):
+    global a
     global LIST
     global IDS
     chat_id = m.chat.id
