@@ -6,7 +6,7 @@ admin_list = {}
 async def list_admins(_, m):
     global admin_list
     chat_id = m.chat.id
-    if not admin_list[chat_id]:
+    if not chat_id in admin_list:
         l = await reload_admins(_, m)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
@@ -32,7 +32,7 @@ async def list_admin_rights(_, m):
     global admin_rights
     chat_id = m.chat.id
     l = await list_admins(_, m)
-    if not admin_rights[chat_id]:
+    if not chat_id in admin_rights:
         for x in l:
             h = await _.get_chat_member(chat_id, x)
             h = h.privileges
