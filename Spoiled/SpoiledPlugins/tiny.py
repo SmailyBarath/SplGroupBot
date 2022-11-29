@@ -12,7 +12,7 @@ async def tiny_rvrnt(_, m):
         return await m.reply(f"**Reply to a sticker !**")
     kontol = await m.reply("`Processing tiny...`")
     ik = await m.reply_to_message.download()
-    im1 = Image.open("./Assests/ken.png")
+    im1 = Image.open("./Assets/ken.png")
     if ik.endswith(".tgs"):
         await _.download_media(m.reply_to_message, file_name="ken.tgs")
         os.system("lottie_convert.py downloads/ken.tgs json.json")
