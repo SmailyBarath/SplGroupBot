@@ -19,6 +19,9 @@ VALID_WELCOME_FORMATTERS = [
     "mention",
 ]
 
+@Client.on_message(filters.group, group=10)
+async def cwf(_, m):
+
 @Client.on_message(filters.command("clearwelcome") & filters.group)
 async def welcomclr(_, m):
     id = m.from_user.id
