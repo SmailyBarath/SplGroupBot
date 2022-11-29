@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as 
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
-@Client.on_message(filters.command("approve"))
+@Client.on_message(filters.command("approve") & filters.group)
 async def approve_user(_, m):
     user_id = m.from_user.id
     x, y = await verify(_, m)
@@ -30,7 +30,7 @@ async def approve_user(_, m):
     await approve(m.chat.id, id)
     await m.reply(f"**{fn}** is now approved in **{m.chat.title}**, they got no limitations !")
 
-@Client.on_message(filters.command("disapprove"))
+@Client.on_message(filters.command("disapprove") & filters.group)
 async def disapprove_user(_, m):
     user_id = m.from_user.id
     x, y = await verify(_, m)
@@ -55,7 +55,7 @@ markup = IKM(
          ]
          )
 
-@Client.on_message(filters.command("approved"))
+@Client.on_message(filters.command("approved") & filters.group)
 async def approved(_, m):
     x, y = await verify(_, m)
     if not x:
