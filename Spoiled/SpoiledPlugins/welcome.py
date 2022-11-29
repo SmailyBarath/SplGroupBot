@@ -41,32 +41,32 @@ async def cwf(_, m):
         if txt:
             if "{first}" in txt:
                 h = m.new_chat_members[0].first_name
-                txt.replace("{first}", h)
+                txt = txt.replace("{first}", h)
             if "{last}" in txt:
                 h = m.new_chat_members[0].last_name if m.new_chat_members[0].last_name else None
-                txt.replace("{last}", h)
+                txt = txt.replace("{last}", h)
             if "{fullname}" in txt:
                 h = m.new_chat_members[0].first_name
                 o = m.new_chat_members[0].last_name if m.new_chat_members[0].last_name else None
                 if o:
-                    txt.replace("{fullname}", h+o)
+                    txt = txt.replace("{fullname}", h+o)
                 else:
-                    txt.replace("{fullname}", h)
+                    txt = txt.replace("{fullname}", h)
             if "{username}" in txt:
                 h = m.new_chat_members[0].username if m.new_chat_members[0].username else None
-                txt.replace("{username}", h)
+                txt = txt.replace("{username}", h)
             if "{id}" in txt:
                 h = m.new_chat_members[0].id
-                txt.replace("{id}", h)
+                txt = txt.replace("{id}", h)
             if "{count}" in txt:
                 h = await _.get_chat_members_count(m.chat.id)
-                txt.replace("{count}", str(h))
+                txt = txt.replace("{count}", str(h))
             if "{chatname}" in txt:
                 h = m.chat.title
-                txt.replace("{chatname}", h)
+                txt = txt.replace("{chatname}", h)
             if "{mention}" in txt:
                 h = m.new_chat_members[0].mention
-                txt.replace("{mention}", h)
+                txt = txt.replace("{mention}", h)
             
         if msg.photo:
             return await m.reply_photo(msg.photo.file_id, caption=txt if txt else None)
@@ -78,7 +78,40 @@ async def cwf(_, m):
             return await m.reply_audio(msg.audio.file_id, caption=txt if txt else None)
         if msg.document:
             return await m.reply_document(msg.document.file_id, caption=txt if txt else None, force_document=True)
+
+    elif msg.text:
+        txt = msg.text if msg.text else None
+        if txt:
+            if "{first}" in txt:
+                h = m.new_chat_members[0].first_name
+                txt = txt.replace("{first}", h)
+            if "{last}" in txt:
+                h = m.new_chat_members[0].last_name if m.new_chat_members[0].last_name else None
+                txt = txt.replace("{last}", h)
+            if "{fullname}" in txt:
+                h = m.new_chat_members[0].first_name
+                o = m.new_chat_members[0].last_name if m.new_chat_members[0].last_name else None
+                if o:
+                    txt = txt.replace("{fullname}", h+o)
+                else:
+                    txt = txt.replace("{fullname}", h)
+            if "{username}" in txt:
+                h = m.new_chat_members[0].username if m.new_chat_members[0].username else None
+                txt = txt.replace("{username}", h)
+            if "{id}" in txt:
+                h = m.new_chat_members[0].id
+                txt = txt.replace("{id}", h)
+            if "{count}" in txt:
+                h = await _.get_chat_members_count(m.chat.id)
+                txt = txt.replace("{count}", str(h))
+            if "{chatname}" in txt:
+                h = m.chat.title
+                txt = txt.replace("{chatname}", h)
+            if "{mention}" in txt:
+                h = m.new_chat_members[0].mention
+                txt = txt.replace("{mention}", h)
         
+        return await m.reply(txt)
 
 
 
