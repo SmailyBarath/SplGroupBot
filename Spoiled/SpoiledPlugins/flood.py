@@ -63,6 +63,7 @@ IDS = {}
 @Client.on_message(filters.group, group=9)
 async def cwf(_, m):
     global LIST
+    global IDS
     chat_id = m.chat.id
     if m.from_user:
         user_id = m.from_user.id
@@ -75,8 +76,41 @@ async def cwf(_, m):
             IDS.add(m.id)
         else:
             LIST = {}
+            IDS = {}
             LIST = {chat_id: user_id}
+            IDS = {m.id}
             a = 1
         x = await get_flood(m.chat.id)
         if a == x:
+            men = (await _.get_users(user_id))
+            txt = f"**{men} flooding...**"
+            y = await get_flood_mode(m.chat.id)
+            SET = []
+            for j in IDS:
+                SET.append(j)
+            if y == "delete":
+                try:
+                    await _.delete_messages(m.chat.id, SET)
+                    return await m.reply(txt)
+                except:
+                    return await m.reply(txt)
+            elif y == "mute":
+                try:
+                    await _.restrict_chat_member(m.chat.id, user_id, permissions=ChatPermissions())
+                    return await m.reply(txt + f"**\n\nmuted...**")
+                except:
+                    return await m.reply(txt)
+            elif y == "ban":
+                try:
+                    await _.ban_chat_member(m.chat.id, user_id)
+                    return await m.reply(txt + f"**\n\banned...**")
+                except:
+                    return await m.reply(txt)
+            elif y == "tmute":
+                try:
+                    await _.restrict_chat_member(m.chat.id, user_id, ChatPermissions(), datetime.now()+timedelta(minutes=(await get_mute_time(chat_id))))
+                    return await m.reply(txt + f"**\n\nmuted for {await get_mute_time(chat_id)}min..**")
+                except:
+                    return await m.reply(txt)
+                    
     
