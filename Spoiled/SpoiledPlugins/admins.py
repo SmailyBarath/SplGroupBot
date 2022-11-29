@@ -23,6 +23,24 @@ async def reload_admins(_, m):
         l.append(x.user.id)
     return l
 
+admin_rights = {}
+
+async def list_admin_rights(_, m):
+    chat_id = m.chat.id
+    l = await list_admins(_, m)
+    if not admin_rights:
+        for x in l:
+            h = await _.get_chat_member(chat_id, x)
+            h = h.privileges
+            admin_rights[chat_id][x]["can_change_info"] = True if h.can_change_info else False
+            admin_rights[chat_id][x]["can_delete_messages"] = True if h.can_delete_messages else False
+            admin_rights[chat_id][x]["can_restrict_members"] = True if h.can_restrict_members else False
+            admin_rights[chat_id][x]["can_promote_members"] = True if h.can_promote_members else False
+            admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
+            admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
+            admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
+                
+
 @Client.on_message(filters.command("reload"))
 async def reload(_, m):
     ok = await m.reply(f"**Reloading bot...\n\n• loading\n• ⏳\n• ⏳**")
