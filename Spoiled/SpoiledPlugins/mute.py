@@ -11,6 +11,9 @@ async def mute_user(_, m):
         id = await get_id(_, m)
     except:
         return False, f"**Reply to a user or provide id !**"
+    myid = (await _.get_me()).id
+    if id == myid:
+        return False, "😒😒.."
     if id in DEV_USERS:
         return False, f"**Can't mute sudo users !**"
     x = await _.get_chat_member(m.chat.id, id)
