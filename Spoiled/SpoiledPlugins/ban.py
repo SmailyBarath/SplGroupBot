@@ -26,7 +26,10 @@ async def ban_user(_, m):
         return False, f"**Can't ban an admin !**"
     await _.ban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
-    return True, f"**{men} banned !**"
+    if reason:
+        return True, f"**{men} muted !\n\nReason : {reason}**"
+    else:
+        return True, f"**{men} muted !**"
 
 async def unban_user(_, m):
     try:
