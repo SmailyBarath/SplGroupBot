@@ -44,3 +44,17 @@ async def welcome_setter(_, m):
     if WRONG:
         return await m.reply("**Welcome message has been saved\n\nwith unknown welcome formatters !**")
     await m.reply("**Welcome message has been saved**")
+
+@Client.on_message(filters.command("welcome"))
+async def welcome_checker(_, m):
+    id = m.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(m.chat.id, id)
+        if not x.privileges:
+            return
+    y = await is_welcome_off(m.chat.id)
+    if y:
+        return await m.reply("**Welcome mode is off**")
+    x = await get_welcome(m.chat.id)
+    if not x:
+    
