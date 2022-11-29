@@ -3,10 +3,10 @@ import time
 
 admin_list = {}
 
-async def list_admins(_, chat_id):
+async def list_admins(_, chat_id: int):
     global admin_list
     if not chat_id in admin_list:
-        l = await reload_admins(_, chat_id)
+        l = await reload_admins(_: Client, chat_id)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
     if (int(time.time()-admin_list[chat_id]["updated"])) >= 600:
@@ -14,12 +14,12 @@ async def list_admins(_, chat_id):
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
     if RELOAD:
-        l = await reload_admins(_, chat_id)
+        l = await reload_admins(_: Client, chat_id)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
     return admin_list[chat_id]["admins"]
 
-async def reload_admins(_, chat_id):
+async def reload_admins(_, chat_id: int):
     l = []
     async for x in _.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         l.append(x.user.id)
@@ -27,7 +27,7 @@ async def reload_admins(_, chat_id):
 
 admin_rights = {}
 
-async def list_admin_rights(_, chat_id):
+async def list_admin_rights(_: Client, chat_id: int):
     global admin_rights
     l = await list_admins(_, chat_id)
     if not chat_id in admin_rights:
