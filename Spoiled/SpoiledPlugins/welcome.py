@@ -47,7 +47,7 @@ async def welcome_setter(_, m):
         return await m.reply("**Welcome message has been saved\n\nwith unknown welcome formatters !**")
     await m.reply("**Welcome message has been saved**")
 
-@Client.on_message(filters.command("welcome"))
+@Client.on_message(filters.command("welcome") & filters.group)
 async def welcome_checker(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
@@ -64,6 +64,19 @@ async def welcome_checker(_, m):
         x = random.choice(YashuAlpha)
     await m.reply("**Welcome mode is on !\n\nuse /welcomemode to set it on or off !**")
     await m.reply(x)
+
+@Client.on_msssage(filters.command("welcomemode") & filters.group)
+async def welm(_, m):
+    id = m.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(m.chat.id, id)
+        if not x.privileges:
+            return
+        if not x.privileges.can_change_info:
+            return await m.reply(f"**You can't change welcome settings !**")
+    if not len(m.command) > 1:
+        return await m.reply(f"**/welcomemode [on | off]**")
+    txt = m.text.split()[1].lower()
 
 
     
