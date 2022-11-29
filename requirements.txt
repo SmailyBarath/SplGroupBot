@@ -6,7 +6,7 @@ pymongo[srv]
 pillow
 gpytranslate
 googletrans
-gTTS
+gtts
 bs4
 requests
 aiohttp
@@ -24,4 +24,4 @@ python-arq
 pillow
 img2pdf
 wikipedia
-opencv-python
+opencv-python-headless
