@@ -12,7 +12,7 @@ async def set_flood_time(chat_id: int, tim: int):
     await floodm.update_one({"chat_id": chat_id}, {"$set": {"time": tim}}, upsert=True)
 
 async def get_flood_time(chat_id: int):
-    x = await floodm.find_one({"chat_id: chat_id})
+    x = await floodm.find_one({"chat_id": chat_id})
     if not x:
         return 0
     return x["time"]
