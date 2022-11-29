@@ -142,7 +142,7 @@ async def welcome_checker(_, m):
     await m.reply("**Welcome mode is on !\n\nuse /welcomemode to set it on or off !**")
     await m.reply(x)
 
-@Client.on_msssage(filters.command("welcomemode") & filters.group)
+@Client.on_message(filters.command("welcomemode") & filters.group)
 async def welm(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
