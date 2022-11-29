@@ -4,7 +4,18 @@ from config import DEV
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
-DUMP = CHATS.MESSAGE_DUMP_CHAT
+DUMP = CHATS.LOG_GROUP_ID
+
+VALID_WELCOME_FORMATTERS = [
+    "first",
+    "last",
+    "fullname",
+    "username",
+    "id",
+    "count",
+    "chatname",
+    "mention",
+]
 
 @Client.on_message(filters.command("setwelcome") & filters.group)
 async def welcome_setter(_, m):
@@ -16,4 +27,7 @@ async def welcome_setter(_, m):
         if not x.privileges.can_change_info:
             return await m.reply(f"**You can't change welcome settings !**")
     if not m.reply_to_message:
-        return await m.reply(
+        return await m.reply(f"**Reply to a message...**")
+    await _.copy_message(DUMP, m.chat.id, m.reply_to_message.id)
+    await set_welcome(m.chat.id, m.reply_to_message.id)
+    await m.reply("**Welcome message has been saved**")
