@@ -148,7 +148,7 @@ async def cwf(_, m):
             LIST = {chat_id: user_id}
             a = 1
             IDS = {m.id}
-        if user_id in LIST[chat_id]:
+        if LIST[chat_id] == user_id:
             a += 1
             IDS.add(m.id)
         else:
