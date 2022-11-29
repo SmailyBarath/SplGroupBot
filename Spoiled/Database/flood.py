@@ -18,10 +18,10 @@ async def get_flood_time(chat_id: int):
     return x["time"]
 
 async def set_flood_value(chat_id: int, value: int):
-    await fdb.update_one({"chat_id", chat_id}, {"$set": {"value": value}}, upsert=True)
+    await fdb.update_one({"chat_id": chat_id}, {"$set": {"value": value}}, upsert=True)
 
 async def set_flood_mode(chat_id: int, mode):
-    await fmdb.update_one({"chat_id", chat_id}, {"$set": {"mode": mode}}, upsert=True)
+    await fmdb.update_one({"chat_id": chat_id}, {"$set": {"mode": mode}}, upsert=True)
 
 async def get_flood(chat_id: int):
     x = await fdb.find_one({"chat_id": chat_id})
