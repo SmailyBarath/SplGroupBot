@@ -35,6 +35,10 @@ async def log(_, message):
     except:
         pass
 
+async def verify_right(chat_id, user_id, right):
+    x = await list_admin_rights(Client, Message)
+    
+
 async def verify(_, m):
     id = m.from_user.id
     x = await admin_list(_, m)
