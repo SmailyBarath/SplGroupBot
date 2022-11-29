@@ -6,6 +6,7 @@ pymongo[srv]
 pillow
 gpytranslate
 googletrans
+cloudscraper
 gtts
 bs4
 requests
