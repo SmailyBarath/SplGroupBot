@@ -6,8 +6,7 @@ admin_list = {}
 async def list_admins(_, m):
     global admin_list
     chat_id = m.chat.id
-    admins = admin_list[chat_id]["admins"]
-    if not admins:
+    if not admin_list:
         l = reload_admins(_, m)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
