@@ -67,6 +67,20 @@ async def cwf(_, m):
             if "{mention}" in txt:
                 h = m.new_chat_members[0]["mention"]
                 txt.replace("{mention}", h)
+            
+        if msg.photo:
+            return await m.reply_photo(msg.photo.file_id, caption=txt if txt else None)
+        if msg.video:
+            return await m.reply_video(msg.video.file_id, caption=txt if txt else None)
+        if msg.animation:
+            return await m.reply_animation(msg.animation.file_id, caption=txt if txt else None)
+        if msg.audio:
+            return await m.reply_audio(msg.audio.file_id, caption=txt if txt else None)
+        if msg.document:
+            return await m.reply_document(msg.document.file_id, caption=txt if txt else None, force_document=True)
+        
+
+
 
     
 
