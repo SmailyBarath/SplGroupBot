@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from . import verify, verify_right
 
 @Client.on_message(filters.command("del"))
-async def del(_, m):
+async def dele(_, m):
     id = m.from_user.id
     g, h = await verify(_, m)
     if not g:
@@ -40,8 +40,8 @@ async def pin(_, m):
         return await m.reply("What I've to do ?")
     if m.text.split()[0][1] == "u":
         await m.reply_to_message.unpin()
-        await m.reply("Message unpinned !")
+        await m.reply(f"**Message unpinned !**")
     else:
         await m.reply_to_message.pin()
-        await m.reply("Message pinned !")
+        await m.reply(f"**Message pinned !**")
     
