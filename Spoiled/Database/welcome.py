@@ -13,6 +13,9 @@ async def get_welcome(chat_id: int):
         return None
     return x["msg_id"]
 
+async def clear_welcome(chat_id: int):
+    await welcomedb.delete_one({"chat_id": chat_id})
+
 async def is_welcome_off(chat_id: int):
     x = await wdb.find_one({"chat_id": chat_id})
     if x:
