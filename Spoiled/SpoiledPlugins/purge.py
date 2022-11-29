@@ -29,7 +29,7 @@ async def purge(_, m):
         from_id = m.reply_to_message.id
         ids = []
         a = from_id
-        for i in range(0, (to_id - from_id)):
+        for i in range(0, (to_id + 1 - from_id)):
             if a > to_id:
                 break
             ids.append(a)
