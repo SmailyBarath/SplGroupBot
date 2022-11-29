@@ -13,7 +13,7 @@ async def get_welcome(chat_id: int):
         return None
     return x["msg_id"]
 
-async def is_welcome_on(chat_id: int):
+async def is_welcome_off(chat_id: int):
     x = await wdb.find_one({"chat_id": chat_id})
     if x:
         return True
