@@ -24,3 +24,4 @@ python-arq
 pillow
 img2pdf
 wikipedia
+opencv-python
