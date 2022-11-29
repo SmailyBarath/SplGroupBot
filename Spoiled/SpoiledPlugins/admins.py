@@ -6,7 +6,7 @@ admin_list = {}
 async def list_admins(_, m):
     global admin_list
     chat_id = m.chat.id
-    if not admin_list:
+    if not admin_list[chat_id]:
         l = await reload_admins(_, m)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
@@ -32,7 +32,7 @@ async def list_admin_rights(_, m):
     global admin_rights
     chat_id = m.chat.id
     l = await list_admins(_, m)
-    if not admin_rights:
+    if not admin_rights[chat_id]:
         for x in l:
             h = await _.get_chat_member(chat_id, x)
             h = h.privileges
@@ -43,7 +43,7 @@ async def list_admin_rights(_, m):
             admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
             admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
             admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
-        admin_rights["updated"] = time.time()
+        admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
     if (int(time.time() - admin_rights["updated"])) > 3600:
         for x in l:
@@ -56,7 +56,7 @@ async def list_admin_rights(_, m):
             admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
             admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
             admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
-        admin_rights["updated"] = time.time()
+        admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
     if RELOAD:
         for x in l:
@@ -69,7 +69,7 @@ async def list_admin_rights(_, m):
             admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
             admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
             admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
-        admin_rights["updated"] = time.time()
+        admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
 
 RELOAD = False     
