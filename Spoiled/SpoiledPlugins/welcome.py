@@ -33,7 +33,7 @@ async def cwf(_, m):
     if not msg:
         x = random.choice(YashuAlpha)
         if "{first}" in x.split():
-            h = m.new_chat_members[0]["first_name"]
+            h = m.new_chat_members[0].first_name
             x.replace("{first}", h)
         return await m.reply(x)
     if msg.media:
