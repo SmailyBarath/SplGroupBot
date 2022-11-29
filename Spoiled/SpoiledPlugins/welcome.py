@@ -35,7 +35,7 @@ async def welcome_setter(_, m):
         for x in cap:
             for y in x:
                 if y == "{":
-                    lest.append(x)
+                    lest.append(x[1:-1].lower())
     await _.copy_message(DUMP, m.chat.id, m.reply_to_message.id)
     await set_welcome(m.chat.id, m.reply_to_message.id)
     await m.reply("**Welcome message has been saved**")
