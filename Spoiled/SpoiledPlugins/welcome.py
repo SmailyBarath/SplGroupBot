@@ -28,6 +28,14 @@ async def welcome_setter(_, m):
             return await m.reply(f"**You can't change welcome settings !**")
     if not m.reply_to_message:
         return await m.reply(f"**Reply to a message...**")
+    if m.reply_to_message.text or m.reply_to_message.caption:
+        cap = m.reply_to_message.text or m.reply_to_message.caption
+        cap = cap.split()
+        lest = []
+        for x in cap:
+            for y in x:
+                if y == "{":
+                    lest.append(x)
     await _.copy_message(DUMP, m.chat.id, m.reply_to_message.id)
     await set_welcome(m.chat.id, m.reply_to_message.id)
     await m.reply("**Welcome message has been saved**")
