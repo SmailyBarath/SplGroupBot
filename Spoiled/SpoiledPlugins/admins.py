@@ -78,9 +78,9 @@ async def reload(_, m):
     global RELOAD
     RELOAD = True
     ok = await m.reply(f"**Reloading bot...\n\n• loading\n\n• ⏳\n\n• ⏳\n\n• ⏳**")
-    x = await list_admins(_, m)
+    x = await list_admins(_, m.chat.id)
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• ⏳\n\n• ⏳**")
-    x = await list_admin_rights(_, m)
+    x = await list_admin_rights(_, m.chat.id)
     text = f"reloaded admin rights ✅"
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• {text}\n\n• ⏳**")
     RELOAD = False
