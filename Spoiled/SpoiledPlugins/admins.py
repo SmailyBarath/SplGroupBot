@@ -36,39 +36,39 @@ async def list_admin_rights(_, m):
         for x in l:
             h = await _.get_chat_member(chat_id, x)
             h = h.privileges
-            admin_rights[chat_id][x]["can_change_info"] = True if h.can_change_info else False
-            admin_rights[chat_id][x]["can_delete_messages"] = True if h.can_delete_messages else False
-            admin_rights[chat_id][x]["can_restrict_members"] = True if h.can_restrict_members else False
-            admin_rights[chat_id][x]["can_promote_members"] = True if h.can_promote_members else False
-            admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
-            admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
-            admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
+            admin_rights = {chat_id: {x: {"can_change_info": True if h.can_change_info else False}}}
+            admin_rights = {chat_id: {x: {"can_delete_messages": True if h.can_delete_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_restrict_members": True if h.can_restrict_members else False}}}
+            admin_rights = {chat_id: {x: {"can_promote_members": True if h.can_promote_members else False}}}
+            admin_rights = {chat_id: {x: {"can_invite_users": True if h.can_invite_users else False}}}
+            admin_rights = {chat_id: {x: {"can_pin_messages": True if h.can_pin_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_manage_voice_chats": True if h.can_manage_voice_chats else False}}}
         admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
     if (int(time.time() - admin_rights[chat_id]["updated"])) > 3600:
         for x in l:
             h = await _.get_chat_member(chat_id, x)
             h = h.privileges
-            admin_rights[chat_id][x]["can_change_info"] = True if h.can_change_info else False
-            admin_rights[chat_id][x]["can_delete_messages"] = True if h.can_delete_messages else False
-            admin_rights[chat_id][x]["can_restrict_members"] = True if h.can_restrict_members else False
-            admin_rights[chat_id][x]["can_promote_members"] = True if h.can_promote_members else False
-            admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
-            admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
-            admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
+            admin_rights = {chat_id: {x: {"can_change_info": True if h.can_change_info else False}}}
+            admin_rights = {chat_id: {x: {"can_delete_messages": True if h.can_delete_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_restrict_members": True if h.can_restrict_members else False}}}
+            admin_rights = {chat_id: {x: {"can_promote_members": True if h.can_promote_members else False}}}
+            admin_rights = {chat_id: {x: {"can_invite_users": True if h.can_invite_users else False}}}
+            admin_rights = {chat_id: {x: {"can_pin_messages": True if h.can_pin_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_manage_voice_chats": True if h.can_manage_voice_chats else False}}}
         admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
     if RELOAD:
         for x in l:
             h = await _.get_chat_member(chat_id, x)
             h = h.privileges
-            admin_rights[chat_id][x]["can_change_info"] = True if h.can_change_info else False
-            admin_rights[chat_id][x]["can_delete_messages"] = True if h.can_delete_messages else False
-            admin_rights[chat_id][x]["can_restrict_members"] = True if h.can_restrict_members else False
-            admin_rights[chat_id][x]["can_promote_members"] = True if h.can_promote_members else False
-            admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
-            admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
-            admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
+            admin_rights = {chat_id: {x: {"can_change_info": True if h.can_change_info else False}}}
+            admin_rights = {chat_id: {x: {"can_delete_messages": True if h.can_delete_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_restrict_members": True if h.can_restrict_members else False}}}
+            admin_rights = {chat_id: {x: {"can_promote_members": True if h.can_promote_members else False}}}
+            admin_rights = {chat_id: {x: {"can_invite_users": True if h.can_invite_users else False}}}
+            admin_rights = {chat_id: {x: {"can_pin_messages": True if h.can_pin_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_manage_voice_chats": True if h.can_manage_voice_chats else False}}}
         admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
 
