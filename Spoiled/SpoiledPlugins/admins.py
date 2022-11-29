@@ -81,12 +81,8 @@ async def reload(_, m):
     ok = await m.reply(f"**Reloading bot...\n\n• loading\n\n• ⏳\n\n• ⏳\n\n• ⏳**")
     x = await list_admins(_, m)
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• ⏳\n\n• ⏳**")
-    try:
-        x = await list_admin_rights(_, m)
-        text = f"reloaded admin rights ✅"
-    except Exception as e:
-        print(e)
-        text = f"can't reload admin rights ❌"
+    x = await list_admin_rights(_, m)
+    text = f"reloaded admin rights ✅"
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• {text}\n\n• ⏳**")
     RELOAD = False
     x = (await _.get_me()).id
