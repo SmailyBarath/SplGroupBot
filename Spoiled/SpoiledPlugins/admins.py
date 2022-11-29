@@ -77,6 +77,7 @@ async def list_admin_rights(_: Client, chat_id: int):
 async def reload(_, m):
     global admin_list
     global admin_rights
+    chat_id = m.chat.id
     ok = await m.reply(f"**Reloading bot...\n\n• loading\n\n• ⏳\n\n• ⏳\n\n• ⏳**")
     l = await reload_admins(_, chat_id)
     admin_list[chat_id] = {"admins": l, "updated": time.time()}
