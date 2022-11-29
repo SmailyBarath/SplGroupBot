@@ -27,7 +27,7 @@ async def cwf(_, m):
         x = random.choice(YashuAlpha)
         if "{first}" in x.split():
             h = m.new_chat_members[0].first_name
-            x.replace("{first}", h)
+            x = x.replace("{first}", h)
         return await m.reply(x)
     msg = await _.get_messages(DUMP, x)
     if not msg:
