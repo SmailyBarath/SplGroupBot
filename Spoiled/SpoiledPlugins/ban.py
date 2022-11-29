@@ -53,6 +53,8 @@ async def ban(_, m):
             return await m.reply("You got no rights to restrict !")
     myid = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, myid)
+    if not x.privileges:
+        return await m.reply(f"**I'm not admin !**")
     x = x.privileges
     if not x.can_restrict_members:
         return await m.reply("I got no rights to restrict members !")
@@ -75,6 +77,8 @@ async def unban(_, m):
             return await m.reply("You got no rights to restrict !")
     myid = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, myid)
+    if not x.privileges:
+        return await m.reply(f"**I'm not admin !**")
     x = x.privileges
     if not x.can_restrict_members:
         return await m.reply("I got no rights to restrict members !")
