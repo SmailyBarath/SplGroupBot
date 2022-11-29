@@ -1,4 +1,4 @@
-"""from pyrogram import Client, filters
+from pyrogram import Client, filters
 from config import CHATS
 from config import DEV
 
@@ -17,4 +17,3 @@ async def welcome_setter(_, m):
             return await m.reply(f"**You can't change welcome settings !**")
     if not m.reply_to_message:
         return await m.reply(
-"""
