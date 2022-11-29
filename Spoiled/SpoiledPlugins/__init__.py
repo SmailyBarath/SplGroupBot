@@ -46,7 +46,7 @@ async def verify_right(chat_id, user_id, right):
 
 async def verify(_, m):
     id = m.from_user.id
-    x = await list_admins(_, m)
+    x = await list_admins(_, m.chat.id)
     lel = x + DEV_USERS
     if not id in lel:
         return False, "You got no rights to do this action !"
