@@ -1,8 +1,77 @@
 from pyrogram import Client, filters
 from Spoiled.Database.flood import *
 from config import DEV
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
+
+@Client.on_callback_query(filters.regex("toggle_flood") | filters.regex("det_flood") | filters.regex("close_flood"))
+async def cbq(_, q):
+    id = q.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(q.message.chat.id, id)
+        if not x.privileges:
+            return
+        if not x.privileges.can_change_info:
+            return await q.answer(f"**You can't change flood settings !**", show_alert=True)
+    if q.data == "toggle_flood":
+        x = await is_flood_on(q.message.chat.id)
+        if x:
+            await q.answer("Turning flood off...")
+            await flood_off(q.message.chat.id)
+        else:
+            await q.answer("Turning flood on...")
+            await flood_on(q.message.chat.id)
+        x = await is_flood_on(q.message.chat.id)
+        if x:
+            y = "Enabled ✅"
+        else:
+            y = "Disabled ❌"
+        markup = IKM(
+             [
+             [
+             IKB("Flood mode", callback_data="det_flood"),
+             IKB("{}".format(y), callback_data="toggle_flood")
+             ],
+             [
+             IKB("Close 🗑️", callback_data="close_flood")
+             ]
+             ]
+             )
+        await q.edit_message_reply_markup(reply_markup=markup)  
+    elif q.data == "det_flood":
+        await q.answer("Click on button beside to toggle flood settings !", show_alert=True)
+    elif q.data == "close_flood":  
+        await q.answer()
+        await q.message.delete()
+
+@Client.on_message(filters.command(["flood", "floods"]) & filters.group)
+async def flooooods(_, m):
+    id = m.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(m.chat.id, id)
+        if not x.privileges:
+            return
+        if not x.privileges.can_change_info:
+            return await m.reply(f"**You can't change flood settings !**")
+    x = is_flood_on(m.chat.id)
+    if x:
+        y = "Enabled ✅"
+    else:
+        y = "Disabled ❌"
+    markup = IKM(
+             [
+             [
+             IKB("Flood mode", callback_data="det_flood"),
+             IKB("{}".format(y), callback_data="toggle_flood")
+             ],
+             [
+             IKB("Close 🗑️", callback_data="close_flood")
+             ]
+             ]
+             )    
+    await m.reply(f"**⚙️ Flood settings in {m.chat.title}\n\n• Group id : {m.chat.id}**", reply_markup=markup)
+    
 
 @Client.on_message(filters.command("floodmode") & filters.group)
 async def fm(_, m):
