@@ -54,8 +54,29 @@ async def setflm(_, m):
     else:
         return await m.reply(f"**Choose from [delete, mute, ban]**")
     if not val in ["delete", "ban", "mute"]:
-        return await m.reply(f"**Choose from [delete, mute, ban]**")
+        return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick]**")
     await set_flood_mode(m.chat.id, val)
     await m.reply(f"**Flood mode set to {val}**")
 
+LIST = {}
+IDS = {}
+@Client.on_message(filters.group, group=9)
+async def cwf(_, m):
+    global LIST
+    chat_id = m.chat.id
+    if m.from_user:
+        user_id = m.from_user.id
+        if not chat_id in LIST:
+            LIST = {chat_id: user_id}
+            a = 1
+            IDS = {m.id}
+        if user_id in LIST[chat_id]:
+            a += 1
+            IDS.add(m.id)
+        else:
+            LIST = {}
+            LIST = {chat_id: user_id}
+            a = 1
+        x = await get_flood(m.chat.id)
+        if a == x:
     
