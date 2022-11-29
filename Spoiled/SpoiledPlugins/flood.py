@@ -152,15 +152,15 @@ async def cwf(_, m):
         if not chat_id in LIST:
             LIST = {chat_id: user_id}
             a = 1
-            IDS = {m.id}
+            IDS = {chat_id: [m.id]}
         if LIST[chat_id] == user_id:
             a += 1
-            IDS.add(m.id)
+            IDS[chat_id].append(m.id)
         else:
-            LIST = {}
-            IDS = {}
-            LIST = {chat_id: user_id}
-            IDS = {m.id}
+            LIST.remove(chat_id)
+            IDS[chat_id].clear()
+            LIST.add({chat_id: user_id})
+            IDS[chat_id].append(m.id)
             a = 1
         x = await get_flood(m.chat.id)
         if a == x:
