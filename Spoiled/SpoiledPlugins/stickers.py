@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.constants import ParseMode
+from telegram.utils.helpers import mention_html
 from Spoiled import Yashu
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
