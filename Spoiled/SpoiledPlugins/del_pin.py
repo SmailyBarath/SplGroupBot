@@ -19,16 +19,16 @@ async def dele(_, m):
                 return await m.delete()
             except:
                 return
-        if not m.reply_to_message:
-            try:
-                return await m.delete()
-            except:
-                return
+    if not m.reply_to_message:
         try:
-            await m.reply_to_message.delete()
-            await m.delete()
+            return await m.delete()
         except:
             return
+    try:
+        await m.reply_to_message.delete()
+        await m.delete()
+    except:
+        return
 
 @Client.on_message(filters.command(["pin", "unpin"]) & filters.group)
 async def pin(_, m):
