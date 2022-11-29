@@ -2,6 +2,7 @@ import cloudscraper
 from bs4 import BeautifulSoup as bs
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
+from telegram.constants import ParseMode
 from Spoiled import Yashu
 
 async def stickerid(update: Update, context: CallbackContext):
