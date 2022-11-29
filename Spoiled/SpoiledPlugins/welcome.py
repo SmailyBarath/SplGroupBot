@@ -29,6 +29,7 @@ async def welcomclr(_, m):
         if not x.privileges.can_change_info:
             return await m.reply(f"**You can't change welcome settings !**")
     await clear_welcome(m.chat.id)
+    await m.reply("**Welcome messages cleared !**")
 
 @Client.on_message(filters.command("setwelcome") & filters.group)
 async def welcome_setter(_, m):
