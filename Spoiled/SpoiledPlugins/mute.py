@@ -3,6 +3,7 @@ from pyrogram import Client, filters
 from . import get_id
 from config import DEV
 from pyrogram.types import ChatPermissions
+from datetime import datetime, timedelta
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
@@ -113,7 +114,7 @@ async def tmute_user(_, m):
     x = await _.get_chat_member(m.chat.id, id)
     if x.privileges:
         return False, f"**Can't mute an admin !**"
-    await _.restrict_chat_member(m.chat.id, id, permissions=ChatPermissions())
+    await _.restrict_chat_member(m.chat.id, id, permissions=ChatPermissions(), datetime.now()+timedelta(minutes=tim))
     men = (await _.get_users(id)).mention
     if reason:
         return True, f"**{men} muted for {tim}min!\n\nReason : {reason}**"
