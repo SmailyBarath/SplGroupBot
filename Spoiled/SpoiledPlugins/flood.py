@@ -157,7 +157,7 @@ async def cwf(_, m):
             a += 1
             IDS[chat_id].append(m.id)
         else:
-            LIST.delete(chat_id)
+            LIST.pop(chat_id)
             IDS[chat_id].clear()
             LIST.add({chat_id: user_id})
             IDS[chat_id].append(m.id)
