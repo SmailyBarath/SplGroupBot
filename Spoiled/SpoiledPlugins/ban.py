@@ -10,6 +10,12 @@ async def ban_user(_, m):
         id = await get_id(_, m)
     except:
         return False, f"**Reply to a user or provide id !**"
+    if not m.reply_to_message:
+        if len(m.command) > 2:
+            reason = m.text.split(None, 2)[2]
+    else:
+        if len(m.command) > 1:
+            reason = m.text.split(None, 1)[1]
     myid = (await _.get_me()).id
     if id == myid:
         return False, "😒😒.."
