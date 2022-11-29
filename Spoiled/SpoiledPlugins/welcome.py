@@ -3,6 +3,7 @@ from config import CHATS
 from config import DEV
 from .strings import YashuAlpha
 from Spoiled.Database.welcome import *
+import random
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
@@ -19,8 +20,15 @@ VALID_WELCOME_FORMATTERS = [
     "mention",
 ]
 
-@Client.on_message(filters.group, group=10)
+@Client.on_message(filters.group & filters.new_chat_members, group=10)
 async def cwf(_, m):
+    x = await get_welcome(m.chat.id)
+    if not x:
+        x = random.choice(YashuAlpha)
+        if "{first}" in x.split():
+            h = m.new_chat_members[0]["first_name"]
+            x.replace("{first}", h)
+        return await m.reply(x)
 
 @Client.on_message(filters.command("clearwelcome") & filters.group)
 async def welcomclr(_, m):
