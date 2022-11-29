@@ -29,3 +29,26 @@ async def kick_user(_, m):
         return True, f"**{men} kicked !\n\nReason : {reason}**"
     else:
         return True, f"**{men} kicked !**"
+    await _.unban_chat_member(m.chat.id, id)
+
+@Client.on_message(filters.command(["kick", "skick"]) & filters.group)
+async def kick(_, m):
+    id = m.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(m.chat.id, id)
+        if not x.privileges:
+            return await m.reply("You need to be admin this !")
+        priv = x.privileges
+        if not priv.can_restrict_members:
+            return await m.reply("You got no rights to restrict !")
+    myid = (await _.get_me()).id
+    x = await _.get_chat_member(m.chat.id, myid)
+    x = x.privileges
+    if not x.can_restrict_members:
+        return await m.reply("I got no rights to restrict members !")
+    g, h = await kick_user(_, m)
+    if not g:
+        return await m.reply(h)
+    if m.text.split()[0][1].lower() == "s":
+        return
+    await m.reply(h)
