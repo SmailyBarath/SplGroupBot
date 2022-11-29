@@ -29,6 +29,46 @@ async def cwf(_, m):
             h = m.new_chat_members[0]["first_name"]
             x.replace("{first}", h)
         return await m.reply(x)
+    msg = await _.get_messages(DUMP, x)
+    if not msg:
+        x = random.choice(YashuAlpha)
+        if "{first}" in x.split():
+            h = m.new_chat_members[0]["first_name"]
+            x.replace("{first}", h)
+        return await m.reply(x)
+    if msg.media:
+        txt = msg.caption if msg.caption else None
+        if txt:
+            if "{first}" in txt:
+                h = m.new_chat_members[0]["first_name"]
+                txt.replace("{first}", h)
+            if "{last}" in txt:
+                h = m.new_chat_members[0]["last_name"] if m.new_chat_members[0]["last_name"] else None
+                txt.replace("{last}", h)
+            if "{fullname}" in txt:
+                h = m.new_chat_members[0]["full_name"]
+                o = m.new_chat_members[0]["last_name"] if m.new_chat_members[0]["last_name"] else None
+                if o:
+                    txt.replace("{fullname}", h+o)
+                else:
+                    txt.replace("{fullname}", h)
+            if "{username}" in txt:
+                h = m.new_chat_members[0]["username"] if m.new_chat_members[0]["username"] else None
+                txt.replace("{username}", h)
+            if "{id}" in txt:
+                h = m.new_chat_members[0]["id"]
+                txt.replace("{id}", h)
+            if "{count}" in txt:
+                h = m.new_chat_members[0]["first_name"]
+                txt.replace("{count}", h)
+            if "{chatname}" in txt:
+                h = m.chat.title
+                txt.replace("{chatname}", h)
+            if "{mention}" in txt:
+                h = m.new_chat_members[0]["mention"]
+                txt.replace("{mention}", h)
+
+    
 
 @Client.on_message(filters.command("clearwelcome") & filters.group)
 async def welcomclr(_, m):
