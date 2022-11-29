@@ -29,9 +29,8 @@ async def reload_admins(_, m):
 
 admin_rights = {}
 
-async def list_admin_rights(_, m):
+async def list_admin_rights(_, chat_id):
     global admin_rights
-    chat_id = m.chat.id
     l = await list_admins(_, m)
     if not chat_id in admin_rights:
         for x in l:
