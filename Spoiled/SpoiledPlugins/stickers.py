@@ -3,27 +3,22 @@ from bs4 import BeautifulSoup as bs
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.constants import ParseMode
-from telegram.utils.helpers import mention_html
 from Spoiled import Yashu
+from html import escape
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
 async def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
     if msg.reply_to_message and msg.reply_to_message.sticker:
-        await update.effective_message.reply_text(
-            "Hello "
-            + f"{mention_html(msg.from_user.id, msg.from_user.first_name)}"
-            + ", The sticker id you are replying is :\n <code>"
+        await update.effective_message.reply_text("The sticker id you are replying is :\n <code>"
             + escape(msg.reply_to_message.sticker.file_id)
             + "</code>",
             parse_mode=ParseMode.HTML,
         )
     else:
         await update.effective_message.reply_text(
-            "Hello "
-            + f"{mention_html(msg.from_user.id, msg.from_user.first_name)}"
-            + ", Please reply to sticker message to get id sticker",
+            "Please reply to sticker message to get id sticker",
             parse_mode=ParseMode.HTML,
         )
 
