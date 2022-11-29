@@ -36,11 +36,11 @@ async def flood_on(chat_id: int):
     is_flood = await is_flood_on(chat_id)
     if is_flood:
         return
-    return await flood_toggle_db.delete_one({"chat_id": chat_id})
+    return await flood_toggle_db.insert_one({"chat_id": chat_id})
 
 
 async def flood_off(chat_id: int):
     is_flood = await is_flood_on(chat_id)
     if not is_flood:
         return
-    return await flood_toggle_db.insert_one({"chat_id": chat_id})
+    return await flood_toggle_db.delete_one({"chat_id": chat_id})
