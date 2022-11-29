@@ -127,6 +127,8 @@ async def setflm(_, m):
     if val == "tmute":
         try:
             tim = int(m.text.split()[2])
+            if tim < 0:
+                return await m.reply("😒😒..")
             await set_mute_time(m.chat.id, tim)
         except:
             return await m.reply(f"**Give a value which will be considered in minutes !**")
