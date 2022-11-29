@@ -76,7 +76,7 @@ async def list_admin_rights(_, m):
 
 RELOAD = False     
 
-@Client.on_message(filters.command("reload"))
+@Client.on_message(filters.command("reload") & filters.group)
 async def reload(_, m):
     global RELOAD
     RELOAD = True
