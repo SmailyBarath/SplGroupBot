@@ -1,28 +1,27 @@
 import os
 import cv2
 from PIL import Image
-from EmikoRobot.events import register
-from EmikoRobot import telethn as tbot
+from pyrogram import Client, filters
 
 
-@register(pattern="^/tiny ?(.*)")
-async def _(event):
-    reply = await event.get_reply_message()
-    if not (reply and(reply.media)):
-           await event.reply("`Please reply to a sticker`")
-           return
-    kontol = await event.reply("`Processing tiny...`")
-    ik = await tbot.download_media(reply)
-    im1 = Image.open("EmikoRobot/resources/ken.png")
+@Client.on_message(filters.command("tiny"))
+async def tiny_rvrnt(_, m):
+    if not m.reply_to_message:
+        return await m.reply(f"**Reply to a sticker !**")
+    if not m.reply_to_message.sticker:
+        return await m.reply(f"**Reply to a sticker !**")
+    kontol = await m.reply("`Processing tiny...`")
+    ik = await m.reply_to_message.download()
+    im1 = Image.open("./Assests/ken.png")
     if ik.endswith(".tgs"):
-        await tbot.download_media(reply, "ken.tgs")
-        os.system("lottie_convert.py ken.tgs json.json")
+        await _.download_media(m.reply_to_message, file_name="ken.tgs")
+        os.system("lottie_convert.py downloads/ken.tgs json.json")
         json = open("json.json", "r")
         jsn = json.read()
         jsn = jsn.replace("512", "2000")
         open = ("json.json", "w").write(jsn)
-        os.system("lottie_convert.py json.json ken.tgs")
-        file = "ken.tgs"
+        os.system("lottie_convert.py json.json downloads/ken.tgs")
+        file = "downloads/ken.tgs"
         os.remove("json.json")
     elif ik.endswith((".gif", ".mp4")):
         iik = cv2.VideoCapture(ik)
@@ -71,7 +70,7 @@ async def _(event):
         back_im.save("o.webp", "WEBP", quality=95)
         file = "o.webp"
         os.remove("k.png")
-    await tbot.send_file(event.chat_id, file, reply_to=event.reply_to_msg_id)
+    await m.reply_sticker(file)
     await kontol.delete()
     os.remove(file)
     os.remove(ik)
