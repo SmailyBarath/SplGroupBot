@@ -1,6 +1,8 @@
 from pyrogram import Client, filters, enums
 import time
 
+RELOAD = False
+
 admin_list = {}
 
 async def list_admins(_: Client, chat_id: int):
@@ -69,9 +71,7 @@ async def list_admin_rights(_: Client, chat_id: int):
             admin_rights = {chat_id: {x: {"can_manage_video_chats": True if h.can_manage_video_chats else False}}}
         admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
-    return admin_rights
-
-RELOAD = False     
+    return admin_rights 
 
 @Client.on_message(filters.command("reload") & filters.group)
 async def reload(_, m):
