@@ -143,6 +143,9 @@ async def cwf(_, m):
     global a
     global LIST
     global IDS
+    on = await is_flood_on(m.chat.id)
+    if not on:
+        return
     chat_id = m.chat.id
     if m.from_user:
         user_id = m.from_user.id
