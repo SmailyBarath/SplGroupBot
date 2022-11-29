@@ -55,9 +55,11 @@ async def ban(_, m):
             return await m.reply("You got no rights to restrict !")
     myid = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, myid)
+    if not x.privileges:
+        return await m.reply(f"**I'm not admin !**")
     x = x.privileges
     if not x.can_restrict_members:
-        return await m.reply("I got no rights to restrict members !")
+        return await m.reply(f"**I got no rights to restrict members !**")
     g, h = await mute_user(_, m)
     if not g:
         return await m.reply(h)
@@ -133,9 +135,11 @@ async def tban(_, m):
             return await m.reply("You got no rights to restrict !")
     myid = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, myid)
+    if not x.privileges:
+        return await m.reply(f"**I'm not admin !**")
     x = x.privileges
     if not x.can_restrict_members:
-        return await m.reply("I got no rights to restrict members !")
+        return await m.reply(f"**I got no rights to restrict members !**")
     g, h = await tmute_user(_, m)
     if not g:
         return await m.reply(h)
