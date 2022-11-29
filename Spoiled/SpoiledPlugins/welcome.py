@@ -1,6 +1,8 @@
 from pyrogram import Client, filters
 from config import CHATS
 from config import DEV
+from .strings import YashuAlpha
+from Spoiled.Database.welcome import *
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
@@ -57,4 +59,7 @@ async def welcome_checker(_, m):
         return await m.reply("**Welcome mode is off**")
     x = await get_welcome(m.chat.id)
     if not x:
+        x = random.choice(YashuAlpha)
+    await m.reply("**Welcome mode is on !**")
+    await m.reply(x)
     
