@@ -36,6 +36,11 @@ async def welcome_setter(_, m):
             for y in x:
                 if y == "{":
                     lest.append(x[1:-1].lower())
+        for j in lest:
+            if not j in VALID_WELCOME_FORMATTERS:
+                WRONG = True
     await _.copy_message(DUMP, m.chat.id, m.reply_to_message.id)
     await set_welcome(m.chat.id, m.reply_to_message.id)
+    if WRONG:
+        return await m.reply("**Welcome message has been saved**")
     await m.reply("**Welcome message has been saved**")
