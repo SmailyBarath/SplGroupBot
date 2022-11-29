@@ -3,6 +3,7 @@ from config import CHATS
 from telegram.ext import ApplicationBuilder
 from config import DEV
 import time
+from .admins import admin_list
 
 startTime = time.time()
 
@@ -36,10 +37,10 @@ async def log(_, message):
 
 async def verify(_, m):
     id = m.from_user.id
-    if id not in DEV_USERS:
-        x = await _.get_chat_member(m.chat.id, id)
-        if not x.privileges:
-            return False, "You got no rights to do this action !"
+    x = await admin_list(_, m)
+    lel = x + DEV_USERS
+    if not id in lel:
+        return False, "You got no rights to do this action !"
     return True, "True"
     
 
