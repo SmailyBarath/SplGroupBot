@@ -1,4 +1,4 @@
-"""from . import db
+from . import db
 
 welcomedb = db.welcome
 
@@ -11,5 +11,8 @@ async def get_welcome(chat_id: int):
         return None
     return x["msg_id"]
 
-async def is_welcome_on(
-"""
+async def is_welcome_on(chat_id: int):
+    x = await welcomedb.find_one({"chat_id": chat_id})
+    if x:
+        return True
+    return False
