@@ -4,9 +4,20 @@ flood_toggle_db = db.floods
 
 fmdb = db.flood
 
+floodm = db.fm
+
 fdb = flood_toggle_db
 
-async def set_flood_value(chat_id: int, value):
+async def set_flood_time(chat_id: int, tim: int):
+    await floodm.update_one({"chat_id": chat_id}, {"$set": {"time": tim}}, upsert=True)
+
+async def get_flood_time(chat_id: int):
+    x = await floodm.find_one({"chat_id: chat_id})
+    if not x:
+        return 0
+    return x["time"]
+
+async def set_flood_value(chat_id: int, value: int):
     await fdb.update_one({"chat_id", chat_id}, {"$set": {"value": value}}, upsert=True)
 
 async def set_flood_mode(chat_id: int, mode):
