@@ -159,7 +159,7 @@ async def cwf(_, m):
         else:
             LIST.pop(chat_id)
             IDS[chat_id].clear()
-            LIST.add({chat_id: user_id})
+            LIST[chat_id] = user_id
             IDS[chat_id].append(m.id)
             a = 1
         x = await get_flood(m.chat.id)
