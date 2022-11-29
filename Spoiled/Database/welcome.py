@@ -1,4 +1,4 @@
-from . import db
+"""from . import db
 
 welcomedb = db.welcome
 
@@ -12,3 +12,4 @@ async def get_welcome(chat_id: int):
     return x["msg_id"]
 
 async def is_welcome_on(
+"""
