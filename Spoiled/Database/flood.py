@@ -24,13 +24,11 @@ async def get_flood_mode(chat_id: int):
         return "delete"
     return x["mode"]
 
-
 async def is_flood_on(chat_id: int) -> bool:
     chat = await flood_toggle_db.find_one({"chat_id": chat_id})
     if not chat:
-        return True
-    return False
-
+        return False
+    return True
 
 async def flood_on(chat_id: int):
     is_flood = await is_flood_on(chat_id)
