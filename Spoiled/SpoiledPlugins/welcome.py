@@ -54,12 +54,16 @@ async def welcome_checker(_, m):
         x = await _.get_chat_member(m.chat.id, id)
         if not x.privileges:
             return
+        if not x.privileges.can_change_info:
+            return await m.reply(f"**You can't change welcome settings !**")
     y = await is_welcome_off(m.chat.id)
     if y:
         return await m.reply("**Welcome mode is off**")
     x = await get_welcome(m.chat.id)
     if not x:
         x = random.choice(YashuAlpha)
-    await m.reply("**Welcome mode is on !**")
+    await m.reply("**Welcome mode is on !\n\nuse /welcomemode to set it on or off !**")
     await m.reply(x)
+
+
     
