@@ -59,8 +59,8 @@ async def cwf(_, m):
                 h = m.new_chat_members[0]["id"]
                 txt.replace("{id}", h)
             if "{count}" in txt:
-                h = m.new_chat_members[0]["first_name"]
-                txt.replace("{count}", h)
+                h = await _.get_chat_members_count(m.chat.id)
+                txt.replace("{count}", str(h))
             if "{chatname}" in txt:
                 h = m.chat.title
                 txt.replace("{chatname}", h)
