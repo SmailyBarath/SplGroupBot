@@ -3,7 +3,9 @@ from config import CHATS
 from telegram.ext import ApplicationBuilder
 from config import DEV
 import time
-from .admins import admin_list
+from pyrogram import Client
+from pyrogram.types import Message
+from .admins import list_admins, list_admin_rights
 
 startTime = time.time()
 
@@ -37,11 +39,12 @@ async def log(_, message):
 
 async def verify_right(chat_id, user_id, right):
     x = await list_admin_rights(Client, Message)
+    return x[chat_id][user_id][right]
     
 
 async def verify(_, m):
     id = m.from_user.id
-    x = await admin_list(_, m)
+    x = await list_admins(_, m)
     lel = x + DEV_USERS
     if not id in lel:
         return False, "You got no rights to do this action !"
