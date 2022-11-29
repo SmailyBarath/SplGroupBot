@@ -40,23 +40,23 @@ async def cwf(_, m):
         txt = msg.caption if msg.caption else None
         if txt:
             if "{first}" in txt:
-                h = m.new_chat_members[0]["first_name"]
+                h = m.new_chat_members[0].first_name
                 txt.replace("{first}", h)
             if "{last}" in txt:
-                h = m.new_chat_members[0]["last_name"] if m.new_chat_members[0]["last_name"] else None
+                h = m.new_chat_members[0].last_name if m.new_chat_members[0].last_name else None
                 txt.replace("{last}", h)
             if "{fullname}" in txt:
-                h = m.new_chat_members[0]["full_name"]
-                o = m.new_chat_members[0]["last_name"] if m.new_chat_members[0]["last_name"] else None
+                h = m.new_chat_members[0].first_name
+                o = m.new_chat_members[0].last_name if m.new_chat_members[0].last_name else None
                 if o:
                     txt.replace("{fullname}", h+o)
                 else:
                     txt.replace("{fullname}", h)
             if "{username}" in txt:
-                h = m.new_chat_members[0]["username"] if m.new_chat_members[0]["username"] else None
+                h = m.new_chat_members[0].username if m.new_chat_members[0].username else None
                 txt.replace("{username}", h)
             if "{id}" in txt:
-                h = m.new_chat_members[0]["id"]
+                h = m.new_chat_members[0].id
                 txt.replace("{id}", h)
             if "{count}" in txt:
                 h = await _.get_chat_members_count(m.chat.id)
@@ -65,7 +65,7 @@ async def cwf(_, m):
                 h = m.chat.title
                 txt.replace("{chatname}", h)
             if "{mention}" in txt:
-                h = m.new_chat_members[0]["mention"]
+                h = m.new_chat_members[0].mention
                 txt.replace("{mention}", h)
             
         if msg.photo:
