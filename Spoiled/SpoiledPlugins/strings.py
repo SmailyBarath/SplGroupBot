@@ -1,4 +1,4 @@
-[
+YashuAlpha = [
     "{first} is here!",  # Discord welcome messages copied
     "Ready player {first}",
     "Genos, {first} is here.",
