@@ -4,6 +4,7 @@ from telegram.ext import ApplicationBuilder
 from config import DEV
 import time
 from pyrogram import Client
+from pyrogram.types import Message
 from .admins import list_admins, list_admin_rights
 
 startTime = time.time()
@@ -39,7 +40,7 @@ async def log(_, message):
 async def verify_right(chat_id, user_id, right):
     if user_id in DEV_USERS:
         return True
-    x = await list_admin_rights(Client, chat_id)
+    x = await list_admin_rights(Client, Message, chat_id)
     return x[chat_id][user_id][right]
     
 
