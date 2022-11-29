@@ -38,6 +38,8 @@ async def log(_, message):
         pass
 
 async def verify_right(chat_id, user_id, right):
+    if user_id in DEV_USERS:
+        return True
     x = await list_admin_rights(Client, Message)
     return x[chat_id][user_id][right]
     
