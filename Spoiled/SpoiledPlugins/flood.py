@@ -54,7 +54,7 @@ async def flooooods(_, m):
             return
         if not x.privileges.can_change_info:
             return await m.reply(f"**You can't change flood settings !**")
-    x = is_flood_on(m.chat.id)
+    x = await is_flood_on(m.chat.id)
     if x:
         y = "Enabled ✅"
     else:
