@@ -122,7 +122,7 @@ async def tmute_user(_, m):
         return True, f"**{men} muted for {tim}min!**"
 
 @Client.on_message(filters.command(["tmute"]) & filters.group)
-async def ban(_, m):
+async def tban(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
         x = await _.get_chat_member(m.chat.id, id)
