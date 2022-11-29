@@ -12,6 +12,7 @@ async def mute_user(_, m):
         id = await get_id(_, m)
     except:
         return False, f"**Reply to a user or provide id !**"
+    reason = None
     if not m.reply_to_message:
         if len(m.command) > 2:
             reason = m.text.split(None, 2)[2]
@@ -94,17 +95,16 @@ async def tmute_user(_, m):
         id = await get_id(_, m)
     except:
         return False, f"**Reply to a user or provide id !**"
-    reason = None
     if not m.reply_to_message:
-        if len(m.command) > 2:
+        if len(m.command) == 3:
             try:
-                tim = int(m.text.split(None, 3)[2])
+                tim = int(m.text.split()[2])
             except:
                 return await m.reply(f"**Enter a value which will be considered in minutes !**")
             reason = None
         elif len(m.command) > 3: 
             try:
-                tim = int(m.text.split(None, 3)[2])
+                tim = int(m.text.split()[2])
             except:
                 return await m.reply(f"**Enter a value which will be considered in minutes !**")
             reason = m.text.split(None, 3)[3] 
