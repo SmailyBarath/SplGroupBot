@@ -75,15 +75,28 @@ async def list_admin_rights(_: Client, chat_id: int):
 
 @Client.on_message(filters.command("reload") & filters.group)
 async def reload(_, m):
-    global RELOAD
-    RELOAD = True
+    global admin_list
+    global admin_rights
     ok = await m.reply(f"**Reloading bot...\n\n• loading\n\n• ⏳\n\n• ⏳\n\n• ⏳**")
-    x = await list_admins(_, m.chat.id)
+    l = await reload_admins(_, chat_id)
+    admin_list[chat_id] = {"admins": l, "updated": time.time()}
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• ⏳\n\n• ⏳**")
-    x = await list_admin_rights(_, m.chat.id)
+    ALPHA = True
+    l = await list_admins(_, chat_id)
+    if ALPHA:
+        for x in l:
+            h = await _.get_chat_member(chat_id, x)
+            h = h.privileges
+            admin_rights = {chat_id: {x: {"can_change_info": True if h.can_change_info else False}}}
+            admin_rights = {chat_id: {x: {"can_delete_messages": True if h.can_delete_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_restrict_members": True if h.can_restrict_members else False}}}
+            admin_rights = {chat_id: {x: {"can_promote_members": True if h.can_promote_members else False}}}
+            admin_rights = {chat_id: {x: {"can_invite_users": True if h.can_invite_users else False}}}
+            admin_rights = {chat_id: {x: {"can_pin_messages": True if h.can_pin_messages else False}}}
+            admin_rights = {chat_id: {x: {"can_manage_video_chats": True if h.can_manage_video_chats else False}}}
+        admin_rights[chat_id]["updated"] = time.time()
     text = f"reloaded admin rights ✅"
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• {text}\n\n• ⏳**")
-    RELOAD = False
     x = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, x)
     x = x.privileges
