@@ -11,6 +11,12 @@ async def mute_user(_, m):
         id = await get_id(_, m)
     except:
         return False, f"**Reply to a user or provide id !**"
+    if not m.reply_to_message:
+        if len(m.command) > 2:
+            reason = m.text.split(None, 2)[2]
+    else:
+        if len(m.command) > 1:
+            reason = m.text.split(None, 1)[1]
     myid = (await _.get_me()).id
     if id == myid:
         return False, "😒😒.."
@@ -21,7 +27,10 @@ async def mute_user(_, m):
         return False, f"**Can't mute an admin !**"
     await _.restrict_chat_member(m.chat.id, id, permissions=ChatPermissions())
     men = (await _.get_users(id)).mention
-    return True, f"**{men} muted !**"
+    if reason:
+        return True, f"**{men} muted !\n\nReason : {reason}**"
+    else:
+        return True, f"**{men} muted !**"
 
 async def unmute_user(_, m):
     try:
