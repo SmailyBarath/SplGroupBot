@@ -15,6 +15,10 @@ async def list_admins(_, m):
         l = reload_admins(_, m)
         admin_list[chat_id] = {"admins": l, "updated": time.time()}
         return l
+    if RELOAD:
+        l = reload_admins(_, m)
+        admin_list[chat_id] = {"admins": l, "updated": time.time()}
+        return l
 
 async def reload_admins(_, m):
     chat_id = m.chat.id
@@ -39,13 +43,51 @@ async def list_admin_rights(_, m):
             admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
             admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
             admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
-                
+        admin_rights["updated"] = time.time()
+        return admin_rights
+    if (int(time.time() - admin_rights["updated"])) > 3600:
+        for x in l:
+            h = await _.get_chat_member(chat_id, x)
+            h = h.privileges
+            admin_rights[chat_id][x]["can_change_info"] = True if h.can_change_info else False
+            admin_rights[chat_id][x]["can_delete_messages"] = True if h.can_delete_messages else False
+            admin_rights[chat_id][x]["can_restrict_members"] = True if h.can_restrict_members else False
+            admin_rights[chat_id][x]["can_promote_members"] = True if h.can_promote_members else False
+            admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
+            admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
+            admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
+        admin_rights["updated"] = time.time()
+        return admin_rights
+    if RELOAD:
+        for x in l:
+            h = await _.get_chat_member(chat_id, x)
+            h = h.privileges
+            admin_rights[chat_id][x]["can_change_info"] = True if h.can_change_info else False
+            admin_rights[chat_id][x]["can_delete_messages"] = True if h.can_delete_messages else False
+            admin_rights[chat_id][x]["can_restrict_members"] = True if h.can_restrict_members else False
+            admin_rights[chat_id][x]["can_promote_members"] = True if h.can_promote_members else False
+            admin_rights[chat_id][x]["can_invite_users"] = True if h.can_invite_users else False
+            admin_rights[chat_id][x]["can_pin_messages"] = True if h.can_pin_messages else False
+            admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
+        admin_rights["updated"] = time.time()
+        return admin_rights
+
+RELOAD = False     
 
 @Client.on_message(filters.command("reload"))
 async def reload(_, m):
-    ok = await m.reply(f"**Reloading bot...\n\n• loading\n• ⏳\n• ⏳**")
+    global RELOAD
+    RELOAD = True
+    ok = await m.reply(f"**Reloading bot...\n\n• loading\n\n• ⏳\n\n• ⏳\n\n• ⏳**")
     x = list_admins(_, m)
-    await ok.edit(f"**Reloading bot...\n\n• loading\n• Admin list updated ✅\n• ⏳**")
+    await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• ⏳\n\n• ⏳**")
+    try:
+        x = list_admin_rights(_, m)
+        text = f"**reloaded admin rights ✅**"
+    except:
+        text = f"**can't reload admin rights ❌**"
+    await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• {text}\n\n• ⏳**")
+    RELOAD = False
     x = (await _.get_me()).id
     x = await _.get_chat_member(m.chat.id, x)
     x = x.privileges
@@ -53,5 +95,5 @@ async def reload(_, m):
         txt = "No ban rights ❌"
     else:
         txt = "Bot can ban ✅"
-    await ok.edit(f"**Reloaded bot !\n\n• loaded\n• Admin list updated ✅\n• {txt}**")
+    await ok.edit(f"**Reloaded bot !\n\n• loaded\n\n• Admin list updated ✅\n\n• {text}\n\n• {txt}**")
     
