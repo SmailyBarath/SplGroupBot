@@ -32,7 +32,7 @@ async def unban_user(_, m):
     men = (await _.get_users(id)).mention
     return True, f"**{men} unbanned !**"
 
-@Client.on_message(filters.command(["ban", "sban"]))
+@Client.on_message(filters.command(["ban", "sban"]) & filters.group)
 async def ban(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
@@ -54,7 +54,7 @@ async def ban(_, m):
         return
     await m.reply(h)
 
-@Client.on_message(filters.command(["unban"]))
+@Client.on_message(filters.command(["unban"]) & filters.group)
 async def unban(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
