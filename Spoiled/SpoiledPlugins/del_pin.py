@@ -33,7 +33,6 @@ async def dele(_, m):
 @Client.on_message(filters.command(["pin", "unpin"]) & filters.group)
 async def pin(_, m):
     id = m.from_user.id
-    id = m.from_user.id
     if not id in DEV_USERS:
         d = await _.get_chat_member(m.chat.id, id)
         if not d.privileges:
@@ -42,10 +41,13 @@ async def pin(_, m):
             return await m.reply(f"**You got no right to do this**")
     if not m.reply_to_message:
         return await m.reply(f"**What I've to do ?**")
-    if m.text.split()[0][1] == "u":
-        await m.reply_to_message.unpin()
-        await m.reply(f"**Message unpinned !**")
-    else:
-        await m.reply_to_message.pin()
-        await m.reply(f"**Message pinned !**")
+    try:
+        if m.text.split()[0][1] == "u":
+            await m.reply_to_message.unpin()
+            await m.reply(f"**Message unpinned !**")
+        else:
+            await m.reply_to_message.pin()
+            await m.reply(f"**Message pinned !**")
+    except:
+        return await m.reply(f"**I got no rights to do !**")
     
