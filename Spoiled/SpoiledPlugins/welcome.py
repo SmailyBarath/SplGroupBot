@@ -64,8 +64,8 @@ async def welcome_setter(_, m):
         for j in lest:
             if not j in VALID_WELCOME_FORMATTERS:
                 WRONG = True
-    await _.copy_message(DUMP, m.chat.id, m.reply_to_message.id)
-    await set_welcome(m.chat.id, m.reply_to_message.id)
+    frwd = await _.copy_message(DUMP, m.chat.id, m.reply_to_message.id)
+    await set_welcome(m.chat.id, frwd.message_id)
     if WRONG:
         return await m.reply("**Welcome message has been saved\n\nwith unknown welcome formatters !**")
     await m.reply("**Welcome message has been saved**")
