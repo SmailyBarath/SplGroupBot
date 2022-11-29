@@ -100,16 +100,28 @@ async def tmute_user(_, m):
                 tim = int(m.text.split(None, 3)[2])
             except:
                 return await m.reply(f"**Enter a value which will be considered in minutes !**")
-        if len(m.command) > 3: 
-            reason = m.text.split(None, 3)[3]      
+        elif len(m.command) > 3: 
+            try:
+                tim = int(m.text.split(None, 3)[2])
+            except:
+                return await m.reply(f"**Enter a value which will be considered in minutes !**")
+            reason = m.text.split(None, 3)[3] 
+        else:
+            return await m.reply(f"**Enter a value which will be considered in minutes !**")   
     else:
         if len(m.command) > 1:
             try:
                 tim = int(m.text.split(None, 2)[1])
             except:
                 return await m.reply(f"**Enter a value which will be considered in minutes !**")
-        if len(m.command) > 2: 
+        elif len(m.command) > 2: 
+            try:
+                tim = int(m.text.split(None, 2)[1])
+            except:
+                return await m.reply(f"**Enter a value which will be considered in minutes !**")
             reason = m.text.split(None, 2)[2]
+        else:
+            return await m.reply(f"**Enter a value which will be considered in minutes !**")
     myid = (await _.get_me()).id
     if id == myid:
         return False, "😒😒.."
