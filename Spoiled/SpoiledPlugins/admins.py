@@ -79,7 +79,7 @@ async def reload(_, m):
     global RELOAD
     RELOAD = True
     ok = await m.reply(f"**Reloading bot...\n\n• loading\n\n• ⏳\n\n• ⏳\n\n• ⏳**")
-    x = list_admins(_, m)
+    x = await list_admins(_, m)
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• ⏳\n\n• ⏳**")
     try:
         x = await list_admin_rights(_, m)
