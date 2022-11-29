@@ -33,7 +33,7 @@ async def unmute_user(_, m):
     men = (await _.get_users(id)).mention
     return True, f"**{men} unmuted !**"
 
-@Client.on_message(filters.command(["mute", "smute"]))
+@Client.on_message(filters.command(["mute", "smute"]) & filters.group)
 async def ban(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
@@ -55,7 +55,7 @@ async def ban(_, m):
         return
     await m.reply(h)
 
-@Client.on_message(filters.command(["unmute"]))
+@Client.on_message(filters.command(["unmute"]) & filters.group)
 async def unban(_, m):
     id = m.from_user.id
     if not id in DEV_USERS:
