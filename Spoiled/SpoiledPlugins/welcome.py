@@ -22,6 +22,9 @@ VALID_WELCOME_FORMATTERS = [
 
 @Client.on_message(filters.group & filters.new_chat_members, group=10)
 async def cwf(_, m):
+    x = await is_welcome_off(m.chat.id)
+    if x:
+        return
     x = await get_welcome(m.chat.id)
     if not x:
         x = random.choice(YashuAlpha)
@@ -54,15 +57,19 @@ async def cwf(_, m):
                     txt = txt.replace("{fullname}", h)
             if "{username}" in txt:
                 h = m.new_chat_members[0].username if m.new_chat_members[0].username else None
+                h = "@" + h
                 txt = txt.replace("{username}", h)
             if "{id}" in txt:
                 h = m.new_chat_members[0].id
+                h = f"`{h}`"
                 txt = txt.replace("{id}", h)
             if "{count}" in txt:
                 h = await _.get_chat_members_count(m.chat.id)
+                h = f"**{h}**"
                 txt = txt.replace("{count}", str(h))
             if "{chatname}" in txt:
                 h = m.chat.title
+                h = f"**{h}**"
                 txt = txt.replace("{chatname}", h)
             if "{mention}" in txt:
                 h = m.new_chat_members[0].mention
@@ -97,15 +104,19 @@ async def cwf(_, m):
                     txt = txt.replace("{fullname}", h)
             if "{username}" in txt:
                 h = m.new_chat_members[0].username if m.new_chat_members[0].username else None
+                h = "@" + h
                 txt = txt.replace("{username}", h)
             if "{id}" in txt:
                 h = m.new_chat_members[0].id
+                h = f"`{h}`"
                 txt = txt.replace("{id}", h)
             if "{count}" in txt:
                 h = await _.get_chat_members_count(m.chat.id)
+                h = f"**{h}**"
                 txt = txt.replace("{count}", str(h))
             if "{chatname}" in txt:
                 h = m.chat.title
+                h = f"**{h}**"
                 txt = txt.replace("{chatname}", h)
             if "{mention}" in txt:
                 h = m.new_chat_members[0].mention
