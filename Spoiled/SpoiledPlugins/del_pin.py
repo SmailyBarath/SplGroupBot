@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from . import verify, verify_right
 
-@Client.on_message(filters.command("del"))
+@Client.on_message(filters.command("del") & filters.group)
 async def dele(_, m):
     id = m.from_user.id
     g, h = await verify(_, m)
@@ -27,7 +27,7 @@ async def dele(_, m):
     except:
         return
 
-@Client.on_message(filters.command(["pin", "unpin"]))
+@Client.on_message(filters.command(["pin", "unpin"]) & filters.group)
 async def pin(_, m):
     id = m.from_user.id
     g, h = await verify(_, m)
