@@ -140,6 +140,7 @@ async def welcome_setter(_, m):
             return await m.reply(f"**You can't change welcome settings !**")
     if not m.reply_to_message:
         return await m.reply(f"**Reply to a message...**")
+    WRONG = False
     if m.reply_to_message.text or m.reply_to_message.caption:
         cap = m.reply_to_message.text or m.reply_to_message.caption
         cap = cap.split()
