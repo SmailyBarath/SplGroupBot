@@ -82,9 +82,9 @@ async def reload(_, m):
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• ⏳\n\n• ⏳**")
     try:
         x = await list_admin_rights(_, m)
-        text = f"**reloaded admin rights ✅**"
+        text = f"reloaded admin rights ✅"
     except:
-        text = f"**can't reload admin rights ❌**"
+        text = f"can't reload admin rights ❌"
     await ok.edit(f"**Reloading bot...\n\n• loading\n\n• Admin list updated ✅\n\n• {text}\n\n• ⏳**")
     RELOAD = False
     x = (await _.get_me()).id
