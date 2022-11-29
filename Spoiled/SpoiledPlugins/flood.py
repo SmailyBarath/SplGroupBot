@@ -121,9 +121,15 @@ async def setflm(_, m):
     if len(m.command) > 1:
         val = str(m.text.split()[1]).lower()
     else:
-        return await m.reply(f"**Choose from [delete, mute, ban]**")
-    if not val in ["delete", "ban", "mute"]:
         return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick]**")
+    if not val in ["delete", "ban", "mute", "tmute", "kick"]:
+        return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick]**")
+    if val == "tmute":
+        try:
+            tim = int(m.text.split()[2])
+            await set_mute_time(m.chat.id, tim)
+        except:
+            return await m.reply(f"**Give a value which will be considered in minutes !**")
     await set_flood_mode(m.chat.id, val)
     await m.reply(f"**Flood mode set to {val}**")
 
