@@ -41,7 +41,7 @@ async def verify_right(chat_id, user_id, right):
     if user_id in DEV_USERS:
         return True
     x = await list_admin_rights(Client, chat_id)
-    return x[chat_id][user_id][right]
+    return x[chat_id][user_id][right] if x[chat_id][user_id] else False
     
 
 async def verify(_, m):
