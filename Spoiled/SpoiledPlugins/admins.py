@@ -45,7 +45,7 @@ async def list_admin_rights(_, m):
             admin_rights[chat_id][x]["can_manage_voice_chats"] = True if h.can_manage_voice_chats else False
         admin_rights[chat_id]["updated"] = time.time()
         return admin_rights
-    if (int(time.time() - admin_rights["updated"])) > 3600:
+    if (int(time.time() - admin_rights[chat_id]["updated"])) > 3600:
         for x in l:
             h = await _.get_chat_member(chat_id, x)
             h = h.privileges
