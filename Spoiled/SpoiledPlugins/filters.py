@@ -110,7 +110,20 @@ async def cwf(_, m):
                         sext = j["text"]
                         return await m.reply(sext)
                     t = j["file"]
-                    
+                    if t[0] == "photo":
+                        return await m.reply_photo(t[1], caption=j["text"] if "text" in j else None)
+                    if t[0] == "video":
+                        return await m.reply_video(t[1], caption=j["text"] if "text" in j else None)
+                    if t[0] == "audio":
+                        return await m.reply_audio(t[1], caption=j["text"] if "text" in j else None)
+                    if t[0] == "voice":
+                        return await m.reply_voice(t[1], caption=j["text"] if "text" in j else None)
+                    if t[0] == "document":
+                        return await m.reply_document(t[1], caption=j["text"] if "text" in j else None)
+                    if t[0] == "animation":
+                        return await m.reply_animation(t[1], caption=j["text"] if "text" in j else None)
+                    if t[0] == "sticker":
+                        return await m.reply_sticker(t[1], caption=j["text"] if "text" in j else None)
                 
     
         
