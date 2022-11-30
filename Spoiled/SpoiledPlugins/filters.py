@@ -105,7 +105,7 @@ async def filter_getter(_, m):
     txt = f"**Filters is {m.chat.title}**"
     txt += "\n\n"
     for g in x:
-        txt += f"- {g}\n"
+        txt += f"- `{g}`\n"
     await m.reply(txt, reply_markup=markup)
 
 @Client.on_message(filters.group, group=11)
