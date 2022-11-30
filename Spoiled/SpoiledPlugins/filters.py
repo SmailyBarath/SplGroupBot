@@ -48,4 +48,5 @@ async def filter(_, m):
             else:
                 return
             trigger = m.text.split()[1]
-    await add_filter(m.chat.id
+    await add_filter(m.chat.id, [trigger, content])
+    await m.reply(f"**Filter saved ~ **`{trigger}`")
