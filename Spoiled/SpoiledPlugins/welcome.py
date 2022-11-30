@@ -85,6 +85,8 @@ async def cwf(_, m):
             return await m.reply_audio(msg.audio.file_id, caption=txt if txt else None)
         if msg.document:
             return await m.reply_document(msg.document.file_id, caption=txt if txt else None, force_document=True)
+        if msg.sticker:
+            return await m.reply_sticker(msg.sticker.file_id)
 
     elif msg.text:
         txt = msg.text if msg.text else None
@@ -184,8 +186,27 @@ async def welcome_checker(_, m):
     x = await get_welcome(m.chat.id)
     if not x:
         x = random.choice(YashuAlpha)
-    await m.reply("**Welcome mode is on !\n\nuse /welcomemode to set it on or off !**")
-    await m.reply(x)
+        await m.reply("**Welcome mode is on !\n\nuse /welcomemode to set it on or off !**")
+        await m.reply(x)
+    else:
+        x = await _.get_messages(DUMP, x)
+        await m.reply("**Welcome mode is on !\n\nuse /welcomemode to set it on or off !**")
+        if x.media:
+            if x.photo:
+                return await m.reply_photo(x.photo.file_id, caption=x.caption if x.caption else None)
+            if x.video:
+                return await m.reply_video(x.video.file_id, caption=x.caption if x.caption else None)
+            if x.audio:
+                return await m.reply_audio(x.audio.file_id, caption=x.caption if x.caption else None)
+            if x.document:
+                return await m.reply_document(x.document.file_id, caption=x.caption if x.caption else None, force_document=True)
+            if x.animation:
+                return await m.reply_animation(x.animation.file_id, caption=x.caption if x.caption else None)
+            if x.sticker:
+                return await m.reply_sticker(x.sticker.file_id)
+
+
+        
 
 @Client.on_message(filters.command("welcomemode") & filters.group)
 async def welm(_, m):
