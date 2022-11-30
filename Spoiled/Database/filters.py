@@ -2,6 +2,16 @@ from . import db
 
 filtersdb = db.filters
 
+async def del_all_filters(chat_id: int):
+    x = await filterdb.find_one({"chat_id" chat_id})
+    if not x:
+        return
+    x = await list_filters(chat_id)
+    if not x:
+        return
+    for y in x:
+        await del_filter(chat_id, y)
+
 async def add_filter(chat_id: int, data):
     x = await filterdb.find_one({"chat_id" chat_id})
     if not x:
