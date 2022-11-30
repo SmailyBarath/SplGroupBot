@@ -13,6 +13,17 @@ markup = IKM(
          ]
          )
 
+@Client.on_callback_query(filters.regex("clear_filters"))
+async def cbq(_, q):
+    id = q.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(q.message.chat.id, id)
+        if not x.status.OWNER:
+            return await q.answer("Only owner can clear all at once !", show_alert=True)
+    await q.answer("clearing...")
+    await del_all_filters(q.message.chat.id)
+    await q.edit_message_text("All filters cleared !")
+
 @Client.on_message(filters.command("filter") & filters.group)
 async def filter(_, m):
     id = m.from_user.id
