@@ -44,3 +44,4 @@ async def filter(_, m):
                 content = {"file": ["voice", reply.voice.file_id], "text": caption}
             if reply.animation:
                 content = {"file": ["animation", reply.animation.file_id], "text": caption}
+            trigger = m.text.split()[1]
