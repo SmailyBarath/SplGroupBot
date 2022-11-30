@@ -2,8 +2,9 @@ import html
 import random
 import time
 
-import .fun_strings as fun_strings
+import Spoiled.SpoiledPlugins.fun_strings as fun_strings
 from Spoiled import Yashu 
+from telegram import Update
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler
@@ -109,8 +110,6 @@ async def table(update: Update, context: CallbackContext):
 
 Yashu.add_handler(CommandHandler("sanitize", sanitize))
 Yashu.add_handler(CommandHandler("run", runs))
-Yashu.add_handler(CommandHandler("pat", pat))
-Yashu.add_handler(CommandHandler("slap", slap))
 Yashu.add_handler(CommandHandler("roll", roll))
 Yashu.add_handler(CommandHandler("shrug", shrug))
 Yashu.add_handler(CommandHandler("rlg", rlg))
