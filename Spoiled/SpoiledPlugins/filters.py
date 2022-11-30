@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from config import DEV
+from Spoiled.Database.filters import *
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
@@ -30,18 +31,21 @@ async def filter(_, m):
             caption = reply.caption if reply.caption else None
             if len(m.command) < 2:
                 return await m.reply("**Give a word to filter it !**")
-            if reply.photo:
+            elif reply.photo:
                 content = {"file": ["photo", reply.photo.file_id], "text": caption}
-            if reply.video:
+            elif reply.video:
                 content = {"file": ["video", reply.video.file_id], "text": caption}
-            if reply.sticker:
+            elif reply.sticker:
                 content = {"file": ["sticker", reply.sticker.file_id], "text": caption}
-            if reply.document:
+            elif reply.document:
                 content = {"file": ["document", reply.document.file_id], "text": caption}
-            if reply.audio:
+            elif reply.audio:
                 content = {"file": ["audio", reply.audio.file_id], "text": caption}
-            if reply.voice:
+            elif reply.voice:
                 content = {"file": ["voice", reply.voice.file_id], "text": caption}
-            if reply.animation:
+            elif reply.animation:
                 content = {"file": ["animation", reply.animation.file_id], "text": caption}
+            else:
+                return
             trigger = m.text.split()[1]
+    await add_filter(m.chat.id
