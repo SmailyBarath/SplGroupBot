@@ -69,7 +69,7 @@ async def filter(_, m):
                 return
             trigger = m.text.split()[1]
     await add_filter(m.chat.id, [trigger.lower(), content])
-    await m.reply(f"**Filter saved ~ **`{trigger}`")
+    await m.reply(f"**Filter saved ~** `{trigger}`")
 
 @Client.on_message(filters.command("stop") & filters.group)
 async def stopper(_, m):
@@ -87,7 +87,7 @@ async def stopper(_, m):
     if not x:
         return await m.reply("**No filter saved with this name !**")
     await del_filter(m.chat.id, m.text.split()[1].lower())
-    await m.reply("**Filter stopped ~**`{m.text.split()[1]}`")
+    await m.reply("**Filter stopped ~** `{m.text.split()[1]}`")
 
 @Client.on_message(filters.command("filters") & filters.group)
 async def filter_getter(_, m):
