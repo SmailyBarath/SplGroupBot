@@ -35,7 +35,10 @@ async def list_filters(chat_id: int):
     x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
         return []
-    list = x["data"]
+    if "data" in x:
+        list = x["data"]
+    else:
+        return []
     lmao = []
     for c in list:
         lmao.append(c[0])
