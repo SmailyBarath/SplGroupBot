@@ -57,7 +57,7 @@ async def filter(_, m):
             else:
                 return
             trigger = m.text.split()[1]
-    await add_filter(m.chat.id, [trigger, content])
+    await add_filter(m.chat.id, [trigger.lower(), content])
     await m.reply(f"**Filter saved ~ **`{trigger}`")
 
 @Client.on_message(filters.command("stop") & filters.group)
@@ -72,10 +72,10 @@ async def stopper(_, m):
             return await m.reply("**You don't have right to edit filters !**")
     if len(m.command) < 2:
         return await m.reply("**Give filter name to stop !**")
-    x = await is_filter(m.chat.id, m.text.split()[1])
+    x = await is_filter(m.chat.id, m.text.split()[1].lower())
     if not x:
         return await m.reply("**No filter saved with this name !**")
-    await del_filter(m.chat.id, m.text.split()[1])
+    await del_filter(m.chat.id, m.text.split()[1].lower())
     await m.reply("**Filter stopped ~**`{m.text.split()[1]}`")
 
 @Client.on_message(filters.command("filters") & filters.group)
@@ -96,4 +96,21 @@ async def filter_getter(_, m):
     for g in x:
         txt += f"- {g}\n"
     await m.reply(txt, reply_markup=markup)
+
+@Client.on_message(filters.group, group=11)
+async def cwf(_, m):
+    if m.from_user:
+        if m.text or m.caption:
+            txt = m.text if m.text else m.caption
+            x = await list_filters(m.chat.id)
+            for h in txt.split():
+                if h.lower() in x:
+                    j = await get_filter(m.chat.id, h)
+                    if not "file" in j:
+                        sext = j["text"]
+                        return await m.reply(sext)
+                    t = j["file"]
+                    
+                
+    
         
