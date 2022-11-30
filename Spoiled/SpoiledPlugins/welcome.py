@@ -211,6 +211,6 @@ async def welm(_, m):
         if not y:
             return await m.reply("**Welcome mode is already enabled**")
         await toggle_welcome(m.chat.id)
-        return await m.reply(**"Welcome mode disabled !**")
+        return await m.reply("**Welcome mode disabled !**")
     
     
