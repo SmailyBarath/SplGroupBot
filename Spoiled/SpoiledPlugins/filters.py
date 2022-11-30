@@ -5,6 +5,14 @@ from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as 
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
+markup = IKM(
+         [
+         [
+         IKB("Clear 🗑️", callback_data="clear_locks")
+         ]
+         ]
+         )
+
 @Client.on_message(filters.command("filter") & filters.group)
 async def filter(_, m):
     id = m.from_user.id
@@ -51,3 +59,21 @@ async def filter(_, m):
             trigger = m.text.split()[1]
     await add_filter(m.chat.id, [trigger, content])
     await m.reply(f"**Filter saved ~ **`{trigger}`")
+
+@Client.on_message(filters.command("stop") & filters.group)
+async def stopper(_, m):
+    id = m.from_user.id
+    if not id in DEV_USERS:
+        x = await _.get_chat_member(m.chat.id, id)
+        if not x.privileges:
+            return await m.reply("**You don't have right to do this !**")
+        x = x.privileges
+        if not x.can_change_info:
+            return await m.reply("**You don't have right to edit filters !**")
+    if len(m.command) < 2:
+        return await m.reply("**Give filter name to stop !**")
+    x = await is_filter(m.chat.id, m.text.split()[1])
+    if not x:
+        return await m.reply("**No filter saved with this name !**")
+    await del_filter(m.chat.id, m.text.split()[1])
+    await m.reply("**Filter stopped ~**`{m.text.split()[1]}`")
