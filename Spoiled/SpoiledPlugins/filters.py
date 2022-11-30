@@ -1,6 +1,7 @@
 from pyrogram import Client, filters
 from config import DEV
 from Spoiled.Database.filters import *
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
