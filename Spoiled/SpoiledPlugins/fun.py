@@ -25,11 +25,11 @@ async def sanitize(update: Update, context: CallbackContext):
         else message.from_user.first_name
     )
     reply_animation = (
-        await message.reply_to_message.reply_animation
+        message.reply_to_message.reply_animation
         if message.reply_to_message
-        else await message.reply_animation
+        else message.reply_animation
     )
-    reply_animation(random.choice(fun_strings.GIFS), caption=f"*Sanitizes {name}*")
+    await reply_animation(random.choice(fun_strings.GIFS), caption=f"*Sanitizes {name}*")
 
 
 
@@ -54,17 +54,17 @@ async def shout(update: Update, context: CallbackContext):
 async def shrug(update: Update, context: CallbackContext):
     msg = update.effective_message
     reply_text = (
-        await msg.reply_to_message.reply_text if msg.reply_to_message else await msg.reply_text
+         msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
     )
-    reply_text(r"¯\_(ツ)_/¯")
+    await reply_text(r"¯\_(ツ)_/¯")
 
 
 async def bluetext(update: Update, context: CallbackContext):
     msg = update.effective_message
     reply_text = (
-        await msg.reply_to_message.reply_text if msg.reply_to_message else await msg.reply_text
+        msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
     )
-    reply_text(
+    await reply_text(
         "/BLUE /TEXT\n/MUST /CLICK\n/I /AM /A /STUPID /ANIMAL /THAT /IS /ATTRACTED /TO /COLORS",
     )
 
@@ -83,29 +83,29 @@ async def rlg(update: Update, context: CallbackContext):
 
 async def decide(update: Update, context: CallbackContext):
     reply_text = (
-        await update.effective_message.reply_to_message.reply_text
+        update.effective_message.reply_to_message.reply_text
         if update.effective_message.reply_to_message
-        else await update.effective_message.reply_text
+        else update.effective_message.reply_text
     )
-    reply_text(random.choice(fun_strings.DECIDE))
+    await reply_text(random.choice(fun_strings.DECIDE))
 
 
 async def eightball(update: Update, context: CallbackContext):
     reply_text = (
-        await update.effective_message.reply_to_message.reply_text
+        update.effective_message.reply_to_message.reply_text
         if update.effective_message.reply_to_message
-        else await update.effective_message.reply_text
+        else update.effective_message.reply_text
     )
-    reply_text(random.choice(fun_strings.EIGHTBALL))
+    await reply_text(random.choice(fun_strings.EIGHTBALL))
 
 
 async def table(update: Update, context: CallbackContext):
     reply_text = (
-        await update.effective_message.reply_to_message.reply_text
+        update.effective_message.reply_to_message.reply_text
         if update.effective_message.reply_to_message
-        else await update.effective_message.reply_text
+        else update.effective_message.reply_text
     )
-    reply_text(random.choice(fun_strings.TABLE))
+    await reply_text(random.choice(fun_strings.TABLE))
 
 
 Yashu.add_handler(CommandHandler("sanitize", sanitize))
