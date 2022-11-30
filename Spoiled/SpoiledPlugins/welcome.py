@@ -204,6 +204,8 @@ async def welcome_checker(_, m):
                 return await m.reply_animation(x.animation.file_id, caption=x.caption if x.caption else None)
             if x.sticker:
                 return await m.reply_sticker(x.sticker.file_id)
+        elif x.text:
+            return await m.reply(x.text)
 
 
         
