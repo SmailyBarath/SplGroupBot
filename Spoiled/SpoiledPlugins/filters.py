@@ -8,7 +8,7 @@ DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 markup = IKM(
          [
          [
-         IKB("Clear 🗑️", callback_data="clear_locks")
+         IKB("Clear 🗑️", callback_data="clear_filters")
          ]
          ]
          )
