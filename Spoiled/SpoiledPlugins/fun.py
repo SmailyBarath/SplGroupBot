@@ -3,11 +3,11 @@ import random
 import time
 
 import .fun_strings as fun_strings
-from EmikoRobot import dispatcher
-from EmikoRobot.modules.disable import DisableAbleCommandHandler
+from Spoiled import Yashu 
 from EmikoRobot.modules.helper_funcs.chat_status import is_user_admin
 from EmikoRobot.modules.helper_funcs.extraction import extract_user
-from telegram import ChatPermissions, ParseMode, Update
+from telegram import ChatPermissions, Update
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 
