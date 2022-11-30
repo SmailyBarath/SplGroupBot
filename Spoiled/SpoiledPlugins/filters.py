@@ -95,4 +95,5 @@ async def filter_getter(_, m):
     txt += "\n\n"
     for g in x:
         txt += f"- {g}\n"
+    await m.reply(txt, reply_markup=markup)
         
