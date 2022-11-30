@@ -3,7 +3,7 @@ from . import db
 filtersdb = db.filters
 
 async def del_all_filters(chat_id: int):
-    x = await filterdb.find_one({"chat_id" chat_id})
+    x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
         return
     x = await list_filters(chat_id)
@@ -13,16 +13,16 @@ async def del_all_filters(chat_id: int):
         await del_filter(chat_id, y)
 
 async def add_filter(chat_id: int, data):
-    x = await filterdb.find_one({"chat_id" chat_id})
+    x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
-        await filterdb.update_one({"chat_id": chat_id}, {"$set": {"data": data}}, upsert=True)
+        await filtersdb.update_one({"chat_id": chat_id}, {"$set": {"data": data}}, upsert=True)
     else:
         list = x["data"]
         list.append(data)
-        await filterdb.update_one({"chat_id": chat_id}, {"$set": {"data": list}}, upsert=True)
+        await filtersdb.update_one({"chat_id": chat_id}, {"$set": {"data": list}}, upsert=True)
 
 async def is_filter(chat_id: int, name):
-    x = await filterdb.find_one({"chat_id" chat_id})
+    x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
         return False
     list = x["data"]
@@ -32,7 +32,7 @@ async def is_filter(chat_id: int, name):
     return False
 
 async def list_filters(chat_id: int):
-    x = await filterdb.find_one({"chat_id" chat_id})
+    x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
         return []
     list = x["data"]
@@ -42,7 +42,7 @@ async def list_filters(chat_id: int):
     return lmao
 
 async def del_filter(chat_id: int, name):
-    x = await filterdb.find_one({"chat_id" chat_id})
+    x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
         return
     list = x["data"]
@@ -53,7 +53,7 @@ async def del_filter(chat_id: int, name):
     return
 
 async def get_filter(chat_id: int, name):
-    x = await filterdb.find_one({"chat_id" chat_id})
+    x = await filtersdb.find_one({"chat_id": chat_id})
     if not x:
         return {}
     list = x["data"]
