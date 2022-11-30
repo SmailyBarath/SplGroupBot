@@ -6,7 +6,7 @@ import .fun_strings as fun_strings
 from Spoiled import Yashu 
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, CommandHandler
 
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
 
