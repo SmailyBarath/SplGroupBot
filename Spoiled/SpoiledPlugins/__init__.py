@@ -89,7 +89,7 @@ def bot_info():
     global botid
     global botun
     if not botname or not botid or not botun:
-        x = await Client.get_me()
+        x = Client.get_me()
     if not botname:
         botname = x.first_name
     if not botname:
