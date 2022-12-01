@@ -10,7 +10,7 @@ Hello {} !
 × Service Uptime: {}
 × {} users.
 ────────────────────────
-✪ Hit /help for more info. [.]({})
+✪ Hit /help for more info.
 
 """
 
