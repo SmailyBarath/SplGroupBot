@@ -84,7 +84,7 @@ botid = None
 
 botun = None
 
-def bot_info()
+def bot_info():
     global botname
     global botid
     global botun
