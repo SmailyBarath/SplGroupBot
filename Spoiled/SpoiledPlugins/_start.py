@@ -12,4 +12,6 @@ async def st(_, m):
     fn = m.from_user.first_name
     Upt = get_readable_time(int(time.time()-startTime))
     x = await get_served_users
+    x = len(x)
+    await add_served_puser(m.from_user.id)
     await m.reply_photo(STUFF.START_IMG, caption=START_TEXT.format(fn, botname, Upt, x), reply_markup=START_MARKUP)
