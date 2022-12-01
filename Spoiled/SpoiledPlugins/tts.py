@@ -1,39 +1,29 @@
-import traceback
-from asyncio import get_running_loop
-from io import BytesIO
-
-from googletrans import Translator
+from pyrogram import Client, filters
 from gtts import gTTS
-from pyrogram import filters, Client as app
-from pyrogram.types import Message
 
+def convert(txt):
+    tts = gTTS(txt)
+    x = tts.save()
+    return x
 
-def convert(text):
-    audio = BytesIO()
-    i = Translator().translate(text, dest="en")
-    lang = i.src
-    tts = gTTS(text, lang=lang)
-    audio.name = lang + ".mp3"
-    tts.write_to_fp(audio)
-    return audio
+@Client.on_message(filters.command("tts"))
+async def teeteeyess(_, m):
+    reply = m.reply_to_message
+    if not reply:
+        if len(m.command) < 2:
+            return await m.reply("**Either reply or give some text !**")
+    
+    if reply:
+        if not reply.text and not reply.caption:
+            return await m.reply("**No text found in replied messages !**")
+        txt = reply.text if reply.text else reply.caption
+        path = convert(txt)
+    else:
+        txt = m.text.split(None, 1)[1]
+        path = convert(txt)
 
-
-@app.on_message(filters.command("tts"))
-async def text_to_speech(_, message: Message):
-    if not message.reply_to_message:
-        return await message.reply_text("Reply to some text ffs.")
-    if not message.reply_to_message.text:
-        return await message.reply_text("Reply to some text ffs.")
-    m = await message.reply_text("Processing")
-    text = message.reply_to_message.text
     try:
-       #loop = get_running_loop()
-    #   audio = await loop.run_in_executor(None, convert, text)
-        audio = convert(text)
-        await message.reply_audio(audio)
-        await m.delete()
-        audio.close()
-    except Exception as e:
-        await m.edit(e)
-        e = traceback.format_exc()
-        print(e)
+        await m.reply_voice(path)
+    except:
+        await m.reply_audio(path)
+            
