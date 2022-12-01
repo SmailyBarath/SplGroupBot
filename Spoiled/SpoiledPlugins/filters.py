@@ -88,7 +88,7 @@ async def stopper(_, m):
     if not x:
         return await m.reply("**No filter saved with this name !**")
     await del_filter(m.chat.id, filname)
-    await m.reply("**Filter stopped ~** `{filname}`")
+    await m.reply(f"**Filter stopped ~** `{filname}`")
 
 @Client.on_message(filters.command("filters") & filters.group)
 async def filter_getter(_, m):
