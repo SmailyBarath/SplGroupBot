@@ -56,9 +56,12 @@ async def del_filter(chat_id: int, name):
         return
     list = x["data"]
     for c in list:
-        if c[0] == name:
-            list.remove(c)
-            return await filtersdb.update_one({"chat_id": chat_id}, {"$set": {"data": list}}, upsert=True)
+        try:
+            if c[0] == name:
+                list.remove(c)
+                return await filtersdb.update_one({"chat_id": chat_id}, {"$set": {"data": list}}, upsert=True)
+        except:
+            pass
     return
 
 async def get_filter(chat_id: int, name):
