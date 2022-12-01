@@ -140,7 +140,7 @@ async def cwf(_, m):
                     if t[0] == "animation":
                         return await m.reply_animation(t[1], caption=j["text"] if "text" in j else None)
                     if t[0] == "sticker":
-                        return await m.reply_sticker(t[1], caption=j["text"] if "text" in j else None)
+                        return await m.reply_sticker(t[1])
                 
     
         
