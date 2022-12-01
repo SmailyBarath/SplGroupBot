@@ -113,9 +113,7 @@ async def filter_getter(_, m):
 async def cwf(_, m):
     if m.from_user:
         if m.text or m.caption:
-            txt = m.text if m.text else m.caption
-            if txt.split()[0] in ["/filter", "/stop"]:
-                return 
+            txt = m.text if m.text else m.caption 
             x = await list_filters(m.chat.id)
             for h in txt.split():
                 h = h.lower()
