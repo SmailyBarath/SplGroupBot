@@ -67,6 +67,9 @@ async def get_filter(chat_id: int, name):
         return {}
     list = x["data"]
     for c in list:
-        if c[0] == name:
-            return c[1]
+        try:
+            if c[0] == name:
+                return c[1]
+        except:
+            pass
     return {}
