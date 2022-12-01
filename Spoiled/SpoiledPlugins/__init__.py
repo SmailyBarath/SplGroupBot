@@ -84,13 +84,17 @@ botid = None
 
 botun = None
 
-async def bot_info(_):
+async def bot_info(_, m):
     global botname
     global botid
     global botun
-    x = await _.get_me()
-    botname = x.first_name
-    botun = x.username
-    botid = x.id
+    if not botname or not botid or not botun:
+        x = await _.get_me()
+    if not botname:
+        botname = x.first_name
+    if not botname:
+        botun = x.username
+    if not botname:
+        botid = x.id
 
-asyncio.create_task(bot_info(Client))
+asyncio.create_task(bot_info(Client, Message))
