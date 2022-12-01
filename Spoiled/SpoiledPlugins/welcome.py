@@ -28,9 +28,11 @@ async def cwf(_, m):
     x = await get_welcome(m.chat.id)
     if not x:
         x = random.choice(YashuAlpha)
-        if "{first}" in x.split():
-            h = m.new_chat_members[0].first_name
-            x = x.replace("{first}", h)
+        for j in x:
+            if j == "{":
+                ind = x.index(j)
+                h = m.new_chat_members[0].first_name
+                x = x.replace(x[ind:ind+7], h)
         return await m.reply(x)
     msg = await _.get_messages(DUMP, x)
     if not msg:
