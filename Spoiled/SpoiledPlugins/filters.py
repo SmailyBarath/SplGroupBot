@@ -115,6 +115,7 @@ async def cwf(_, m):
             txt = m.text if m.text else m.caption
             x = await list_filters(m.chat.id)
             for h in txt.split():
+                h = h.lower()
                 if h.lower() in x:
                     j = await get_filter(m.chat.id, h)
                     print(j)
