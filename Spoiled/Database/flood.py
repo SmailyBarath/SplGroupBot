@@ -27,6 +27,8 @@ async def get_flood(chat_id: int):
     x = await fdb.find_one({"chat_id": chat_id})
     if not x:
         return 0
+    if not "value" in x:
+        return
     return x["value"]
 
 async def get_flood_mode(chat_id: int):
