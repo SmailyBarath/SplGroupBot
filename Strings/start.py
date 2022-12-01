@@ -21,7 +21,7 @@ START_MARKUP = IKM(
                ],
                [
                IKB("Commands ✨💭", callback_data="help"),
-               IKB("Support ✨💭" url=f"t.me/{CHATS.SUPPORT_CHAT}")
+               IKB("Support ✨💭", url=f"t.me/{CHATS.SUPPORT_CHAT}")
                ],
                [
                IKB("➕ Add Me To Your Group ➕", url=f"t.me/{botun}?startgroup=True")
