@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from gtts import gTTS
 
 def convert(txt):
@@ -24,7 +24,11 @@ async def teeteeyess(_, m):
         path = convert(txt)
 
     try:
+        await _.send_chat_action(m.chat.id, enums.ChatAction.RECORD_AUDIO)
         await m.reply_voice(path)
+        await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
     except:
+        await _.send_chat_action(m.chat.id, enums.ChatAction.RECORD_AUDIO)
         await m.reply_audio(path)
+        await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
             
