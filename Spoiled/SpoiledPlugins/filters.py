@@ -103,7 +103,7 @@ async def filter_getter(_, m):
     x = await list_filters(m.chat.id)
     if not x:
         return await m.reply(f"**No filters saved in {m.chat.title}**")
-    txt = f"**Filters is {m.chat.title}**"
+    txt = f"**Filters in {m.chat.title}**"
     txt += "\n\n"
     for g in x:
         txt += f"- `{g}`\n"
