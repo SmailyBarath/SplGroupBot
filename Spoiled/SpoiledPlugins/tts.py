@@ -3,7 +3,8 @@ from gtts import gTTS
 
 def convert(txt):
     tts = gTTS(txt)
-    x = tts.save()
+    x = "alpha.mp3"
+    tts.save(x)
     return x
 
 @Client.on_message(filters.command("tts"))
