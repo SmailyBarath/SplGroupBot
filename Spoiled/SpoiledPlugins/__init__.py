@@ -84,7 +84,7 @@ botid = None
 
 botun = None
 
-async def bot_info(_: Client):
+async def bot_info(_):
     global botname
     global botid
     global botun
@@ -93,4 +93,4 @@ async def bot_info(_: Client):
     botun = x.username
     botid = x.id
 
-asyncio.create_task(bot_info(_))
+asyncio.create_task(bot_info(Client))
