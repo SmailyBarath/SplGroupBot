@@ -19,8 +19,8 @@ async def ruleset(_, m):
             return await m.reply("**Either reply to a message or use /setrules rules !**")
 
     if m.reply_to_message:
-        if not m.reply_to_message.text or not m.reply_to_message.caption:
-            return await m.reply("**No text found in replied message !")
+        if not m.reply_to_message.text and not m.reply_to_message.caption:
+            return await m.reply("**No text found in replied message !**")
         txt = m.reply_to_message.text if m.reply_to_message.text else m.reply_to_message.caption
         await set_rules(m.chat.id, txt)
         return await m.reply(f"**Rules set for {m.chat.title}**")
