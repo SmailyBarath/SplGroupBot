@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as 
 from Strings.start import START_TEXT
 from config import STUFF, CHATS
 import time
-from . import startTime, botname
+from . import startTime
 from .afk import get_readable_time
 from Spoiled.Database.users import get_served_users
 from Spoiled.Database.pusers import add_served_puser
