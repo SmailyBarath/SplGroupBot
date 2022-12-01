@@ -27,6 +27,7 @@ async def is_filter(chat_id: int, name):
         return False
     list = x["data"]
     for c in list:
+        print(c)
         if c[0] == name:
             return True
     return False
