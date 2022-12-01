@@ -83,11 +83,12 @@ async def stopper(_, m):
             return await m.reply("**You don't have right to edit filters !**")
     if len(m.command) < 2:
         return await m.reply("**Give filter name to stop !**")
-    x = await is_filter(m.chat.id, m.text.split()[1].lower())
+    filname = m.text.split()[1].lower()
+    x = await is_filter(m.chat.id, filname)
     if not x:
         return await m.reply("**No filter saved with this name !**")
-    await del_filter(m.chat.id, m.text.split()[1].lower())
-    await m.reply("**Filter stopped ~** `{m.text.split()[1]}`")
+    await del_filter(m.chat.id, filname)
+    await m.reply("**Filter stopped ~** `{filname}`")
 
 @Client.on_message(filters.command("filters") & filters.group)
 async def filter_getter(_, m):
