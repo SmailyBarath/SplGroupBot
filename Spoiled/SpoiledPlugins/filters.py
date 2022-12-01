@@ -120,7 +120,7 @@ async def cwf(_, m):
                     j = await get_filter(m.chat.id, h)
                     print(j)
                     await m.reply(j)
-                    if not "file" in j:
+                    if not j["file"]:
                         sext = j["text"]
                         return await m.reply(sext)
                     t = j["file"]
