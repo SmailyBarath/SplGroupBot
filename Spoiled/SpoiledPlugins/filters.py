@@ -121,8 +121,6 @@ async def cwf(_, m):
                 h = h.lower()
                 if h.lower() in x:
                     j = await get_filter(m.chat.id, h)
-                    print(j)
-                    await m.reply(j)
                     if not j["file"]:
                         sext = j["text"]
                         return await m.reply(sext)
