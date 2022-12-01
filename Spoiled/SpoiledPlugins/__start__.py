@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from String.start import START_TEXT, START_MARKUP
+from Strings.start import START_TEXT, START_MARKUP
 from config import STUFF
 import time
 from . import startTime, botname
