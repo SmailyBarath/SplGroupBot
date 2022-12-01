@@ -5,6 +5,7 @@ from config import DEV
 import time
 from pyrogram import Client
 from pyrogram.types import Message
+import asyncio
 from .admins import list_admins, list_admin_rights
 
 startTime = time.time()
@@ -77,3 +78,19 @@ def triple_button_maker(x, y, z):
              )
     return markup
 
+botname = None
+
+botid = None
+
+botun = None
+
+async def bot_info(_: Client):
+    global botname
+    global botid
+    global botun
+    x = await _.get_me()
+    botname = x.first_name
+    botun = x.username
+    botid = x.id
+
+asyncio.create_task(bot_info(_))
