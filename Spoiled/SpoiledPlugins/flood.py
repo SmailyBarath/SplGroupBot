@@ -1,4 +1,4 @@
-"""from pyrogram import Client, filters
+from pyrogram import Client, filters
 from Spoiled.Database.flood import *
 from config import DEV
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
@@ -193,6 +193,5 @@ async def cwf(_, m):
                     await _.restrict_chat_member(m.chat.id, user_id, ChatPermissions(), datetime.now()+timedelta(minutes=(await get_mute_time(chat_id))))
                     return await m.reply(txt + f"**\n\nmuted for {await get_mute_time(chat_id)}min..**")
                 except:
-                    return await m.reply(txt)
-"""                  
+                    return await m.reply(txt)            
     
