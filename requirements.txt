@@ -7,7 +7,7 @@ pillow
 gpytranslate
 googletrans
 cloudscraper
-gtts
+gTTS
 bs4
 requests
 aiohttp
