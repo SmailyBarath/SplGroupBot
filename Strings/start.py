@@ -9,8 +9,11 @@ Hello {} !
 × Service Uptime: {}
 × {} users.
 ────────────────────────
-✪ Hit /help for more info. [.](
+✪ Hit /help for more info. [.]({})
 
 """
 
-START_MARKUP = 
+START_MARKUP = IKM(
+               [
+               [
+                
