@@ -96,6 +96,11 @@ async def lock_cbq(_, q):
     await q.edit_message_text("Cleared all locks !")
     ASYNC = True
 
+@Client.on_message(filters.command("reload"))
+async def rrl(_, m):
+    global admins
+    admins = []
+
 LOCKS = []
 admins = []
 @Client.on_message(filters.group, group=4)
