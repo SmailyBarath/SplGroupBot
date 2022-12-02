@@ -10,11 +10,14 @@ async def user_cwf(_, m):
         return
     await add_served_user(m.from_user.id)
 
+men = None
 @Client.on_message(filters.new_chat_members, group=6)
 async def welcome(_, message: Message):
+    global men
     chat_id = message.chat.id
     await add_served_chat(chat_id)
-    men = (await _.get_me()).mention
+    if not men:
+        men = (await _.get_me()).mention
     for member in message.new_chat_members:
         try:
             if member.id == (await _.get_me()).id:
