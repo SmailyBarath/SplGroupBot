@@ -41,7 +41,7 @@ async def unban_user(_, m):
         return False, f"**Reply to a user or provide id !**"
     x = await _.get_chat_member(m.chat.id, id)
     if not x.status.ChatMemberStatus.BANNED:
-        return await m.reply("**User isn't banned !**")
+        return False, "**User isn't banned !**"
     await _.unban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
     return True, f"**{men} unbanned !**"
