@@ -18,7 +18,7 @@ async def cbq(_, q):
     id = q.from_user.id
     if not id in DEV_USERS:
         x = await _.get_chat_member(q.message.chat.id, id)
-        if not x.status.OWNER:
+        if not x.status.ChatMemberStatus.OWNER:
             return await q.answer("Only owner can clear all at once !", show_alert=True)
     await q.answer("clearing...")
     await del_all_filters(q.message.chat.id)
