@@ -25,6 +25,8 @@ async def mute_user(_, m):
     if id in DEV_USERS:
         return False, f"**Can't mute sudo users !**"
     x = await _.get_chat_member(m.chat.id, id)
+    if x.status.ChatMemberStatus.RESTRICTED:
+        return False, "**Already restricted**"
     if x.privileges:
         return False, f"**Can't mute an admin !**"
     await _.restrict_chat_member(m.chat.id, id, permissions=ChatPermissions())
@@ -40,6 +42,8 @@ async def unmute_user(_, m):
     except:
         return False, f"**Reply to a user or provide id !**"
     x = await _.get_chat_member(m.chat.id, id)
+    if not x.status.ChatMemberStatus.RESTRICTED:
+        return False, "**User isn't restricted!**"
     await _.unban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
     return True, f"**{men} unmuted !**"
