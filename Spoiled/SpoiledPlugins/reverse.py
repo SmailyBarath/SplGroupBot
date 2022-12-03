@@ -7,7 +7,7 @@ from aiohttp import ClientSession
 import aiofiles
 import requests
 from bs4 import BeautifulSoup
-from pyrogram import filters
+from pyrogram import filters, Client as app
 from pyrogram.types import InputMediaPhoto, Message
 from .chatbot import eor
 
