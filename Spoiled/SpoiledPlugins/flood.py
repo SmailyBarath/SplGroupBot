@@ -164,7 +164,7 @@ async def cwf(_, m):
             a = 1
         x = await get_flood(m.chat.id)
         if a == x:
-            men = (await _.get_users(user_id))
+            men = (await _.get_users(user_id)).mention
             txt = f"**{men} flooding...**"
             y = await get_flood_mode(m.chat.id)
             SET = []
