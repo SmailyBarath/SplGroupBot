@@ -32,6 +32,13 @@ async def list_admins(_, m):
         tm = time.time()
         return l
 
+
+async def is_admin(chat_id, user_id):
+    set = admin_list
+    if not user_id in set[chat_id]:
+        return False
+    return True
+    
 async def sender_admin(_, m):
     x = await _.get_chat_member(m.chat.id, m.from_user.id)
     if not x:
