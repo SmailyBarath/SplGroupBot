@@ -5,7 +5,6 @@ from config import DEV
 import time
 from pyrogram import Client
 from pyrogram.types import Message
-from .admins import list_admins, list_admin_rights
 
 startTime = time.time()
 
@@ -45,9 +44,12 @@ async def verify_right(chat_id, user_id, right):
     
 
 async def verify(_, m):
+    lel = []
     id = m.from_user.id
-    x = await list_admins(_, m.chat.id)
-    lel = x + DEV_USERS
+    x = await _.get_chat_member(m.chat.id, id)
+    if x.privileges:
+        lel.append(id)
+    lel += DEV_USERS
     if not id in lel:
         return False, "You got no rights to do this action !"
     return True, "True"
