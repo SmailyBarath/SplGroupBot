@@ -1,6 +1,7 @@
 from pyrogram import Client, filters
 from Spoiled.Database.flood import *
 from config import DEV
+from .admins import sender_admin
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
@@ -149,6 +150,11 @@ async def cwf(_, m):
     chat_id = m.chat.id
     if m.from_user:
         user_id = m.from_user.id
+        if user_id in DEV_USERS:
+            return
+        is_admin = await sender_admin(_, m)
+        if is_admin:
+            return
         if not chat_id in LIST:
             LIST = {chat_id: user_id}
             a = 1
