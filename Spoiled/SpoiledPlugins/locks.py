@@ -89,7 +89,7 @@ async def lock_cbq(_, q):
     id = q.from_user.id
     if not id in DEV_USERS:
         x = await _.get_chat_member(q.message.chat.id, id)
-        if x.status != "creator":
+        if x.status.ChatMemberStatus.OWNER:
             return await q.answer("Only creator can clear all at once !", show_alert=True)
     await q.answer("Clearing locks !")
     await clear_locks(q.message.chat.id)
