@@ -1,3 +1,5 @@
+# MODULE VERIFIED BY @ShutupKeshav
+
 from asyncio import gather, sleep
 from Python_ARQ import ARQ
 from pyrogram import filters, Client as app, enums
