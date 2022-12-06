@@ -50,5 +50,7 @@ async def sender_admin(_, m):
 @Client.on_message(filters.command("reload") & filters.group)
 async def reloader(_, m):
     ok = await m.reply("reloading..")
+    RELOAD = True
     await list_admins(_, m)
+    RELOAD = False
     await ok.edit("reloaded 😌")
