@@ -23,7 +23,7 @@ async def ban_user(_, m):
     if id in DEV_USERS:
         return False, f"**Can't ban sudo users !**"
     x = await _.get_chat_member(m.chat.id, id)
-    if x.status == "ChatMemberStatus.BANNED":
+    if x.status.name == "BANNED":
         return False, "**User is already banned !**"
     if x.privileges:
         return False, f"**Can't ban an admin !**"
@@ -40,7 +40,7 @@ async def unban_user(_, m):
     except:
         return False, f"**Reply to a user or provide id !**"
     x = await _.get_chat_member(m.chat.id, id)
-    if not x.status.ChatMemberStatus.BANNED:
+    if not x.status.name == "BANNED":
         return False, "**User isn't banned !**"
     await _.unban_chat_member(m.chat.id, id)
     men = (await _.get_users(id)).mention
