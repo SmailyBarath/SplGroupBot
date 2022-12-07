@@ -22,6 +22,8 @@ async def kick_user(_, m):
     if id in DEV_USERS:
         return False, f"**Can't kick sudo users !**"
     x = await _.get_chat_member(m.chat.id, id)
+    if not x.status.name == "MEMBER":
+        return False, "**User isn't there in group !**"
     if x.privileges:
         return False, f"**Can't kick an admin !**"
     await _.ban_chat_member(m.chat.id, id)
