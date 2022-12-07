@@ -16,8 +16,6 @@ secureme
 multicolorcaptcha
 emoji==1.7
 pyrate-limiter
-sqlalchemy
-psycopg2
 psutil
 pynewtonmath
 pykeyboard
