@@ -22,21 +22,22 @@ async def al(_, m):
     txt = f"**{m.chat.title} staff :**"
     txt += "\n\n"
     txt += " 👑**Creator :**"
+    txt += "\n"
     txt += f" • {creator}"
-    txt += "\n\n"
     if admins:
+        txt += "\n\n"
         txt += " 👨‍💻**Admins :**"
         for adm in admins:
             txt += f" • {adm}"
             txt += "\n"
-    txt += "\n\n"
     if bots:
+        txt += "\n\n"
         txt += " 🤖**Bots :**"
         for adm in bots:
             txt += f" • {adm}"
             txt += "\n"
-    txt += "\n\n"
     if deleted:
+        txt += "\n\n"
         txt += " 👻**Admins :**"
         for adm in deleted:
             txt += f" • **None**"
