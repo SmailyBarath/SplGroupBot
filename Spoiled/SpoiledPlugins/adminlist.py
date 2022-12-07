@@ -27,18 +27,21 @@ async def al(_, m):
     if admins:
         txt += "\n\n"
         txt += " 👨‍💻**Admins :**"
+        txt += "\n"
         for adm in admins:
             txt += f" • {adm}"
             txt += "\n"
     if bots:
         txt += "\n\n"
         txt += " 🤖**Bots :**"
+        txt += "\n"
         for adm in bots:
             txt += f" • {adm}"
             txt += "\n"
     if deleted:
         txt += "\n\n"
         txt += " 👻**Admins :**"
+        txt += "\n"
         for adm in deleted:
             txt += f" • **None**"
             txt += "\n"
