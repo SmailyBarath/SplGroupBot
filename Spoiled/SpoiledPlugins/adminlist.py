@@ -32,14 +32,14 @@ async def al(_, m):
             txt += f" • {adm}"
             txt += "\n"
     if bots:
-        txt += "\n\n"
+        txt += "\n"
         txt += " 🤖**Bots :**"
         txt += "\n"
         for adm in bots:
             txt += f" • {adm}"
             txt += "\n"
     if deleted:
-        txt += "\n\n"
+        txt += "\n"
         txt += " 👻**Admins :**"
         txt += "\n"
         for adm in deleted:
