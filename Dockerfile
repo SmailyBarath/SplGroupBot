@@ -1,11 +1,11 @@
 FROM python:3.10-slim-buster
 
-WORKDIR /ALPHA
+WORKDIR /app
 
-COPY requirements.txt /ALPHA
+COPY requirements.txt /app
 
 RUN pip3 install -r requirements.txt
 
-COPY . /ALPHA
+COPY . /app
 
 CMD ["python3", "yashu.py"]
