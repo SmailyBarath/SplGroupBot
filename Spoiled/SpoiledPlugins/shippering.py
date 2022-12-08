@@ -6,7 +6,7 @@ import random
 from datetime import datetime
 from . import log, SUPPORT_CHAT_MARKUP
 
-YASHUALPHA = [5754821527, 5296178757]
+YASHUALPHA = [5868832590]
 
 # Date and time
 def dt():
