@@ -8,6 +8,10 @@ deleted = []
 @Client.on_message(filters.command(["admins", "adminlist", "staff"]) & filters.group)
 async def al(_, m):
     global creator, admins, bots, deleted
+    creator = None
+    admins = []
+    bots = []
+    deleted = []
     ok = await m.reply("**Fetching staff...**")
     async for x in _.get_chat_members(m.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if x.user.is_bot:
