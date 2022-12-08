@@ -28,8 +28,9 @@ async def al(_, m):
     txt += " 👑**Creator :**"
     txt += "\n"
     txt += f" • {creator}"
+    txt += "\n"
     if admins:
-        txt += "\n\n"
+        txt += "\n"
         txt += " 👨‍💻**Admins :**"
         txt += "\n"
         for adm in admins:
