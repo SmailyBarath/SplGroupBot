@@ -5,9 +5,20 @@ from telegram.ext import CallbackContext, CommandHandler
 from telegram.constants import ParseMode
 from Spoiled import Yashu
 from html import escape
+from pyrogram import Client, filters
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
+
+@Client.on_message(filters.command("getsticker"))
+async def gibst(_, m):
+    if not m.reply_to_message:
+        return await m.reply("Reply to a sticker !")
+    if not m.reply_to_message.sticker:
+        return await m.reply("Reply to a sticker !")
+    x = await m.reply_to_message.download_media()
+    await m.reply_document(x, force_document=True)
+ 
 async def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
     if msg.reply_to_message and msg.reply_to_message.sticker:
