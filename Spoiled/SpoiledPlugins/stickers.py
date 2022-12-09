@@ -16,7 +16,7 @@ async def gibst(_, m):
         return await m.reply("Reply to a sticker !")
     if not m.reply_to_message.sticker:
         return await m.reply("Reply to a sticker !")
-    x = await m.reply_to_message.download_media()
+    x = await m.reply_to_message.download()
     await m.reply_document(x, force_document=True)
  
 async def stickerid(update: Update, context: CallbackContext):
