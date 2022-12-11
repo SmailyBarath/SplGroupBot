@@ -44,8 +44,8 @@ async def reverse(update, context):
         else:
             await msg.reply_text("Reply to an image or sticker to lookup.")
             return
-        image_file = context.bot.get_file(file_id)
-        image_file.download(imagename)
+        image_file = await context.bot.get_file(file_id)
+        await image_file.download(imagename)
         if args:
             txt = args[0]
             try:
