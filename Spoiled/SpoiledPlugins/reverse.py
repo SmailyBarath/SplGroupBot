@@ -207,4 +207,4 @@ def scam(imgspage, lim):
 
     return imglinks
 
-Yashu.add_handler(CommandHandler(["reverse", "grs", "pp"], reverse)
+Yashu.add_handler(CommandHandler(["reverse", "grs", "pp"], reverse))
