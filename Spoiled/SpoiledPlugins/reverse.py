@@ -1,167 +1,210 @@
 import os
-from asyncio import gather, get_running_loop
-from base64 import b64decode
-from io import BytesIO
-from random import randint
-from aiohttp import ClientSession
-import aiofiles
+import re
+import urllib
+import urllib.parse
+import urllib.request
+from urllib.error import URLError, HTTPError
+
 import requests
 from bs4 import BeautifulSoup
-from pyrogram import filters, Client as app
-from pyrogram.types import InputMediaPhoto, Message
-from .chatbot import eor
+from telegram import InputMediaPhoto
+from telegram.error import TelegramError
 
-session = ClientSession()
-async def get(url: str, *args, **kwargs):
-    async with session.get(url, *args, **kwargs) as resp:
+from Spoiled import Yashu
+
+opener = urllib.request.build_opener()
+useragent = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.38 "
+    "Safari/537.36 "
+)
+# useragent = 'Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko)
+# Chrome/52.0.2743.98 Mobile Safari/537.36'
+opener.addheaders = [("User-agent", useragent)]
+
+
+async def reverse(update, context):
+    if os.path.isfile("okgoogle.png"):
+        os.remove("okgoogle.png")
+
+    msg = update.effective_message
+    chat_id = update.effective_chat.id
+    rtmid = msg.message_id
+    args = context.args
+    imagename = "okgoogle.png"
+
+    reply = msg.reply_to_message
+    if reply:
+        if reply.sticker:
+            file_id = reply.sticker.file_id
+        elif reply.photo:
+            file_id = reply.photo[-1].file_id
+        elif reply.document:
+            file_id = reply.document.file_id
+        else:
+            await msg.reply_text("Reply to an image or sticker to lookup.")
+            return
+        image_file = context.bot.get_file(file_id)
+        image_file.download(imagename)
+        if args:
+            txt = args[0]
+            try:
+                lim = int(txt)
+            except BaseException:
+                lim = 2
+        else:
+            lim = 2
+    elif args:
+        splatargs = msg.text.split(" ")
+        if len(splatargs) == 3:
+            img_link = splatargs[1]
+            try:
+                lim = int(splatargs[2])
+            except BaseException:
+                lim = 2
+        elif len(splatargs) == 2:
+            img_link = splatargs[1]
+            lim = 2
+        else:
+            await msg.reply_text("/reverse <link> <amount of images to return.>")
+            return
         try:
-            data = await resp.json()
-        except Exception:
-            data = await resp.text()
-    return data
-
-def get_file_id_from_message(
-    message,
-    max_file_size=3145728,
-    mime_types=["image/png", "image/jpeg"],
-):
-    file_id = None
-    if message.document:
-        if int(message.document.file_size) > max_file_size:
-            return
-
-        mime_type = message.document.mime_type
-
-        if mime_types and mime_type not in mime_types:
-            return
-        file_id = message.document.file_id
-
-    if message.sticker:
-        if message.sticker.is_animated:
-            if not message.sticker.thumbs:
-                return
-            file_id = message.sticker.thumbs[0].file_id
-        else:
-            file_id = message.sticker.file_id
-
-    if message.photo:
-        file_id = message.photo.file_id
-
-    if message.animation:
-        if not message.animation.thumbs:
-            return
-        file_id = message.animation.thumbs[0].file_id
-
-    if message.video:
-        if not message.video.thumbs:
-            return
-        file_id = message.video.thumbs[0].file_id
-    return file_id
-
-async def get_soup(url: str, headers):
-    html = await get(url, headers=headers)
-    return BeautifulSoup(html, "html.parser")
-
-
-@app.on_message(filters.command("reverse"))
-async def reverse_image_search(client, message: Message):
-    if not message.reply_to_message:
-        return await eor(
-            message, text="Reply to a message to reverse search it."
-        )
-    reply = message.reply_to_message
-    if (
-        not reply.document
-        and not reply.photo
-        and not reply.sticker
-        and not reply.animation
-        and not reply.video
-    ):
-        return await eor(
-            message,
-            text="Reply to an image/document/sticker/animation to reverse search it.",
-        )
-    m = await eor(message, text="Searching...")
-    file_id = get_file_id_from_message(reply)
-    if not file_id:
-        return await m.edit("Can't reverse that")
-    image = await client.download_media(file_id, f"{randint(1000, 10000)}.jpg")
-    async with aiofiles.open(image, "rb") as f:
-        if image:
-            search_url = "http://www.google.com/searchbyimage/upload"
-            multipart = {
-                "encoded_image": (image, await f.read()),
-                "image_content": "",
-            }
-
-            def post_non_blocking():
-                return requests.post(
-                    search_url, files=multipart, allow_redirects=False
+            urllib.request.urlretrieve(img_link, imagename)
+        except HTTPError as HE:
+            if HE.reason == "Forbidden":
+                await msg.reply_text(
+                    "Couldn't access the provided link, The website might have blocked accessing to the website by "
+                    "bot or the website does not existed. "
                 )
-
-            loop = get_running_loop()
-            response = await loop.run_in_executor(None, post_non_blocking)
-            location = response.headers.get("Location")
-            os.remove(image)
-        else:
-            return await m.edit("Something wrong happened.")
-    headers = {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0"
-    }
+                return
+            if HE.reason == "Not Found":
+                await msg.reply_text("Image not found.")
+                return
+        except URLError as UE:
+            await msg.reply_text(f"{UE.reason}")
+            return
+        except ValueError as VE:
+            await msg.reply_text(f"{VE}\nPlease try again using http or https protocol.")
+            return
+    else:
+        await msg.reply_markdown(
+            "Please reply to a sticker, or an image to search it!\nDo you know that you can search an image with a "
+            "link too? `/reverse [picturelink] <amount>`. "
+        )
+        return
 
     try:
-        soup = await get_soup(location, headers=headers)
-        div = soup.find_all("div", {"class": "r5a77d"})[0]
-        text = div.find("a").text
-        text = f"**Result**: [{text}]({location})"
-    except Exception:
-        return await m.edit(
-            f"**Result**: [Link]({location})",
+        searchUrl = "https://www.google.com/searchbyimage/upload"
+        multipart = {
+            "encoded_image": (imagename, open(imagename, "rb")),
+            "image_content": "",
+        }
+        response = requests.post(searchUrl, files=multipart, allow_redirects=False)
+        fetchUrl = response.headers["Location"]
+
+        if response != 400:
+            xx = await context.bot.send_message(
+                chat_id,
+                "Image was successfully uploaded to Google."
+                "\nParsing source now. Maybe.",
+                reply_to_message_id=rtmid,
+            )
+        else:
+            xx = await context.bot.send_message(
+                chat_id, "Google told me to go away.", reply_to_message_id=rtmid
+            )
+            return
+
+        os.remove(imagename)
+        match = ParseSauce(fetchUrl + "&hl=en")
+        guess = match["best_guess"]
+        if match["override"] and match["override"] != "":
+            imgspage = match["override"]
+        else:
+            imgspage = match["similar_images"]
+
+        if guess and imgspage:
+            await xx.edit_text(
+                f"[{guess}]({fetchUrl})\nLooking for images...",
+                parse_mode="Markdown",
+                disable_web_page_preview=True,
+            )
+        else:
+            await xx.edit_text("Couldn't find anything.")
+            return
+
+        images = scam(imgspage, lim)
+        if len(images) == 0:
+            await xx.edit_text(
+                f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})",
+                parse_mode="Markdown",
+                disable_web_page_preview=True,
+            )
+            return
+
+        imglinks = []
+        for link in images:
+            lmao = InputMediaPhoto(media=str(link))
+            imglinks.append(lmao)
+
+        await context.bot.send_media_group(
+            chat_id=chat_id, media=imglinks, reply_to_message_id=rtmid
+        )
+        await xx.edit_text(
+            f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})",
+            parse_mode="Markdown",
             disable_web_page_preview=True,
         )
+    except TelegramError as e:
+        print(e)
+    except Exception as exception:
+        print(exception)
 
-    # Pass if no images detected
+
+def ParseSauce(googleurl):
+    source = opener.open(googleurl).read()
+    soup = BeautifulSoup(source, "html.parser")
+
+    results = {"similar_images": "", "override": "", "best_guess": ""}
+
     try:
-        url = "https://google.com" + soup.find_all(
-            "a", {"class": "ekf0x hSQtef"}
-        )[0].get("href")
-
-        soup = await get_soup(url, headers=headers)
-
-        media = []
-        for img in soup.find_all("img"):
-            if len(media) == 2:
-                break
-
-            if img.get("src"):
-                img = img.get("src")
-                if "image/gif" in img:
-                    continue
-
-                img = BytesIO(b64decode(img))
-                img.name = "img.png"
-                media.append(img)
-            elif img.get("data-src"):
-                img = img.get("data-src")
-                media.append(img)
-
-        # Cache images, so we can use file_ids
-        tasks = [client.send_photo(MESSAGE_DUMP_CHAT, img) for img in media]
-        messages = await gather(*tasks)
-
-        await message.reply_media_group(
-            [
-                InputMediaPhoto(
-                    i.photo.file_id,
-                    caption=text,
-                )
-                for i in messages
-            ]
-        )
-    except Exception:
+        for bess in soup.findAll("a", {"class": "PBorbe"}):
+            url = "https://www.google.com" + bess.get("href")
+            results["override"] = url
+    except BaseException:
         pass
 
-    await m.edit(
-        text,
-        disable_web_page_preview=True,
-    )
+    for similar_image in soup.findAll("input", {"class": "gLFyf"}):
+        url = "https://www.google.com/search?tbm=isch&q=" + urllib.parse.quote_plus(
+            similar_image.get("value")
+        )
+        results["similar_images"] = url
+
+    for best_guess in soup.findAll("div", attrs={"class": "r5a77d"}):
+        results["best_guess"] = best_guess.get_text()
+
+    return results
+
+
+def scam(imgspage, lim):
+    """Parse/Scrape the HTML code for the info we want."""
+
+    single = opener.open(imgspage).read()
+    decoded = single.decode("utf-8")
+    if int(lim) > 10:
+        lim = 10
+
+    imglinks = []
+    counter = 0
+
+    pattern = r"^,\[\"(.*[.png|.jpg|.jpeg])\",[0-9]+,[0-9]+\]$"
+    oboi = re.findall(pattern, decoded, re.I | re.M)
+
+    for imglink in oboi:
+        counter += 1
+        imglinks.append(imglink)
+        if counter >= int(lim):
+            break
+
+    return imglinks
+
+Yashu.add_handler(CommandHandler(["reverse", "grs", "pp"], reverse)
