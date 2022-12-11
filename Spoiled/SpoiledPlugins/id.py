@@ -1,7 +1,7 @@
 from pyrogram import Client as Crystal, filters
 from pyrogram.types import Message as Aila
 
-@Crystal.on_message(filters.command(["id", "id@EndCrystalBot"]) & ~filters.edited & ~filters.via_bot)
+@Crystal.on_message(filters.command(["id"]))
 async def id(_, m: Aila):
     if m.reply_to_message:
         f_n = m.reply_to_message.from_user.first_name
