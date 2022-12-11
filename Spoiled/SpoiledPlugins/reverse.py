@@ -9,6 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from telegram import InputMediaPhoto
 from telegram.error import TelegramError
+from telegram.ext import CommandHandler
 
 from Spoiled import Yashu
 
