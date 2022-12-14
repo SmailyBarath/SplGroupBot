@@ -111,8 +111,8 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
         elif is_selected:
             c1_id = int(is_selected["c1_id"])
             c2_id = int(is_selected["c2_id"])
-            c1_name = (await app.get_users(c1_id)).mention
-            c2_name = (await app.get_users(c2_id)).mention
+            c1_name = (await _.get_users(c1_id)).mention
+            c2_name = (await _.get_users(c2_id)).mention
             couple_selection_message = f"""**Couple of the day:**
 
 {c1_name} + {c2_name} = ❤️
