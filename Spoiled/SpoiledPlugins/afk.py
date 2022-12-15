@@ -26,7 +26,7 @@ async def cwf(_, m):
         B_UN = (await _.get_me()).username
     user_id = m.from_user.id
     if m.text:
-        if m.text.split()[0].lower() in ["/afk", f"/afk@{B_UN}", "brb"]:
+        if m.text.split()[0].lower() in ["/afk", f"/afk@{B_UN}".lower(), "brb"]:
             return
     afk, details = await is_afk(user_id)
     if not afk:
