@@ -10,7 +10,7 @@ DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 @Client.on_message(filters.command("broadcast") & filters.user(DEV_USERS))
 async def broadcast(_, message):
     if message.reply_to_message:
-        x = message.reply_to_message.message_id
+        x = message.reply_to_message.id
         y = message.chat.id
     else:
         if len(message.command) < 2:
@@ -31,7 +31,7 @@ async def broadcast(_, message):
                 sent += 1
                 CASTED.append(i)
                 try:
-                    await _.pin_chat_message(i, ok.message_id)
+                    await _.pin_chat_message(i, ok.id)
                     pinned += 1
                 except:
                     continue 
@@ -40,7 +40,7 @@ async def broadcast(_, message):
                 sent += 1
                 CASTED.append(i)
                 try:
-                    await _.pin_chat_message(i, ok.message_id)
+                    await _.pin_chat_message(i, ok.id)
                     pinned += 1
                 except:
                     continue
