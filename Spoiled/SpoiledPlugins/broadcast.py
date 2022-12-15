@@ -20,10 +20,7 @@ async def broadcast(_, message):
         query = message.text.split(None, 1)[1]
     sent = 0
     pinned = 0
-    chats = []
-    schats = await get_served_chats()
-    for chat in schats:
-        chats.append(int(chat["chat_id"]))
+    chats = await get_served_chats()
     CASTED = []
     for i in chats:
         if i in CASTED:
