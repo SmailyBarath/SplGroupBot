@@ -24,11 +24,15 @@ async def broadcast(_, message):
     schats = await get_served_chats()
     for chat in schats:
         chats.append(int(chat["chat_id"]))
+    CASTED = []
     for i in chats:
+        if i in CASTED:
+            continue
         try:
             if message.reply_to_message:
                 ok = await _.forward_messages(i, y, x)
                 sent += 1
+                CASTED.append(i)
                 try:
                     await _.pin_chat_message(i, ok.message_id)
                     pinned += 1
@@ -37,6 +41,7 @@ async def broadcast(_, message):
             else:
                 ok = await _.send_message(i, query)
                 sent += 1
+                CASTED.append(i)
                 try:
                     await _.pin_chat_message(i, ok.message_id)
                     pinned += 1
@@ -60,7 +65,11 @@ async def broadcast(_, message):
 async def schats(_, m: Message):
     chats = await get_served_chats()
     msg = ""
+    NOTED = []
     for i in chats:
+        if i in NOTED:
+            continue
+        NOTED.append(i)
         i = str(i)
         msg += f"\n<code>{i}</code>"
     await m.reply(f"**Served chats** :-\n{msg}\n\n**Count** :- {len(chats)}")
