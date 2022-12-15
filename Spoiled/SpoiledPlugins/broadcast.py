@@ -72,4 +72,4 @@ async def schats(_, m: Message):
         NOTED.append(i)
         i = str(i)
         msg += f"\n<code>{i}</code>"
-    await m.reply(f"**Served chats** :-\n{msg}\n\n**Count** :- {len(chats)}")
+    await m.reply(f"**Served chats** :-\n{msg}\n\n**Count** :- {len(NOTED)}")
