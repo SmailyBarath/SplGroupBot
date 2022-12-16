@@ -5,7 +5,7 @@ from pyrogram.types import Message
 
 SUDOERS = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
-@Client.on_message(filters.command(["block", "unblock"]) & ~filters.edited & ~filters.forwarded)
+@Client.on_message(filters.command(["block", "unblock"]))
 async def bloblo(_, m: Message):
     if m.from_user.id not in SUDOERS:
         return
