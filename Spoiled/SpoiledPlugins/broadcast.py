@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from Spoiled.Database.chats import *
+from Spoiled.Database.blocked import is_blocked
 from config import DEV
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message
@@ -75,6 +76,8 @@ async def schats(_, m: Message):
 @Client.on_message(filters.command("report"))
 async def report(_, m):
     if not m.from_user:
+        return
+    if await is_blocked(m.from_user.id):
         return
     if len(m.command) <= 1:
         return await m.reply("**/report Feedback **")
