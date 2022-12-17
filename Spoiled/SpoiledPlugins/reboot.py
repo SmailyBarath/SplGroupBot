@@ -10,4 +10,7 @@ async def reboot(_, m):
     ok = await m.reply("Rebooting, wait for 10sec..")
     time.sleep(3)
     await ok.delete()
-    os.system("killall5 -9 && python3 yashu.py")
+    try:
+        os.system("killall5 -9 && python3 yashu.py")
+    except Exception as e:
+        await m.reply(e)
