@@ -3,6 +3,7 @@ from . import db
 warndb = db.warn
 
 async def warn_user(chat_id: int, user_id: int):
+    user_id = str(user_id)
     x = await warndb.find_one({"chat_id": chat_id})
     if x:
         warns = x["warns"]
@@ -16,6 +17,7 @@ async def warn_user(chat_id: int, user_id: int):
         return await warndb.update_one({"chat_id": chat_id}, {"$set": warns}, upsert=True)
 
 async def dwarn_user(chat_id: int, user_id: int):
+    user_id = str(user_id)
     x = await warndb.find_one({"chat_id": chat_id})
     if not x:
         return
@@ -27,6 +29,7 @@ async def dwarn_user(chat_id: int, user_id: int):
     return await warndb.update_one({"chat_id", chat_id}, {"set": {"warns": {user_id: h}}}, upsert=True)
 
 async def get_warns(chat_id: int, user_id: int):
+    user_id = str(user_id)
     x = await warndb.find_one({"chat_id": chat_id})
     if not x:
         return 0
