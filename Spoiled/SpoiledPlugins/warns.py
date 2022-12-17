@@ -2,11 +2,13 @@ from Spoiled.Database.warn import *
 from pyrogram import Client, filters
 from .admins import sender_admin, is_admin
 from . import get_id
+from .admins import reloaders
 
 times = "times"
 time = "time"
 @Client.on_message(filters.command(["dwarn"]))
 async def dwarn_act(_, m):
+    await reloaders(_, m)
     x = await sender_admin(_, m)
     if not x:
         return
@@ -26,6 +28,7 @@ async def dwarn_act(_, m):
 
 @Client.on_message(filters.command(["warn"]))
 async def warn_act(_, m):
+    await reloaders(_, m)
     x = await sender_admin(_, m)
     if not x:
         return
