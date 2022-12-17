@@ -25,6 +25,8 @@ async def dwarn_user(chat_id: int, user_id: int):
     if not user_id in warns:
         return
     h = warns[user_id]
+    if h == 0:
+        return
     h -= 1
     return await warndb.update_one({"chat_id": chat_id}, {"$set": {"warns": {user_id: h}}}, upsert=True)
 
