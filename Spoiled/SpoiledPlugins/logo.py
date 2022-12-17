@@ -262,7 +262,10 @@ async def ylego(_, m):
         IDS.append(x.id)
     while True:
         now_ = random.choice(IDS)
-        get_m = await _.get_messages(-1001527231746, now_)
+        try:
+            get_m = await _.get_messages(-1001527231746, now_)
+        except:
+            pass
         if not get_m.photo:
             pass
         else:
