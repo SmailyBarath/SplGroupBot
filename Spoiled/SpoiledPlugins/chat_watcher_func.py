@@ -3,12 +3,15 @@ from pyrogram.types import Message
 from config import DEV
 from Spoiled.Database.chats import add_served_chat
 from Spoiled.Database.users import add_served_user
+from Spoiled.Database.logo import set_latest_id
 
 @Client.on_message(group=8)
 async def user_cwf(_, m):
-    if not m.from_user:
-        return
-    await add_served_user(m.from_user.id)
+    if m.from_user:
+        await add_served_user(m.from_user.id)
+    if m:
+        if m.chat.id == -1001527231746:
+            await set_latest_id(m.chat.id, m.id)
 
 men = None
 @Client.on_message(filters.new_chat_members, group=6)
