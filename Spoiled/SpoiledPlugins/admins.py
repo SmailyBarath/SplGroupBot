@@ -57,3 +57,9 @@ async def reloader(_, m):
     await list_admins(_, m)
     RELOAD = False
     await ok.edit("reloaded 😌")
+
+async def reloaders(_, m):
+    global RELOAD
+    RELOAD = True
+    await list_admins(_, m)
+    RELOAD = False
