@@ -246,6 +246,53 @@ LOGO_LINKS            = ["https://telegra.ph/file/d1838efdafce9fe611d0c.jpg",
                          ]
 
 B_UN = None
+@Client.on_message(filters.command("ylogo"))
+async def ylego(_, m):
+ global B_UN
+ if not B_UN:
+  B_UN = (await _.get_me()).username
+ reply = m.reply_to_message
+ if not len(m.command) > 1:
+  return await m.reply("Give text to make logo !")
+ pesan = await m.reply("processing..!")
+ try:
+    text = m.text.split(None, 1)[1]
+    IDS = []
+    async for x in app.get_chat_history("spl_logo"):
+        IDS.append(x.id)
+    while True:
+        now_ = random.choice(IDS)
+        get_m = await _.get_messages(-1001527231746, now_)
+        if not get_m.photo:
+            pass
+        else:
+            break
+    randc = await get_m.download()
+    img = Image.open(randc)
+    draw = ImageDraw.Draw(img)
+    image_widthz, image_heightz = img.size
+    pointsize = 500
+    fillcolor = "black"
+    shadowcolor = "blue"
+    fnt = glob.glob("./Fonts/*")
+    randf = random.choice(fnt)
+    font = ImageFont.truetype(randf, 120)
+    w, h = draw.textsize(text, font=font)
+    h += int(h*0.21)
+    image_width, image_height = img.size
+    draw.text(((image_widthz-w)/2, (image_heightz-h)/2), text, font=font, fill=(255, 255, 255))
+    x = (image_widthz-w)/2
+    y = ((image_heightz-h)/2+6)
+    draw.text((x, y), text, font=font, fill="white", stroke_width=1, stroke_fill="black")
+    fname = "Spl.png"
+    img.save(fname, "png")
+    await _.send_photo(m.chat.id, fname, caption = f"Made by @{B_UN} !")         
+    await pesan.delete()
+    if os.path.exists(fname):
+            os.remove(fname)
+ except Exception as e:
+    await m.reply(f'Error, Report @{CHATS.SUPPORT_CHAT}, {e}')
+
 @Client.on_message(filters.command("logo"))
 async def lego(_, m):
  global B_UN
