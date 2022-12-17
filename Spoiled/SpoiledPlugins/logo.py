@@ -6,12 +6,11 @@ import random
 import re
 import glob
 import time
-from Spoiled.Database.logo import get_latest_id, set_latest_id
+from Spoiled.Database.logo import get_latest_id
 from io import BytesIO
 from requests import get
 from pyrogram import Client, filters
 from config import CHATS
-from config import DEV
 from PIL import Image, ImageDraw, ImageFont
 
 
