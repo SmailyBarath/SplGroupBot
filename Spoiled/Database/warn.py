@@ -2,7 +2,7 @@ from . import db
 
 warndb = db.warn
 
-async def warn_user(chat_id: int, user_id: int)
+async def warn_user(chat_id: int, user_id: int):
     x = await warndb.find_one({"chat_id": chat_id})
     if x:
         warns = x["warns"]
