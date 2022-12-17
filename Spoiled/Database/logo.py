@@ -5,7 +5,7 @@ logodb = db.logo
 async def get_latest_id(chat_id):
     x = logodb.find({"chat_id": chat_id})
     if x:
-    c = int(x["id"])
+        c = int(x["id"])
         return c
 
 async def set_latest_id(chat_id, id):
