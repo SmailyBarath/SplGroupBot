@@ -258,7 +258,7 @@ async def ylego(_, m):
  try:
     text = m.text.split(None, 1)[1]
     IDS = []
-    async for x in app.get_chat_history("spl_logo"):
+    async for x in _.get_chat_history("spl_logo"):
         IDS.append(x.id)
     while True:
         now_ = random.choice(IDS)
