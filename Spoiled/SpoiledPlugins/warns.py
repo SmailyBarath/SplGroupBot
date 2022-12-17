@@ -20,7 +20,7 @@ async def dwarn_act(_, m):
     await dwarn_user(m.chat.id, id)
     x = await get_warns(m.chat.id, id)
     men = (await _.get_users(id)).mention
-    await m.reply(f"{men}, your warnings reduced to {x} {times if x > 1 else time}")
+    await m.reply(f"{men}, your warnings reduced to {x}.")
 
 @Client.on_message(filters.command(["warn"]))
 async def warn_act(_, m):
