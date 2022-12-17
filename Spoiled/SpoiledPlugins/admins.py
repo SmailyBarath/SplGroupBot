@@ -2,6 +2,7 @@ from pyrogram import Client, filters, enums
 import time
 
 admin_list = {}
+admin_rights = {}
 tm = None
 
 RELOAD = False
@@ -32,8 +33,7 @@ async def list_admins(_, m):
             l.append(x.user.id)
         admin_list = {chat_id: l}
         tm = time.time()
-        return l
-
+        return l     
 
 async def is_admin(chat_id, user_id):
     set = admin_list
