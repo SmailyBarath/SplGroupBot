@@ -6,7 +6,7 @@ import random
 import re
 import glob
 import time
-
+from Spoiled.Database.logo import get_latest_id
 from io import BytesIO
 from requests import get
 from pyrogram import Client, filters
