@@ -1,5 +1,5 @@
 from pyrogram import Client, idle
-from config import API, TOKENS
+from config import API, TOKENS, CHATS
 from Spoiled import Yashu
 #
 spoil = Client(":SPOILED-BOT:",
@@ -11,6 +11,10 @@ spoil = Client(":SPOILED-BOT:",
 
 def Asynchorous():
     spoil.start()
+    try:
+        spoil.send_message(CHATS.LOG_GROUP_ID, "Bot started !")
+    except:
+        pass
     print("Bot started !")
     Yashu.run_polling()
 
