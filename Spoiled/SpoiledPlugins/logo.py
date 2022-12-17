@@ -258,14 +258,15 @@ async def ylego(_, m):
  try:
     text = m.text.split(None, 1)[1]
     IDS = []
-    async for x in _.get_chat_history("spl_logo"):
-        IDS.append(x.id)
+    latest = await get_latest_id(-1001527231746)
+    for x in range(2, latest+1):
+        IDS.append(x)
     while True:
         now_ = random.choice(IDS)
         try:
             get_m = await _.get_messages(-1001527231746, now_)
         except:
-            pass
+            continue
         if not get_m.photo:
             pass
         else:
