@@ -26,7 +26,7 @@ async def dwarn_user(chat_id: int, user_id: int):
         return
     h = warns[user_id]
     h -= 1
-    return await warndb.update_one({"chat_id", chat_id}, {"set": {"warns": {user_id: h}}}, upsert=True)
+    return await warndb.update_one({"chat_id", chat_id}, {"$set": {"warns": {user_id: h}}}, upsert=True)
 
 async def get_warns(chat_id: int, user_id: int):
     user_id = str(user_id)
