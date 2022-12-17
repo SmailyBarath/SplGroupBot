@@ -14,7 +14,7 @@ async def dwarn_act(_, m):
         id = await get_id(_, m)
     except:
         return
-    x = is_admin(m.chat.id, id)
+    x = await is_admin(m.chat.id, id)
     if x:
         return await m.reply("Lol, can't dwarn an admin !")
     await dwarn_user(m.chat.id, id)
@@ -31,7 +31,7 @@ async def warn_act(_, m):
         id = await get_id(_, m)
     except:
         return
-    x = is_admin(m.chat.id, id)
+    x = await is_admin(m.chat.id, id)
     if x:
         return await m.reply("Lol, can't warn an admin !")
     await warn_user(m.chat.id, id)
