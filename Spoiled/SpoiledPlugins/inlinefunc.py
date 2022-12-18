@@ -493,7 +493,7 @@ async def speedtest_init(query):
     msg = "**Click The Button Below To Perform A Speedtest**"
     button = InlineKeyboard(row_width=1)
     button.add(
-        InlineKeyboardButton(text="Test", callback_data="test_speedtest")
+        InlineKeyboardButton(text="Test", callback_data="speedtest_image")
     )
     answers.append(
         InlineQueryResultArticle(
