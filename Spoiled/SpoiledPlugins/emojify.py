@@ -3,13 +3,13 @@ from pyrogram.types import Message as Dev
 from Spoiled.Addons.emotes import *
 from Spoiled.Database.blocked import is_blocked
 
-@End.on_message(filters.command("doli") & ~filters.edited & ~filters.via_bot)
+@End.on_message(filters.command("emojify"))
 async def doli(ailika, jhulika: Dev):
         if is_blocked(jhulika.from_user.id) is True:
             return
         txt = jhulika.text
         if len(jhulika.command) != 2:
-            return await jhulika.reply("Try: < /doli Crystal >")
+            return await jhulika.reply("Try: < /emojify Crystal >")
         txt = txt.split(None, 1)[1]
         final = ""
         for a in txt:
