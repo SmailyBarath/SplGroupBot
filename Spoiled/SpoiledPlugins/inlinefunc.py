@@ -21,19 +21,13 @@ from pyrogram.types import (
     InputTextMessageContent,
 )
 from search_engine_parser import GoogleSearch
-
-from wbb import (
-    BOT_USERNAME,
-    MESSAGE_DUMP_CHAT,
-    SUDOERS,
-    USERBOT_ID,
-    USERBOT_NAME,
-    USERBOT_USERNAME,
-    app,
-    app2,
-    arq,
-)
+from config import DEV, CHATS
+from .arq import arq
+from yashu import spoil as app
 from .inlinehelp import paste, test_speedtest, download_youtube_audio, get_user_info, get_chat_info, InlineQueryResultCachedDocument, _get_tasks_text, all_tasks, rm_task, ikb
+
+MESSAGE_DUMP_CHAT = CHATS.LOG_GROUP_ID
+SUDOERS = DEV.SUDO_USERS
 
 keywords_list = [
     "image",
