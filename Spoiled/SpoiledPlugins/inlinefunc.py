@@ -493,7 +493,7 @@ async def speedtest_init(query):
     msg = "**Click The Button Below To Perform A Speedtest**"
     button = InlineKeyboard(row_width=1)
     button.add(
-        InlineKeyboardButton(text="Test", callback_data="speedtest_image")
+        InlineKeyboardButton(text="Test", callback_data="test_speedtest")
     )
     answers.append(
         InlineQueryResultArticle(
@@ -513,7 +513,7 @@ async def test_speedtest_cq(_, cq):
     if cq.from_user.id not in SUDOERS:
         return await cq.answer("This Isn't For You!")
     inline_message_id = cq.inline_message_id
-    await app.edit_inline_text(inline_message_id, "**Testing**")
+    await _.edit_inline_text(inline_message_id, "**Testing**")
     loop = asyncio.get_running_loop()
     download, upload, info = await loop.run_in_executor(None, test_speedtest)
     msg = f"""
@@ -524,7 +524,7 @@ async def test_speedtest_cq(_, cq):
 **Latitude:** `{info['lat']}`
 **Longitude:** `{info['lon']}`
 """
-    await app.edit_inline_text(inline_message_id, msg)
+    await _.edit_inline_text(inline_message_id, msg)
 
 
 async def pmpermit_func(answers, user_id, victim):
