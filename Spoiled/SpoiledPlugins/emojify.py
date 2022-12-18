@@ -22,7 +22,7 @@ async def doli(ailika, jhulika: Dev):
                 final += a
         await jhulika.reply(final)
 
-@End.on_message(filters.command("crystal") & ~filters.edited & ~filters.forwarded & ~filters.via_bot)
+@End.on_message(filters.command("crystal"))
 async def crystal(ailika, jhulika: Dev):
     if is_blocked(jhulika.from_user.id) is True:
         return
