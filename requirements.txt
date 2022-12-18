@@ -24,8 +24,4 @@ pillow
 img2pdf
 wikipedia
 opencv-python-headless
-contextlib
-fuzzysearch
-search-engine-parser
-pytube
 telegraph
