@@ -1,6 +1,7 @@
 from pyrogram import Client, idle
 from config import API, TOKENS, CHATS
 from Spoiled import Yashu
+import asyncio
 
 spoil = Client(":SPOILED-BOT:",
                api_id=API.API_ID,
@@ -9,14 +10,14 @@ spoil = Client(":SPOILED-BOT:",
                plugins=dict(root="Spoiled/SpoiledPlugins")
                )
 
-def Asynchorous():
-    global UN
-    spoil.start()
+async def Asynchorous():
+    await spoil.start()
     try:
-        spoil.send_message(CHATS.LOG_GROUP_ID, "Bot started !")
+        await spoil.send_message(CHATS.LOG_GROUP_ID, "Bot started !")
     except:
         pass
     print("Bot started !")
-    Yashu.run_polling()
+    await Yashu.run_polling()
 
-Asynchorous()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(Asynchorous())
