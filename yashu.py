@@ -9,8 +9,11 @@ spoil = Client(":SPOILED-BOT:",
                plugins=dict(root="Spoiled/SpoiledPlugins")
                )
 
+UN = None
 def Asynchorous():
+    global UN
     spoil.start()
+    UN = (spoil.get_me()).username
     try:
         spoil.send_message(CHATS.LOG_GROUP_ID, "Bot started !")
     except:
