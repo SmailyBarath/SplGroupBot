@@ -26,3 +26,4 @@ wikipedia
 opencv-python-headless
 telegraph
 contextlib
+fuzzysearch
