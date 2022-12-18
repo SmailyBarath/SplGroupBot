@@ -10,13 +10,13 @@ spoil = Client(":SPOILED-BOT:",
                plugins=dict(root="Spoiled/SpoiledPlugins")
                )
 
-async def Asynchorous():
-    await spoil.start()
+def Asynchorous():
+    spoil.start()
     try:
-        await spoil.send_message(CHATS.LOG_GROUP_ID, "Bot started !")
+        spoil.send_message(CHATS.LOG_GROUP_ID, "Bot started !")
     except:
         pass
     print("Bot started !")
-    await Yashu.run_polling()
+    Yashu.run_polling()
 
-asyncio.run(Asynchorous())
+Asynchorous()
