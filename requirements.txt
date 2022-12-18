@@ -28,3 +28,4 @@ telegraph
 contextlib
 fuzzysearch
 search-engine-parser
+pytube
