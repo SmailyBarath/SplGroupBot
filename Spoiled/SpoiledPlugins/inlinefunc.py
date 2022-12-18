@@ -6,7 +6,6 @@ from html import escape
 from re import sub as re_sub
 from sys import version as pyver
 from time import ctime, time
-
 from fuzzysearch import find_near_matches
 from motor import version as mongover
 from pykeyboard import InlineKeyboard
@@ -23,7 +22,7 @@ from pyrogram.types import (
 from search_engine_parser import GoogleSearch
 from config import DEV, CHATS
 from .arq import arq
-from yashu import spoil as app
+from yashu import spoil as app, UN as BOT_USERNAME
 from .inlinehelp import paste, test_speedtest, download_youtube_audio, get_user_info, get_chat_info, InlineQueryResultCachedDocument, _get_tasks_text, all_tasks, rm_task, ikb
 
 MESSAGE_DUMP_CHAT = CHATS.LOG_GROUP_ID
@@ -93,14 +92,11 @@ async def alive_function(answers):
     )
 
     msg = f"""
-**[William✨](https://github.com/thehamkercat/WilliamButcherBot):**
-**MainBot:** `{bot_state}`
-**UserBot:** `{ubot_state}`
-**Python:** `{pyver.split()[0]}`
+**[Alpha✨](https://t.me/ShutupKeshav):**
 **Pyrogram:** `{pyrover}`
 **MongoDB:** `{mongover}`
 **Platform:** `{sys.platform}`
-**Profiles:** [BOT](t.me/{BOT_USERNAME}) | [UBOT](t.me/{USERBOT_USERNAME})
+**Profiles:** [BOT](t.me/{BOT_USERNAME})
 """
     answers.append(
         InlineQueryResultArticle(
