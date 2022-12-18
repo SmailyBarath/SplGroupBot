@@ -84,8 +84,8 @@ async def inline_help_func(__HELP__):
 
 async def alive_function(answers):
     buttons = InlineKeyboard(row_width=2)
-    bot_state = "Dead" if not await app.get_me() else "Alive"
-    ubot_state = "Dead" if not await app2.get_me() else "Alive"
+    bot_state = "Alive"
+    ubot_state = "Dead"
     buttons.add(
         InlineKeyboardButton("Stats", callback_data="stats_callback"),
         InlineKeyboardButton(
@@ -564,7 +564,7 @@ async def pmpermit_func(answers, user_id, victim):
 async def ping_func(answers):
     ping = Ping(ping_id=app.rnd_id())
     t1 = time()
-    await app.send(ping)
+    await _.send(ping)
     t2 = time()
     ping = f"{str(round((t2 - t1) * 1000, 2))} ms"
     answers.append(
