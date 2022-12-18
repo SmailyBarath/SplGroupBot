@@ -38,7 +38,7 @@ from wbb.core.tasks import _get_tasks_text, all_tasks, rm_task
 from wbb.core.types import InlineQueryResultCachedDocument
 from wbb.modules.info import get_chat_info, get_user_info
 from wbb.modules.music import download_youtube_audio
-from .inlinehelp import paste, test_speedtest
+from .inlinehelp import paste, test_speedtest, download_youtube_audio
 
 keywords_list = [
     "image",
