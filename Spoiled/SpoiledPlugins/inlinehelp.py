@@ -2,6 +2,7 @@ from .chatbot import aiohttpsession as session
 import speedtest
 import datetime
 from pytube import YouTube
+from yashu import spoil as app
 
 def download_youtube_audio(arq_resp):
     r = arq_resp.result[0]
