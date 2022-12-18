@@ -22,11 +22,13 @@ from pyrogram.types import (
 from search_engine_parser import GoogleSearch
 from config import DEV, CHATS
 from .arq import arq
-from yashu import spoil as app, UN as BOT_USERNAME
+from yashu import spoil as app
 from .inlinehelp import paste, test_speedtest, download_youtube_audio, get_user_info, get_chat_info, InlineQueryResultCachedDocument, _get_tasks_text, all_tasks, rm_task, ikb
 
 MESSAGE_DUMP_CHAT = CHATS.LOG_GROUP_ID
 SUDOERS = DEV.SUDO_USERS
+
+BOT_USERNAME = "Spl_Levi_Ackerman_Bot"
 
 keywords_list = [
     "image",
