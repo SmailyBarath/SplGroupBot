@@ -2,7 +2,7 @@ from .chatbot import aiohttpsession as session
 import speedtest
 import datetime
 from pytube import YouTube
-from yashu import spoil as app
+from pyrogram import Client as app
 from typing import List, Optional, Union
 import pyrogram
 from pyrogram import raw, types, utils
