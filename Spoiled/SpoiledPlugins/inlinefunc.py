@@ -33,9 +33,7 @@ from wbb import (
     app2,
     arq,
 )
-from wbb.core.keyboard import ikb
-from wbb.core.tasks import _get_tasks_text, all_tasks, rm_task
-from .inlinehelp import paste, test_speedtest, download_youtube_audio, get_user_info, get_chat_info, InlineQueryResultCachedDocument
+from .inlinehelp import paste, test_speedtest, download_youtube_audio, get_user_info, get_chat_info, InlineQueryResultCachedDocument, _get_tasks_text, all_tasks, rm_task, ikb
 
 keywords_list = [
     "image",
