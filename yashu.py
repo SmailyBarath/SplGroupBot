@@ -19,5 +19,4 @@ async def Asynchorous():
     print("Bot started !")
     await Yashu.run_polling()
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(Asynchorous())
+asyncio.run(Asynchorous())
