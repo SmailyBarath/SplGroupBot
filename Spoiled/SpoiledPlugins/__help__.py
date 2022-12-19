@@ -215,7 +215,7 @@ async def rules_cbq(_, q):
 async def helper_msg(_, m):
     await m.reply(TEXT, reply_markup=IKM(MAIN))
 
-@Client.on_message(filters.command(["help", "start"]) & filters.group)
+@Client.on_message(filters.command(["help", "start"]) & ~filters.private)
 async def none_func(_, m):
     global botun
     if not botun:
