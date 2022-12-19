@@ -1,4 +1,5 @@
 AFK_HELP = """
+**Afk Help Module**
 
 • /afk - sets you afk.
 • brb - same as afk.
@@ -6,6 +7,7 @@ AFK_HELP = """
 """
 
 ADMIN_HELP = """
+**Admin Help Module**
 
 • /admins - list of group's staff
 • /adminlist - same as /admins
@@ -21,6 +23,7 @@ ADMIN_HELP = """
 """
 
 ANIME_HELP = """
+**Anime Help Module**
 
 • /anime - Fetches info on single anime (includes
           buttons to look up for prequels and
@@ -34,13 +37,17 @@ ANIME_HELP = """
 """
 
 ANIMEQUOTES_HELP = """
+**Animequotes Help Module**
 
-• /animequotes: gives random anime quotes
+• /animequotes - gives random anime quotes
+
+• /quotes - try
 
 """
 
 APPROVAL_HELP = """
- 
+**Approval Help Module**
+
 Sometimes, you might trust a user not to send unwanted content.
 Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
 That's what approvals are for - approve of trustworthy users to allow them to send
@@ -52,6 +59,7 @@ Admin commands:
 """
 
 FLOOD_HELP = """
+**Flood Help Module**
 
 Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood will result in restricting that user.
 
@@ -73,12 +81,14 @@ Antiflood allows you to take action on users that send more than x messages in a
 """
 
 AUTOCORRECT_HELP = """
+**Autocorrect Help Module**
 
 • /autocorrect - toggle on or off
 
 """
 
 BLACKLIST_HELP = """
+**Blacklist Help Module**
 
 • /addblacklist [word] - word will be deleted.
 • /rmblacklist [word] - word will be removed from list.
@@ -87,6 +97,7 @@ BLACKLIST_HELP = """
 """
 
 LOGO_HELP = """
+**Logo Help Module**
 
 • /logo [text] - try
 • /ylogo [text] - try
@@ -97,12 +108,14 @@ LOGO_HELP = """
 """
 
 CHATBOT_HELP = """
+**Chatbot Help Module**
 
 • /chatbot - toggle chat bot on | off
 
 """
 
 FUN_HELP = """
+**Fun Help Module**
 
 • /toss | /coin - get heads or tails
 • /emojify - try 
@@ -115,6 +128,7 @@ FUN_HELP = """
 """
 
 FILTERS_HELP = """
+**Filters Help Module**
 
 • /filter [keyword] - sets a filter 
 • /stop [keyword] - stops a filter
@@ -123,6 +137,7 @@ FILTERS_HELP = """
 """
 
 MISC_HELP = """
+**Misc Help Module**
 
 • /encrypt - encrypt text
 • /decrypt - decrypt text
@@ -138,6 +153,7 @@ MISC_HELP = """
 """
 
 UTILS_HELP = """
+**Utils Help Module**
 
 • /pdf - convert image to pdf
 • /reverse | /grs | /pp - gives name of the image
@@ -148,6 +164,7 @@ UTILS_HELP = """
 """
 
 STICKERS_HELP = """
+**Stickers Help Module**
 
 • /kang - Kangs sticker (static/video/animated)
 • /delsticker - deletes sticker
@@ -158,6 +175,7 @@ STICKERS_HELP = """
 """
 
 LOCKS_HELP = """
+**Locks Help Module**
 
 • /lock - locks the give type
 • /unlock - unlocks the give type
@@ -167,6 +185,7 @@ LOCKS_HELP = """
 """
 
 WELCOME_HELP = """
+**Welcome Help Module**
 
 • /setwelcome - sets welcome message of group
 • /clearwelcome - clears welcome message of group
@@ -176,6 +195,7 @@ WELCOME_HELP = """
 """
 
 RULES_HELP = """
+**Rules Help Module**
 
 • /setrules - sets group rules
 • /clearrules - clears group rules
