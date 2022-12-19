@@ -1,4 +1,4 @@
-from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, InputMedaiPhoto as IMP
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, InputMediaPhoto as IMP
 from Strings.help import *
 from String.start import START_TEXT 
 from pyrogram import Client
