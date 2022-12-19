@@ -15,6 +15,8 @@ ADMIN_HELP = """
 • /ban | /unban | /sban - bans and unbans an user (only admins)
 • /mute | /unmute | /tmute - mute and unmute user (only admins)
 • /kick - kick user from chat (only admins)
+• /del - deletes replied message (only admins)
+• /purge - clears all messages from replies message (only admins)
 
 """
 
@@ -84,5 +86,99 @@ BLACKLIST_HELP = """
 
 """
 
+LOGO_HELP = """
 
+• /logo [text] - try
+• /ylogo [text] - try
+• /carbon [reply to text] - try
+• /mmf [text] - write text on stickers
+• /tiny - try 
 
+"""
+
+CHATBOT_HELP = """
+
+• /chatbot - toggle chat bot on | off
+
+"""
+
+FUN_HELP = """
+
+• /toss | /coin - get heads or tails
+• /emojify - try 
+• /crystal - try
+• /dice - 🎲 
+• /judge - judge an user
+• /wish - wish your query
+• /react - try
+
+"""
+
+FILTERS_HELP = """
+
+• /filter [keyword] - sets a filter 
+• /stop [keyword] - stops a filter
+• /filters - to get list of filters
+
+"""
+
+MISC_HELP = """
+
+• /encrypt - encrypt text
+• /decrypt - decrypt text
+• /gitinfo - get github user info 
+• /paste - try
+• /q [reply] - works as quotly bot
+• /tts - text to speech
+• /ud - urban Dictionary 
+• /weebify - try
+• /whois - gives info abt user
+• /wiki - wikipedia
+
+"""
+
+UTILS_HELP = """
+
+• /pdf - convert image to pdf
+• /reverse | /grs | /pp - gives name of the image
+• /telegraph - gives telegraph link of media
+• /tagall - mentions all in group
+• /tr | /tl - translation of text
+
+"""
+
+STICKERS_HELP = """
+
+• /kang - Kangs sticker (static/video/animated)
+• /delsticker - deletes sticker
+• /stickerid - gives file id of sticker
+• /getsticker - gives document form of sticker 
+• /stickers - get sticker packs
+
+"""
+
+LOCKS_HELP = """
+
+• /lock - locks the give type
+• /unlock - unlocks the give type
+• /locktypes - list of locks available
+• /locks - list of current locks in your chat
+
+"""
+
+WELCOME_HELP = """
+
+• /setwelcome - sets welcome message of group
+• /clearwelcome - clears welcome message of group
+• /welcomemode [on|off] - toggle welcome mode
+• /welcome - to get current welcome message
+
+"""
+
+RULES_HELP = """
+
+• /setrules - sets group rules
+• /clearrules - clears group rules
+• /rules - previews current group rules
+
+"""
