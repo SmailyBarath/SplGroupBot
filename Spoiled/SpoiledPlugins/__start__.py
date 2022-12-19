@@ -24,7 +24,7 @@ async def st(_, m):
                IKB(f"About {botname} ✨💭", callback_data="about_bot")
                ],
                [
-               IKB("Commands ✨💭", callback_data="help"),
+               IKB("Commands ✨💭", callback_data="main_help"),
                IKB("Support ✨💭", url=f"t.me/{CHATS.SUPPORT_CHAT}")
                ],
                [
