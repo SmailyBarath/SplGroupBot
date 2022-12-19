@@ -83,7 +83,7 @@ async def abt_cbq(_, q):
     global botname
     if not botname:
         botname = (await _.get_me()).first_name
-    await q.answer
+    await q.answer()
     await q.edit_message_text(ABOUT_TEXT.format(botname), reply_markup=IKM([[main_back]]))
 
 @Client.on_callback_query(filters.regex("main_back"))
