@@ -221,4 +221,4 @@ async def none_func(_, m):
     if not botun:
         botun = (await _.get_me()).username
     buttons = IKM([[IKB("Start here ✨💭", url=f"t.me/{botun}")]])
-    await m.reply("Start me in pm ✨💭", reply_markup=buttons)
+    await m.reply("Start me in pm \n\nFor help ✨💭", reply_markup=buttons)
