@@ -18,8 +18,8 @@ async def fg(_, m):
                 x.append(y)
     txt = ""
     for z in x:
+        cnt = 0
         for a in z:
-            cnt = 0
             ind = ALPHABETS.index(a)
             if cnt == 0:
                 txt += SERIF[ind]
