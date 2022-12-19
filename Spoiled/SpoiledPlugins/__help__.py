@@ -210,3 +210,15 @@ async def welcome_cbq(_, q):
 async def rules_cbq(_, q):
     await q.answer()
     await q.edit_message_text(RULES_HELP, reply_markup=IKM(CMD))
+
+@Client.on_message(filters.command("help") & filters.private)
+async def helper_msg(_, m):
+    await m.reply(TEXT, reply_markup=IKM(MAIN))
+
+@Client.on_message(filters.command(["help", "start"]) & filters.group)
+async def none_func(_, m):
+    global botun
+    if not botun:
+        botun = (await _.get_me()).username
+    buttons = IKM([[IKB("Start here ✨💭", url=f"t.me/{botun}")]])
+    await m.reply("Start me in pm ✨💭", reply_markup=buttons)
