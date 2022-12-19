@@ -5,7 +5,7 @@ from Spoiled.Database.blocked import is_blocked
 
 @End.on_message(filters.command("emojify"))
 async def doli(ailika, jhulika: Dev):
-        if is_blocked(jhulika.from_user.id) is True:
+        if await is_blocked(jhulika.from_user.id) is True:
             return
         txt = jhulika.text
         if len(jhulika.command) != 2:
