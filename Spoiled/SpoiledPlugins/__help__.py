@@ -1,6 +1,7 @@
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, InputMediaPhoto as IMP
 from Strings.help import *
 from Strings.start import START_TEXT 
+from Strings.about import ABOUT_TEXT
 from pyrogram import Client, filters
 import time
 from . import startTime
@@ -76,6 +77,14 @@ TEXT = "Help section !, choose from below buttons."
 
 botname = None
 botun = None
+
+@Client.on_callback_query(filters.regex("about_bot"))
+async def abt_cbq(_, q):
+    global botname
+    if not botname:
+        botname = (await _.get_me()).first_name
+    await q.answer
+    await q.edit_message_text(ABOUT_TEXT.format(botname), reply_markup=IKM([[main_back]]))
 
 @Client.on_callback_query(filters.regex("main_back"))
 async def main_back_cbq(_, q):
