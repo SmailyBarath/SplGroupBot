@@ -49,7 +49,7 @@ fourth3 = make_button("Logos", "logo_help")
 
 fifth1 = make_button("Misc", "misc_help")
 fifth2 = make_button("Utils", "utils_help")
-fifth3 = make_button("Stickers", "stcikers_help")
+fifth3 = make_button("Stickers", "stickers_help")
 
 sixth1 = make_button("Locks", "locks_help")
 sixth2 = make_button("Welcome", "welcome_help")
