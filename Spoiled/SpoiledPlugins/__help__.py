@@ -1,6 +1,12 @@
-from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
-from Strings.help import * 
-from pyrogram import Client, filters 
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, InputMedaiPhoto as IMP
+from Strings.help import *
+from String.start import START_TEXT 
+from pyrogram import Client
+import time
+from . import startTime
+from .afk import get_readable_time
+from config import STUFF, CHATS
+from Spoiled.Database.users import get_served_users
 
 def append_button(LIST, button1, button2, button3):
     LIST.append(button1)
@@ -19,6 +25,9 @@ THIRD_ROW = []
 FOURTH_ROW = []
 FIFTH_ROW = []
 SIXTH_ROW = []
+
+main_back = make_button("Back", "main_back")
+cmd_back = make_button("Back", "cmd_back")
 
 # buttons
 
@@ -59,11 +68,136 @@ MAIN.append(THIRD_ROW)
 MAIN.append(FOURTH_ROW)
 MAIN.append(FIFTH_ROW)
 MAIN.append(SIXTH_ROW)
+MAIN.append([main_back])
+
+CMD = [[cmd_back]]
 
 TEXT = "Help section !, choose from below buttons."
 
-@Client.on_callback_query(filters.regex("help"))
+botname = None
+botun = None
+
+@Client.on_callback_query(filters.regex("main_back"))
+async def main_back_cbq(_, q):
+    m = q.message
+    global botname, botun
+    if not botname or not botun:
+        Me = await _.get_me()
+        botname = Me.first_name
+        botun = Me.username
+    START_MARKUP = IKM(
+               [
+               [
+               IKB(f"About {botname} ✨💭", callback_data="about_bot")
+               ],
+               [
+               IKB("Commands ✨💭", callback_data="help"),
+               IKB("Support ✨💭", url=f"t.me/{CHATS.SUPPORT_CHAT}")
+               ],
+               [
+               IKB("➕ Add Me To Your Group ➕", url=f"t.me/{botun}?startgroup=True")
+               ]
+               ]
+               )
+    fn = m.from_user.first_name
+    Upt = get_readable_time(int(time.time()-startTime))
+    x = await get_served_users()
+    x = len(x)
+    await q.answer()
+    media = IMP(STUFF.START_IMG, caption=START_TEXT.format(fn, botname, Upt, x))
+    await q.edit_message_media(media, reply_markup=START_MARKUP)
+
+@Client.on_callback_query(filters.regex("help") | filters.regex("cmd_back"))
 async def helper_cbq(_, q):
     await q.answer()
-    await q.edit_message_text(TEXT)
-    await q.edit_message_reply_markup(reply_markup=IKM(MAIN))
+    await q.edit_message_text(TEXT, reply_markup=IKM(MAIN))
+
+@Client.on_callback_query(filters.regex("afk_help"))
+async def afk_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(AFK_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("admins_help"))
+async def admins_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(ADMIN_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("anime_help"))
+async def anime_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(ANIME_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("aq_help"))
+async def aq_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(ANIMEQUOTES_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("approval_help"))
+async def approval_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(APPROVAL_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("ac_help"))
+async def ac_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(AUTOCORRECT_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("bl_help"))
+async def bl_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(BLACKLIST_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("cb_help"))
+async def cb_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(CHATBOT_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("flood_help"))
+async def flood_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(FLOOD_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("filters_help"))
+async def filters_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(FILTERS_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("fun_help"))
+async def fun_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(FUN_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("logo_help"))
+async def logo_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(LOGO_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("misc_help"))
+async def misc_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(MISC_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("utils_help"))
+async def utils_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(UTILS_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("stickers_help"))
+async def stickers_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(STICKERS_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("locks_help"))
+async def locks_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(LOCKS_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("welcome_help"))
+async def welcome_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(WELCOME_HELP, reply_markup=IKM(CMD))
+
+@Client.on_callback_query(filters.regex("rules_help"))
+async def rules_cbq(_, q):
+    await q.answer()
+    await q.edit_message_text(RULES_HELP, reply_markup=IKM(CMD))
