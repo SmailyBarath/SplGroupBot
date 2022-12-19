@@ -24,7 +24,7 @@ async def doli(ailika, jhulika: Dev):
 
 @End.on_message(filters.command("crystal"))
 async def crystal(ailika, jhulika: Dev):
-    if is_blocked(jhulika.from_user.id) is True:
+    if await is_blocked(jhulika.from_user.id) is True:
         return
     txt = jhulika.text
     if len(jhulika.command)!= 3:
