@@ -19,7 +19,7 @@ class DATABASE:
 
 class STUFF:
     START_IMG = e("START_IMG", "https://telegra.ph/file/32ebcdcdf37b6959145d6.jpg")
-    PING_IMG = e("PING_IMG", "https://te.legra.ph/file/3ecafa3dcb3fbf5a44468.jpg")
+    PING_IMG = e("PING_IMG", "https://telegra.ph/file/9984e5ee4e0f2536f13ac.jpg")
 
 class CHATS:
     SUPPORT_CHAT = e("SUPPORT_CHAT", "Spoiled_Community")
