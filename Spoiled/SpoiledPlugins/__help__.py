@@ -1,6 +1,6 @@
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 from Strings.help import * 
-from pyrogram import Client
+from pyrogram import Client, filters 
 
 def append_button(LIST, button1, button2, button3):
     LIST.append(button1)
