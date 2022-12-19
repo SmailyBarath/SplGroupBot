@@ -107,7 +107,7 @@ async def main_back_cbq(_, q):
     media = IMP(STUFF.START_IMG, caption=START_TEXT.format(fn, botname, Upt, x))
     await q.edit_message_media(media, reply_markup=START_MARKUP)
 
-@Client.on_callback_query(filters.regex("help") | filters.regex("cmd_back"))
+@Client.on_callback_query(filters.regex("main_help") | filters.regex("cmd_back"))
 async def helper_cbq(_, q):
     await q.answer()
     await q.edit_message_text(TEXT, reply_markup=IKM(MAIN))
