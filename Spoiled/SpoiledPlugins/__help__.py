@@ -1,6 +1,6 @@
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, InputMediaPhoto as IMP
 from Strings.help import *
-from String.start import START_TEXT 
+from Strings.start import START_TEXT 
 from pyrogram import Client
 import time
 from . import startTime
