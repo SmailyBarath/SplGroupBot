@@ -1,7 +1,7 @@
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, InputMediaPhoto as IMP
 from Strings.help import *
 from Strings.start import START_TEXT 
-from pyrogram import Client
+from pyrogram import Client, filters
 import time
 from . import startTime
 from .afk import get_readable_time
