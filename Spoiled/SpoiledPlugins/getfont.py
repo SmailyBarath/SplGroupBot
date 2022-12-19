@@ -10,7 +10,7 @@ ALLCAPS = "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ"
 async def fg(_, m):
     if len(m.command) < 2:
         return await m.reply("give some text bruh !🥲")
-    s = m.text.split()
+    s = m.text.split(None, 1)[1]
     x = []
     for y in s:
         for z in y:
