@@ -114,7 +114,7 @@ async def cwf(_, m):
     if m.from_user:
         if m.text or m.caption:
             txt = m.text if m.text else m.caption 
-            if txt.split()[0][0] == "/":
+            if txt.split()[0].lower() == "/filter":
                 return
             x = await list_filters(m.chat.id)
             for h in txt.split():
