@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from Spoiled.Database.flood import *
 from Spoiled.Database.approve import is_approved
 from config import DEV
+from Spoiled.Database.warn import *
 from .admins import sender_admin
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM, ChatPermissions
 
@@ -123,17 +124,17 @@ async def setflm(_, m):
     if len(m.command) > 1:
         val = str(m.text.split()[1]).lower()
     else:
-        return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick]**")
+        return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick, warn]**")
     if not val in ["delete", "ban", "mute", "tmute", "kick"]:
-        return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick]**")
+        return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick, warn]**")
     if val == "tmute":
         try:
             tim = int(m.text.split()[2])
             if tim < 0:
                 return await m.reply("😒😒..")
             await set_mute_time(m.chat.id, tim)
-        except:
-            return await m.reply(f"**Give a value which will be considered in minutes !**")
+        except Exception as e:
+            return await m.reply(f"**Give a value which will be considered in minutes !**\n\n" + str(e))
     await set_flood_mode(m.chat.id, val)
     await m.reply(f"**Flood mode set to {val}**")
 
@@ -184,23 +185,36 @@ async def cwf(_, m):
                     await _.delete_messages(m.chat.id, SET)
                     return await m.reply(txt)
                 except Exception as e:
-                    return await m.reply(txt + e)
+                    return await m.reply(txt + str(e))
             elif y == "mute":
                 try:
                     await _.restrict_chat_member(m.chat.id, user_id, permissions=ChatPermissions())
                     return await m.reply(txt + f"**\n\nmuted...**")
                 except Exception as e:
-                    return await m.reply(txt + e)
+                    return await m.reply(txt + str(e))
+            elif y == "kick":
+                try:
+                    await _.ban_chat_member(m.chat.id, user_id)
+                    await _.unban_chat_member(m.chat.id, user_id)
+                    return await m.reply(txt + f"**\n\kicked...**")
+                except Exception as e:
+                    return await m.reply(txt + str(e))
             elif y == "ban":
                 try:
                     await _.ban_chat_member(m.chat.id, user_id)
                     return await m.reply(txt + f"**\n\banned...**")
                 except Exception as e:
-                    return await m.reply(txt + e)
+                    return await m.reply(txt + str(e))
+            elif y == "warn":
+                try:
+                    await warn_user(m.chat.id, user_id)
+                    return await m.reply(txt + f"**\n\warnings : {await get_warns(m.chat.id, user_id)}...**")
+                except Exception as e:
+                    return await m.reply(txt + str(e))
             elif y == "tmute":
                 try:
                     await _.restrict_chat_member(m.chat.id, user_id, ChatPermissions(), datetime.now()+timedelta(minutes=(await get_mute_time(chat_id))))
                     return await m.reply(txt + f"**\n\nmuted for {await get_mute_time(chat_id)}min..**")
                 except Exception as e:
-                    return await m.reply(txt + e)      
+                    return await m.reply(txt + str(e))  
     
