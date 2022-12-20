@@ -178,7 +178,7 @@ async def cwf(_, m):
             txt = f"**{men} flooding...**"
             y = await get_flood_mode(m.chat.id)
             SET = []
-            for j in IDS:
+            for j in IDS[chat_id]:
                 SET.append(j)
             if y == "delete":
                 try:
