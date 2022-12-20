@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from Spoiled.Database.chats import *
+from Spoiled.Database.pusers import get_served_pusers
 from Spoiled.Database.blocked import is_blocked
 from config import DEV
 from pyrogram.errors import FloodWait
