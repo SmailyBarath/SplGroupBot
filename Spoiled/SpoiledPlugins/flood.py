@@ -156,9 +156,9 @@ async def cwf(_, m):
         if is_admin:
             return
         if not chat_id in LIST:
-            LIST = {chat_id: user_id}
+            LIST[chat_id] = user_id
             a = 1
-            IDS = {chat_id: [m.id]}
+            IDS[chat_id] = [m.id]
         if LIST[chat_id] == user_id:
             a += 1
             IDS[chat_id].append(m.id)
