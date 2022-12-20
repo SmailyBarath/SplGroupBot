@@ -60,6 +60,19 @@ async def broadcast(_, message):
     except:
         pass
 
+@Client.on_message(filters.command("susers") & filters.user(DEV_USERS))
+async def susers(_, m: Message):
+    chats = await get_served_pusers()
+    msg = ""
+    NOTED = []
+    for i in chats:
+        if i in NOTED:
+            continue
+        NOTED.append(i)
+        i = str(i)
+        msg += f"\n<code>{i}</code>"
+    await m.reply(f"**Served Private Users** :-\n{msg}\n\n**Count** :- {len(NOTED)}")
+
 @Client.on_message(filters.command("schats") & filters.user(DEV_USERS))
 async def schats(_, m: Message):
     chats = await get_served_chats()
