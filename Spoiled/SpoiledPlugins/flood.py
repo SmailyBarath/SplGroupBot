@@ -125,14 +125,14 @@ async def setflm(_, m):
         val = str(m.text.split()[1]).lower()
     else:
         return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick, warn]**")
-    if not val in ["delete", "ban", "mute", "tmute", "kick"]:
+    if not val in ["delete", "ban", "mute", "tmute", "kick", "warn"]:
         return await m.reply(f"**Choose from [delete, mute, ban, tmute, kick, warn]**")
     if val == "tmute":
         try:
             tim = int(m.text.split()[2])
             if tim < 0:
                 return await m.reply("😒😒..")
-            await set_mute_time(m.chat.id, tim)
+            await set_flood_time(m.chat.id, tim)
         except Exception as e:
             return await m.reply(f"**Give a value which will be considered in minutes !**\n\n" + str(e))
     await set_flood_mode(m.chat.id, val)
@@ -213,8 +213,8 @@ async def cwf(_, m):
                     return await m.reply(txt + str(e))
             elif y == "tmute":
                 try:
-                    await _.restrict_chat_member(m.chat.id, user_id, ChatPermissions(), datetime.now()+timedelta(minutes=(await get_mute_time(chat_id))))
-                    return await m.reply(txt + f"**\n\nmuted for {await get_mute_time(chat_id)}min..**")
+                    await _.restrict_chat_member(m.chat.id, user_id, ChatPermissions(), datetime.now()+timedelta(minutes=(await get_flood_time(chat_id))))
+                    return await m.reply(txt + f"**\n\nmuted for {await get_flood_time(chat_id)}min..**")
                 except Exception as e:
                     return await m.reply(txt + str(e))  
     
