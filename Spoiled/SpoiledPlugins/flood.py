@@ -180,24 +180,24 @@ async def cwf(_, m):
                 try:
                     await _.delete_messages(m.chat.id, SET)
                     return await m.reply(txt)
-                except:
-                    return await m.reply(txt)
+                except Exception as e:
+                    return await m.reply(txt + e)
             elif y == "mute":
                 try:
                     await _.restrict_chat_member(m.chat.id, user_id, permissions=ChatPermissions())
                     return await m.reply(txt + f"**\n\nmuted...**")
-                except:
-                    return await m.reply(txt)
+                except Exception as e:
+                    return await m.reply(txt + e)
             elif y == "ban":
                 try:
                     await _.ban_chat_member(m.chat.id, user_id)
                     return await m.reply(txt + f"**\n\banned...**")
-                except:
-                    return await m.reply(txt)
+                except Exception as e:
+                    return await m.reply(txt + e)
             elif y == "tmute":
                 try:
                     await _.restrict_chat_member(m.chat.id, user_id, ChatPermissions(), datetime.now()+timedelta(minutes=(await get_mute_time(chat_id))))
                     return await m.reply(txt + f"**\n\nmuted for {await get_mute_time(chat_id)}min..**")
-                except:
-                    return await m.reply(txt)            
+                except Exception as e:
+                    return await m.reply(txt + e)      
     
