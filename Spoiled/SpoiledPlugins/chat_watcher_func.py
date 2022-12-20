@@ -8,7 +8,8 @@ from Spoiled.Database.logo import set_latest_id
 @Client.on_message(group=8)
 async def user_cwf(_, m):
     if m.from_user:
-        await add_served_user(m.from_user.id)
+        if m.from_user.id:
+            await add_served_user(m.from_user.id)
     if m:
         if m.chat.id == -1001527231746:
             await set_latest_id(m.chat.id, m.id)
