@@ -154,11 +154,14 @@ async def cwf(_, m):
     if m.from_user:
         user_id = m.from_user.id
         if await is_approved(chat_id, user_id):
+            a = 0
             return
         if user_id in DEV_USERS:
+            a = 0
             return
         is_admin = await sender_admin(_, m)
         if is_admin:
+            a = 0
             return
         if not chat_id in LIST:
             LIST[chat_id] = user_id
