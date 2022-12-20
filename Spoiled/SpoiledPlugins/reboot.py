@@ -11,6 +11,6 @@ async def reboot(_, m):
     time.sleep(3)
     await ok.delete()
     try:
-        os.system("killall5 -9 && python3 yashu.py")
+        os.system(f"kill -9 {os.getpid()} && python3 yashu.py")
     except Exception as e:
         await m.reply(e)
