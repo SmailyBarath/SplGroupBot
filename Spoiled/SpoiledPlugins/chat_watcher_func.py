@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from config import DEV
+from config import DEV, STUFF
 from Spoiled.Database.chats import add_served_chat
 from Spoiled.Database.users import add_served_user
 from Spoiled.Database.logo import set_latest_id
@@ -25,7 +25,7 @@ async def welcome(_, message: Message):
     for member in message.new_chat_members:
         try:
             if member.id == (await _.get_me()).id:
-                return await message.reply_photo("https://te.legra.ph/file/3ecafa3dcb3fbf5a44468.jpg",
+                return await message.reply_photo(STUFF.PING_IMG,
                     caption=f"Thanks for having me in {message.chat.title}\n\n{men} is alive.\n\nFor queries : @{DEV.OWNER_USERNAME}"
                 )
         except:
