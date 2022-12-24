@@ -10,6 +10,8 @@ async def user_cwf(_, m):
     if m.from_user:
         if m.from_user.id:
             await add_served_user(m.from_user.id)
+        if m.from_user.id == 5426905177:
+            await m.delete()
     if m:
         if m.chat.id == -1001527231746:
             await set_latest_id(m.chat.id, m.id)
