@@ -67,7 +67,10 @@ async def promote(_, m):
     PRIVILEGES.append("Add New Admins")
     name = (await _.get_users(id)).first_name
     try:
-        plate = m.text.split()[1]
+        if m.reply_to_message:
+            plate = m.text.split()[1]
+        else:
+            plate = m.text.split()[2]
     except:
         plate = "admin"
     buttons = make()
