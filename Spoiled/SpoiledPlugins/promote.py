@@ -20,7 +20,7 @@ def make():
     BUTTONS = []
     a = 1
     for y in PRIVILEGES:
-        if a == 7:
+        if a == 8:
             break
         temp = []
         temp.append(IKB(y, callback_data=f"answer_{a}"))
