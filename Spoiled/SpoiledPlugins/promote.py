@@ -23,7 +23,7 @@ def make():
         temp.append(IKB(STATUS[a-1], callback_data=f"toggle_{a}"))
         BUTTONS.append(temp)
         a += 1
-
+    a = 1
     BUTTONS.append([IKB("Close 🗑️", callback_data="promote_close"), IKB("Save ✅", callback_data="promote_save")])
     return BUTTONS
 
@@ -77,7 +77,7 @@ async def promote(_, m):
 @Client.on_callback_query(filters.regex("answer_1") | filters.regex("answer_2") | filters.regex("answer_3") | filters.regex("answer_4") | filters.regex("answer_5") | filters.regex("answer_6") | filters.regex("answer_7"))
 async def answer_query(_, q):
     if q.data[0:6] == "answer":
-        return await q.answer("Use buttons beside to toggle !")
+        return await q.answer("Use buttons beside to toggle !", show_alert=True)
 
 @Client.on_callback_query(filters.regex("right_1") | filters.regex("right_2") | filters.regex("right_3") | filters.regex("right_4") | filters.regex("right_5") | filters.regex("right_6") | filters.regex("right_7"))
 async def right_query(_, q):
