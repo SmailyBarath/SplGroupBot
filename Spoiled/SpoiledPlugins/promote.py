@@ -22,7 +22,7 @@ def make():
     for y in PRIVILEGES:
         temp = []
         temp.append(IKB(y, callback_data=f"answer_{a}"))
-        temp.append(IKB(STATUS[a-1], callback_data=f"toggle_{a}"))
+        temp.append(IKB(STATUS[a-1], callback_data=f"right_{a}"))
         BUTTONS.append(temp)
         a += 1
     a = 1
@@ -72,9 +72,9 @@ async def promote(_, m):
         plate = m.text.split()[1]
     except:
         plate = "admin"
-    BUTTONS = make()
+    buttons = make()
     txt = f"User : **{name}**\n\nTag : **{plate}**"
-    await m.reply(txt, reply_markup=IKM(BUTTONS))
+    await m.reply(txt, reply_markup=IKM(buttons))
   
 @Client.on_callback_query(filters.regex("answer_1") | filters.regex("answer_2") | filters.regex("answer_3") | filters.regex("answer_4") | filters.regex("answer_5") | filters.regex("answer_6") | filters.regex("answer_7"))
 async def answer_query(_, q):
@@ -154,7 +154,7 @@ async def saver(_, q):
         h = True if t == "✅" else False
         NOW.append(h)
     try:
-        await _.promote_chat_member(m.chat.id, target, can_change_info=NOW[0], can_delete_messages=NOW[1], can_restrict_members=NOW[2], can_invite_users=NOW[3], can_pin_messages=NOW[4], can_manage_video_chats=NOW[5], can_promote_members=NOW[6])
+        await _.promote_chat_member(q.message.chat.id, target, can_change_info=NOW[0], can_delete_messages=NOW[1], can_restrict_members=NOW[2], can_invite_users=NOW[3], can_pin_messages=NOW[4], can_manage_video_chats=NOW[5], can_promote_members=NOW[6])
         await q.edit_message_text("Promoted successfully !")
     except Exception as e:
         await q.edit_message_text(e)
