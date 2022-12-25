@@ -25,13 +25,14 @@ def make():
         temp.append(IKB(STATUS[a-1], callback_data=f"right_{a}"))
         BUTTONS.append(temp)
         a += 1
-    a = 1
     BUTTONS.append([IKB("Close 🗑️", callback_data="promote_close"), IKB("Save ✅", callback_data="promote_save")])
     return BUTTONS
 
 @Client.on_message(filters.command("promote") & filters.group)
 async def promote(_, m):
     global PRIVILEGES, BUTTONS, oper, STATUS, target
+    PRIVILEGES = []
+    BUTTONS = []
     STATUS = ["❌", "❌", "❌", "❌", "❌", "❌", "❌"]
     id = m.from_user.id
     if not id in DEV_USERS:
