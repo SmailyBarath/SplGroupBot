@@ -155,7 +155,7 @@ async def saver(_, q):
         h = True if t == "✅" else False
         NOW.append(h)
     try:
-        await _.promote_chat_member(q.message.chat.id, target, can_change_info=NOW[0], can_delete_messages=NOW[1], can_restrict_members=NOW[2], can_invite_users=NOW[3], can_pin_messages=NOW[4], can_manage_video_chats=NOW[5], can_promote_members=NOW[6])
+        await _.promote_chat_member(q.message.chat.id, target, privileges=(can_change_info=NOW[0], can_delete_messages=NOW[1], can_restrict_members=NOW[2], can_invite_users=NOW[3], can_pin_messages=NOW[4], can_manage_video_chats=NOW[5], can_promote_members=NOW[6]))
         await q.edit_message_text("Promoted successfully !")
     except Exception as e:
         await q.edit_message_text(e)
