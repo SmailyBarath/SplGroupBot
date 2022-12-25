@@ -55,7 +55,9 @@ async def promote(_, m):
         target = id
     except:
         return await m.reply("Either reply or give username !")
-    x = x.privileges
+    x = await _.get_chat_member(m.chat.id, id)
+    if x.privileges:
+        return await m.reply("User already admin !")
     PRIVILEGES.append("Change Group Info")
     PRIVILEGES.append("Delete Messages")
     PRIVILEGES.append("Ban Users")
