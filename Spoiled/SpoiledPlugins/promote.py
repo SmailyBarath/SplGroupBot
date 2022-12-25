@@ -16,6 +16,8 @@ oper = None
 target = None
 
 def make():
+    global BUTTONS
+    BUTTONS = []
     a = 1
     for y in PRIVILEGES:
         temp = []
