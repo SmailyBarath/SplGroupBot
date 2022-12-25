@@ -9,6 +9,8 @@ PRIVILEGES = []
 
 BUTTONS = []
 
+plate = None
+
 STATUS = ["❌", "❌", "❌", "❌", "❌", "❌", "❌"]
 
 oper = None
@@ -32,7 +34,7 @@ def make():
 
 @Client.on_message(filters.command("promote") & filters.group)
 async def promote(_, m):
-    global PRIVILEGES, BUTTONS, oper, STATUS, target
+    global PRIVILEGES, BUTTONS, oper, STATUS, target, plate
     PRIVILEGES = []
     BUTTONS = []
     STATUS = ["❌", "❌", "❌", "❌", "❌", "❌", "❌"]
@@ -72,7 +74,7 @@ async def promote(_, m):
         else:
             plate = m.text.split()[2]
     except:
-        plate = "admin"
+        plate = None
     buttons = make()
     txt = f"User : **{name}**\n\nTag : **{plate}**"
     await m.reply(txt, reply_markup=IKM(buttons))
@@ -131,11 +133,11 @@ async def right_query(_, q):
             STATUS[5] = "❌"
         return await q.edit_message_reply_markup(reply_markup=IKM(make()))
     elif q.data == "right_7":
-        status = STATUS[7]
+        status = STATUS[6]
         if status == "❌":
-            STATUS[7] = "✅"
+            STATUS[6] = "✅"
         else:
-            STATUS[7] = "❌"
+            STATUS[6] = "❌"
         return await q.edit_message_reply_markup(reply_markup=IKM(make()))
 
 @Client.on_callback_query(filters.regex("promote_close"))
@@ -144,6 +146,8 @@ async def closer(_, q):
         return await q.answer()
     await q.answer()
     await q.message.delete()
+
+Close = IKM([[IKB("Close 🗑️", callback_data="promote_close")]])
 
 @Client.on_callback_query(filters.regex("promote_save"))
 async def saver(_, q):
@@ -156,7 +160,8 @@ async def saver(_, q):
         NOW.append(h)
     try:
         await _.promote_chat_member(q.message.chat.id, target, ChatPrivileges(can_change_info=NOW[0], can_delete_messages=NOW[1], can_restrict_members=NOW[2], can_invite_users=NOW[3], can_pin_messages=NOW[4], can_manage_video_chats=NOW[5], can_promote_members=NOW[6]))
-        await q.edit_message_text("Promoted successfully !")
+        await _.set_administrator_title(q.message.chat.id, target, plate)
+        await q.edit_message_text("Promoted successfully !", reply_markup=Close)
     except Exception as e:
-        await q.edit_message_text(e)
+        await q.edit_message_text(e, reply_markup=Close)
     
