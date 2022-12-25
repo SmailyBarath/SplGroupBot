@@ -20,6 +20,8 @@ def make():
     BUTTONS = []
     a = 1
     for y in PRIVILEGES:
+        if a == 7:
+            break
         temp = []
         temp.append(IKB(y, callback_data=f"answer_{a}"))
         temp.append(IKB(STATUS[a-1], callback_data=f"right_{a}"))
@@ -54,20 +56,13 @@ async def promote(_, m):
     except:
         return await m.reply("Either reply or give username !")
     x = x.privileges
-    if x.can_change_info:
-        PRIVILEGES.append("Change Group Info")
-    if x.can_delete_messages:
-        PRIVILEGES.append("Delete Messages")
-    if x.can_restrict_members:
-        PRIVILEGES.append("Ban Users")
-    if x.can_invite_users:
-        PRIVILEGES.append("Invite Users")
-    if x.can_pin_messages:
-        PRIVILEGES.append("Pin Messages")
-    if x.can_manage_video_chats:
-        PRIVILEGES.append("Manage Video Chats")
-    if x.can_promote_members:
-        PRIVILEGES.append("Add New Admins")
+    PRIVILEGES.append("Change Group Info")
+    PRIVILEGES.append("Delete Messages")
+    PRIVILEGES.append("Ban Users")
+    PRIVILEGES.append("Invite Users")
+    PRIVILEGES.append("Pin Messages")
+    PRIVILEGES.append("Manage Video Chats")
+    PRIVILEGES.append("Add New Admins")
     name = (await _.get_users(id)).first_name
     try:
         plate = m.text.split()[1]
