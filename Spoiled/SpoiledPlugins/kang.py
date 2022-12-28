@@ -107,7 +107,7 @@ async def kang(u: Update, c: CallbackContext):
             return await m.reply_text("Start me in pm !", reply_markup=single_button_maker("Start !", f"https://t.me/{c.bot.username}"))
         if "occupied" in str(e):
             return await m.reply_text("Pack name already occupied, go to @stickers and delete pack name with this bot username !")
-        await m.reply_text("An unknown error occurred, consider support !", reply_markup=support_markup)
+        await m.reply_text("Start me in pm !", reply_markup=single_button_maker("Start !", f"https://t.me/{c.bot.username}"))
         print(e)
                 
       
