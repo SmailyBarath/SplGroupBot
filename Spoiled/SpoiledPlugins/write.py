@@ -12,7 +12,7 @@ async def writer(_, m):
             txt = m.text.split(None, 1)[1]
         else:
             return await m.reply("Either reply to a text or write..!")
-    txt = txt.replace(" ", "%20")
+    text = txt.replace(" ", "%20")
 
     var = await m.reply("`processing...`")
     with BytesIO(get(f"https://apis.xditya.me/write?text={text}").content) as file:
