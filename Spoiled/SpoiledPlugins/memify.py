@@ -4,7 +4,7 @@ from PIL import Image, ImageFont, ImageDraw
 from pyrogram import Client, filters
 
 
-@Client.on_message(filters.command("mmf", "memify"))
+@Client.on_message(filters.command(["mmf", "memify"]))
 async def handler(_, m):
     if not m.reply_to_message:
         return await m.reply("Reply to an image or a sticker !")
