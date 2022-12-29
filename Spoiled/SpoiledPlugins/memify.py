@@ -4,7 +4,7 @@ from PIL import Image, ImageFont, ImageDraw
 from pyrogram import Client, filters
 
 
-@Client.on_message(filters.command("mmf"))
+@Client.on_message(filters.command("mmf", "memify"))
 async def handler(_, m):
     if not m.reply_to_message:
         return await m.reply("Reply to an image or a sticker !")
@@ -28,7 +28,7 @@ async def drawText(image_path, text):
     if os.name == "nt":
         fnt = "ariel.ttf"
     else:
-        fnt = "./Fonts/albr55w.ttf"
+        fnt = "./Fonts/ChaucerRegular.ttf"
     m_font = ImageFont.truetype(fnt, int((70 / 640) * i_width))
     if ";" in text:
         upper_text, lower_text = text.split(";")
