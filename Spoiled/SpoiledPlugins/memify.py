@@ -8,7 +8,7 @@ from pyrogram import Client, filters
 async def handler(_, m):
     if not m.reply_to_message:
         return await m.reply("Reply to an image or a sticker !")
-    if not m.reply_to_message.sticker:
+    if not m.reply_to_message.sticker and not m.reply_to_message.photo:
         return await m.reply("Reply to an image or a sticker !")
     file = await m.reply_to_message.download()
     msg = await m.reply(f"`Memifying this image! (」ﾟﾛﾟ)｣ `")
