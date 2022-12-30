@@ -1,6 +1,6 @@
 from . import db
 
-logodb = db.kiss
+logodb = db.etc
 
 async def get_latest_id(chat_id):
     x = await logodb.find_one({"chat_id": chat_id})
