@@ -101,7 +101,7 @@ async def rrl(_, m):
     global admins
     admins = []
 
-LOCKS = []
+
 admins = []
 @Client.on_message(filters.group, group=4)
 async def cwf(_, m):
@@ -114,13 +114,7 @@ async def cwf(_, m):
         return
     if await is_approved(m.chat.id, m.from_user.id):
         return
-    global LOCKS
-    global ASYNC
-    if not LOCKS:
-        LOCKS = await get_locks(m.chat.id)
-    if ASYNC:
-        LOCKS = await get_locks(m.chat.id)
-        ASYNC = False
+    LOCKS = await get_locks(m.chat.id)
     if not LOCKS:
         return
 
