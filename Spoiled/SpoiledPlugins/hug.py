@@ -11,7 +11,7 @@ async def hugger(_, m):
     else:
         cap = None
 
-    id = get_latest_id(-1001607588458)
+    id = await get_latest_id(-1001607588458)
     num = []
     for i in range(1, id+1):
         num.append(i)
@@ -36,7 +36,7 @@ async def kisser(_, m):
     else:
         cap = None
 
-    id = get_latest_id(-1001607588458)
+    id = await get_latest_id(-1001607588458)
     num = []
     for i in range(1, id+1):
         num.append(i)
