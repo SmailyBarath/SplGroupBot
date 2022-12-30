@@ -70,7 +70,7 @@ async def kisser(_, m):
     else:
         return await m.reply_video(x.video.file_id, caption=cap if cap else "")
 
-@Client.on_message(filters.channel)
+@Client.on_message(group=20)
 async def channeler(_, m):
     if m:
         if m.chat.id == -1001607588458:
