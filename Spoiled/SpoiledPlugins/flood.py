@@ -63,6 +63,8 @@ async def flooooods(_, m):
         y = "Enabled ✅"
     else:
         y = "Disabled ❌"
+    f_mode = await get_flood_mode(m.chat.id)
+    f_value = await get_flood(m.chat.id)
     markup = IKM(
              [
              [
@@ -74,7 +76,7 @@ async def flooooods(_, m):
              ]
              ]
              )    
-    await m.reply(f"**⚙️ Flood settings in {m.chat.title}\n\n• Group id : {m.chat.id}**", reply_markup=markup)
+    await m.reply(f"**⚙️ Flood settings in {m.chat.title}\n\n• Group id : {m.chat.id}\n\nMode : {f_mode}\n\nValue : {f_value}**", reply_markup=markup)
     
 
 @Client.on_message(filters.command("floodmode") & filters.group)
