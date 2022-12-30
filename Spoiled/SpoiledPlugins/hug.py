@@ -9,7 +9,16 @@ async def hugger(_, m):
         men2 = m.reply_to_message.from_user.mention
         cap = f"{men1} hugging {men2} ✨❤️ !"
     else:
-        cap = None
+        if len(m.command) > 1:
+            men1 = m.from_user.mention
+            txt = m.text.split()[1]
+            try:
+                men2 = (await _.get_users(txt)).mention
+                cap = f"{men1} hugging {men2} ✨❤️ !"
+            except:    
+                cap = None
+        else:
+            cap = None
 
     id = await get_latest_id(-1001607588458)
     num = []
@@ -34,7 +43,16 @@ async def kisser(_, m):
         men2 = m.reply_to_message.from_user.mention
         cap = f"{men1} kissing {men2} ✨❤️ !"
     else:
-        cap = None
+        if len(m.command) > 1:
+            men1 = m.from_user.mention
+            txt = m.text.split()[1]
+            try:
+                men2 = (await _.get_users(txt)).mention
+                cap = f"{men1} kissing {men2} ✨❤️ !"
+            except:    
+                cap = None
+        else:
+            cap = None
 
     id = await get_latest_id(-1001607588458)
     num = []
