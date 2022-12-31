@@ -37,7 +37,7 @@ async def hugger(_, m):
         return await m.reply_video(x.video.file_id, caption=cap if cap else "")
 
 @Client.on_message(filters.command("bite"))
-async def hugger(_, m):
+async def biter(_, m):
     if m.reply_to_message:
         men1 = m.from_user.mention
         men2 = m.reply_to_message.from_user.mention
