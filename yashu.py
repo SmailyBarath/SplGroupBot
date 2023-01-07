@@ -18,5 +18,6 @@ def Asynchorous():
         pass
     print("Bot started !")
     Yashu.run_polling()
+    idle()
 
 Asynchorous()
