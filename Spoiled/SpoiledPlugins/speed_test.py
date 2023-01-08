@@ -1,5 +1,5 @@
 # MODULE VERIFIED BY @NORTH_YANKTON
-
+"""
 import speedtest
 from config import DEV
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -57,3 +57,4 @@ async def speedtestxyz_callback(update: Update, context: CallbackContext):
 
 Yashu.add_handler(CommandHandler("speedtest", speedtestxyz))
 Yashu.add_handler(CallbackQueryHandler(speedtestxyz_callback, pattern="speedtest_.*"))
+"""
