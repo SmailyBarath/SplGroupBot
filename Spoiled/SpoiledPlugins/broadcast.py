@@ -34,7 +34,7 @@ async def broadcast(_, message):
                 sent += 1
                 CASTED.append(i)
                 try:
-                    if m.text.split()[0][1].lower() == "p":
+                    if message.text.split()[0][1].lower() == "p":
                         await _.pin_chat_message(i, ok.id)
                         pinned += 1
                 except:
@@ -44,7 +44,7 @@ async def broadcast(_, message):
                 sent += 1
                 CASTED.append(i)
                 try:
-                    if m.text.split()[0][1].lower() == "p":
+                    if message.text.split()[0][1].lower() == "p":
                         await _.pin_chat_message(i, ok.id)
                         pinned += 1
                 except:
