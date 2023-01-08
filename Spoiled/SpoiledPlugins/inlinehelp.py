@@ -1,5 +1,4 @@
 from .chatbot import aiohttpsession as session
-import speedtest
 import datetime
 from pytube import YouTube
 from pyrogram import Client as app
