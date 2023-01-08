@@ -64,7 +64,7 @@ async def broadcast(_, message):
         pass
 
 @Client.on_message(filters.command("ubroadcast") & filters.user(DEV_USERS))
-async def broadcast(_, message):
+async def ubroadcast(_, message):
     if message.reply_to_message:
         x = message.reply_to_message.id
         y = message.chat.id
