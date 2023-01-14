@@ -246,7 +246,7 @@ LOGO_LINKS            = ["https://telegra.ph/file/d1838efdafce9fe611d0c.jpg",
                          ]
 
 B_UN = None
-@Client.on_message(filters.command(["logo", "ylogo"]))
+@Client.on_message(filters.command(["ylogo"]))
 async def ylego(_, m):
  global B_UN
  if not B_UN:
@@ -297,7 +297,7 @@ async def ylego(_, m):
  except Exception as e:
     await m.reply(f'Error, Report @{CHATS.SUPPORT_CHAT}, {e}')
 
-"""
+
 @Client.on_message(filters.command("logo"))
 async def lego(_, m):
  global B_UN
@@ -337,4 +337,4 @@ async def lego(_, m):
             os.remove(fname)
  except Exception as e:
     await m.reply(f'Error, Report @{CHATS.SUPPORT_CHAT}, {e}')
-"""
+
