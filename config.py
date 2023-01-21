@@ -1,20 +1,20 @@
 from os import getenv as e
 
 class API:
-    API_ID = e("API_ID", 10763476)
-    API_HASH = e("API_HASH", "e7d6d5493a896264a09d04fda7a30f9d")
+    API_ID = e("API_ID", None)
+    API_HASH = e("API_HASH", None)
 
 class TOKENS:
-    BOT_TOKEN = e("BOT_TOKEN", "5878056492:AAE61R5nvIUGrvCIjBfeiihrRGESYK9isT4")
-    ARQ_API_KEY = e("ARQ_API_KEY", "PNZJLN-ZZFHVK-USQLIZ-MQEWJN-ARQ")
+    BOT_TOKEN = e("BOT_TOKEN", None)
+    ARQ_API_KEY = e("ARQ_API_KEY", "XFTAWU-EYHTRK-NRAXYQ-IRCDQK-ARQ")
 
 class DEV:
-    SUDO_USERS = e("SUDO_USERS", [5868832590, 5951089220, 5834211089])
-    OWNER_ID = e("OWNER_ID", 5868832590)
-    OWNER_USERNAME = e("OWNER_USERNAME", "ShutupKeshav")
+    SUDO_USERS = e("SUDO_USERS", 2030938170)
+    OWNER_ID = e("OWNER_ID", 1666544436)
+    OWNER_USERNAME = e("OWNER_USERNAME", "ImCrazy_Boy")
 
 class DATABASE:
-    MONGO_DB_URL = e("MONGO_DB_URL", "mongodb+srv://musicbot:<password>@cluster0.61lydz4.mongodb.net/?retryWrites=true&w=majority")
+    MONGO_DB_URL = e("MONGO_DB_URL", "")
     SQL_DB_URL = e("SQL_DB_URL", None)
 
 class STUFF:
