@@ -14,7 +14,7 @@ async def alive(_, m):
     ok = await m.reply("`Building Alive and Pinging..!`")
     myfn = (await _.get_me()).first_name
     txt = f"**Hi {m.from_user.first_name} !, I'm {myfn}**\n\n"
-    txt += f"**Bot owner : [Yashu-Alpha](t.me/{DEV.OWNER_USERNAME})**\n\n"
+    txt += f"**Bot owner : [Barath](t.me/{DEV.OWNER_USERNAME})**\n\n"
     if DEV.SUDO_USERS:
         txt += f"**Sudo status : ✅ , {len(DEV.SUDO_USERS)}**\n\n"
     else:
