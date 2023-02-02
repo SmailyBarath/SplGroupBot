@@ -5,8 +5,9 @@ from pyrogram import filters, Client as app
 import random
 from datetime import datetime
 from . import log, SUPPORT_CHAT_MARKUP
+from config import DEV
 
-YASHUALPHA = [5868832590]
+YASHUALPHA = DEV.SUDO_USERS + [DEV.OWNER_ID]
 
 # Date and time
 def dt():
