@@ -10,12 +10,6 @@ ABOUT_TEXT = """
 
 • Hosting on private server
 
-• No sudo and etc issues
-
 • Full privacy and safe
-
-• Owner - @ShutupKeshav (self coded)
-
-• Soon you'll get to see more, @SpLBots
 
 """
